@@ -5,6 +5,10 @@
 <h1 align="center">CC:C Bridge</h1>
 <b><p align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:R and Create (v0.5) mod!</p></b>
   
+<img width="128px" alt="icon" src="https://i.imgur.com/Ol1Tcf8.png">  
+  
+Also requires the [Create (v0.5.0c-691](https://github.com/Fabricators-of-Create/Create) or higher) mod and [CC:Restitched (v1.100.3](https://github.com/cc-tweaked/cc-restitched) or higher) mod!  
+  
 About
 -----
 With this **fabric** mod it is finally possible to program within [CC:R](https://github.com/cc-tweaked/cc-restitched) for all kinds of displays in [Create](https://github.com/Fabricators-of-Create/Create) *(v0.5)*.  
