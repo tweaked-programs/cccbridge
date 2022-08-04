@@ -30,13 +30,18 @@ public class TargetBlockEntity extends BlockEntity implements IPeripheralTile {
     }
 
     public void updateContent(int offset, List<String> content) {
+        if (peripheral == null)
+            return;
+        int height = getHeight();
         int i=0;
         for (String line : content) {
-            // Replace chars that exist in C and can't be displayed in CC:
-            line = line.replaceAll("\u2588", "=");
-            line = line.replaceAll("\u2592", "-");
+            if (i < height) {
+                // Replace chars that exist in C and can't be displayed in CC:
+                line = line.replaceAll("\u2588", "=");
+                line = line.replaceAll("\u2592", "-");
 
-            peripheral.repalceLine(offset + i, line);
+                peripheral.repalceLine(offset + i, line);
+            }
         }
     }
 

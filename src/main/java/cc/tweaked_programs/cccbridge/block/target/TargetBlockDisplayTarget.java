@@ -27,8 +27,8 @@ public class TargetBlockDisplayTarget extends DisplayTarget {
     public DisplayTargetStats provideStats(DisplayLinkContext context) {
         BlockEntity block = context.getTargetTE();
         if (!(block instanceof TargetBlockEntity targetBlock))
-            return new DisplayTargetStats(1, 1, this);
+            return new DisplayTargetStats(16, 1, this);
 
-        return new DisplayTargetStats(targetBlock.getHeight(), targetBlock.getWidth(), this);
+        return new DisplayTargetStats(16, targetBlock.getWidth(), this);
     }
 }

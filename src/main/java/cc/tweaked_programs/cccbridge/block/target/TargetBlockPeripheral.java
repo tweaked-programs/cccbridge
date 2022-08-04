@@ -12,13 +12,15 @@ import java.util.List;
 
 public class TargetBlockPeripheral implements IPeripheral {
     private final TargetBlockEntity target_block_entity;
-    private Terminal term = new Terminal(16,2);
+    private Terminal term = new Terminal(32,16);
 
 
     TargetBlockPeripheral(TargetBlockEntity target_block_entity) { this.target_block_entity = target_block_entity; }
 
-    public void repalceLine(int i, String line) {
-        term.setCursorPos(0,i);
+    public void repalceLine(int y, String line) {
+        if (y < 0 || y >= term.getHeight())
+            return;
+        term.setCursorPos(0,y);
         term.write(line);
     }
 
@@ -59,13 +61,13 @@ public class TargetBlockPeripheral implements IPeripheral {
     }
 
     @LuaFunction
-    public final Object[] setSize(int width, int height) {
-        if (width > 164 || height > 16)
-            return new Object[] {false, "Given size is larger than '164x16'!"};
-        else if (width < 1 || height < 1)
-            return new Object[] {false, "Given size must be at least '1x1' duh"};
+    public final Object[] setWidth(int width) {
+        if (width > 164)
+            return new Object[] {false, "Given size is larger than 164!"};
+        else if (width < 1)
+            return new Object[] {false, "Given size cannot be lower than 1 duh"};
 
-        term.resize(width,height);
+        term.resize(width,16);
         return new Object[] {true};
     }
 
