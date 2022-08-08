@@ -1,21 +1,23 @@
 package cc.tweaked_programs.cccbridge.block.source;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
-public class SourceBlock extends Block implements BlockEntityProvider {
+import org.jetbrains.annotations.Nullable;
+
+public class SourceBlock extends Block implements EntityBlock {
     public SourceBlock() {
-        super(FabricBlockSettings.of(Material.METAL).strength(2.8f).requiresTool().sounds(BlockSoundGroup.COPPER));
+        super(Properties.of(Material.METAL).strength(2.8f).requiresCorrectToolForDrops().sound(SoundType.COPPER));
     }
 
+    @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new SourceBlockEntity(pos, state);
     }
 }

@@ -7,9 +7,6 @@ import dan200.computercraft.core.terminal.TextBuffer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class TargetBlockPeripheral implements IPeripheral {
     private final TargetBlockEntity target_block_entity;
     private Terminal term = new Terminal(32,16);
@@ -17,7 +14,7 @@ public class TargetBlockPeripheral implements IPeripheral {
 
     TargetBlockPeripheral(TargetBlockEntity target_block_entity) { this.target_block_entity = target_block_entity; }
 
-    public void repalceLine(int y, String line) {
+    public void replaceLine(int y, String line) {
         if (y < 0 || y >= term.getHeight())
             return;
         term.setCursorPos(0,y);

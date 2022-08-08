@@ -4,6 +4,7 @@ import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.core.terminal.Terminal;
 import dan200.computercraft.core.terminal.TextBuffer;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,7 +85,6 @@ public class SourceBlockPeripheral implements IPeripheral {
     public final Object[] getSize() {
         return new Object[] { term.getWidth(), term.getHeight() };
     }
-
 
 
     @NotNull

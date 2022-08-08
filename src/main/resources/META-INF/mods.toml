@@ -1,0 +1,42 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="Apache-2.0"
+issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
+
+[[mods]]
+modId="cccbridge"
+version="${file.jarVersion}"
+displayName="CC:C Bridge"
+updateJSONURL=""
+displayURL="https://tweaked-programs.cc/cccbridge/"
+logoFile="icon.png"
+credits="Thanks for this mod goes out to agnor99, who understands forge way better than me!!"
+authors="Sammy L. Koch (aka. 1Turtle)"
+description='''With this mod, it is possible to use Create Displays within CC:T PCs!
+Not only that, but also source blocks by Create can be read in CC:T too!
+'''
+
+[[dependencies.cccbridge]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE" # NONE; BEFORE; AFTER
+    side="BOTH"
+[[dependencies.cccbridge]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.cccbridge]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.0c,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.cccbridge]]
+    modId="computercraft"
+    mandatory=true
+    versionRange="[1.100.4,)"
+    ordering="NONE"
+    side="BOTH"
