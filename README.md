@@ -4,14 +4,12 @@
 
 <h1 align="center">CC:C Bridge</h1>
 <b><p align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:R and Create (v0.5) mod!</p></b>
-  
-<img width="128px" alt="icon" src="https://i.imgur.com/Ol1Tcf8.png">  
-  
-Also requires the [Create (v0.5.0c-691](https://github.com/Fabricators-of-Create/Create) or higher) mod and [CC:Restitched (v1.100.3](https://github.com/cc-tweaked/cc-restitched) or higher) mod!  
+
+Requires the [Create (v0.5.0c+146](https://github.com/Creators-of-Create/Create) or higher) mod and [CC:Tweaked (v1.100.4](https://github.com/cc-tweaked/cc-tweaked) or higher) mod!  
   
 About
 -----
-With this **fabric** mod it is finally possible to program within [CC:R](https://github.com/cc-tweaked/cc-restitched) for all kinds of displays in [Create](https://github.com/Fabricators-of-Create/Create) *(v0.5)*.  
+With this **forge** mod it is finally possible to program within [CC:T](https://github.com/cc-tweaked/cc-tweaked) for all kinds of displays in [Create](https://github.com/Creators-of-Create/Create) *(v0.5)*.  
 In other words, you can display all your ***f a n c y*** stuff with e.g. Displays *(those flip things)*, Signs, Lecterns or Nixie Tubes.
   
 *But wait, there's more:*  
