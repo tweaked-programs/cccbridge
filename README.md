@@ -1,13 +1,15 @@
-<p align="center">
-  <img width="260px" alt="icon" src="./docs/icon.png">
-</p>
-
-<h1 align="center">CC:C Bridge</h1>
-<b><p align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:R and Create (v0.5) mod!</p></b>
-  
-<img width="128px" alt="icon" src="https://i.imgur.com/Ol1Tcf8.png">  
-  
-Also requires the [Create (v0.5.0c-691](https://github.com/Fabricators-of-Create/Create) or higher) mod and [CC:Restitched (v1.100.3](https://github.com/cc-tweaked/cc-restitched) or higher) mod!  
+<div align="center">
+  <img width="128px" alt="icon" src="./docs/icon.png">  
+    
+  <h1 align="center">CC:C Bridge</h1>  
+  <h3 align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:R and Create (v0.5) mod!</h3>  
+    
+  [![image](https://cf.way2muchnoise.eu/full_656214_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/cccbridge)
+  [![image](https://modrinth-utils.vercel.app/api/badge/downloads/?id=fXt291FO&logo=true&style=for-the-badge)](https://modrinth.com/mod/cccbridge)
+  [![image](https://img.shields.io/badge/TP-Blog-030380?style=for-the-badge)](https://tweaked-programs.cc/cccbridge/)  
+    
+  Requires the [Fabric API](https://github.com/fabricmc/fabric), [Create (v0.5.0c-691](https://github.com/Fabricators-of-Create/Create) or higher) and [CC:Restitched (v1.100.3](https://github.com/cc-tweaked/cc-restitched) or higher)!  
+</div>  
   
 About
 -----
