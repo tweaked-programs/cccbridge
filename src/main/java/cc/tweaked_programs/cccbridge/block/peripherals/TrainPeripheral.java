@@ -1,11 +1,13 @@
 package cc.tweaked_programs.cccbridge.block.peripherals;
 
+import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationTileEntity;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,13 +19,15 @@ import java.util.List;
 public class TrainPeripheral implements IPeripheral {
 
     private final List<IComputerAccess> connectedComputers = new ArrayList<>();
-    private BlockPos pos;
+    private final BlockPos pos;
 
-    private Level level;
+    private final StationTileEntity Te;
+    private final Level level;
 
-    public TrainPeripheral(@NotNull BlockPos pos, Level level) {
+    public TrainPeripheral(@NotNull BlockPos pos, Level level , BlockEntity te) {
         this.pos = pos;
         this.level = level;
+        this.Te = (StationTileEntity) te;
     }
 
 
@@ -38,19 +42,11 @@ public class TrainPeripheral implements IPeripheral {
         connectedComputers.remove(computer);
     }
 
-    private Block get_block() {
-        return this.level.getBlockEntity(pos).getBlockState().getBlock();
-    }
-
     @LuaFunction
     public void assemble() {
-        get_block();
-        //assemble stuff here
+        Te.assemble(Minecraft.getInstance().player.getUUID());
     }
 
-    /**
-     * Will be called when a computer connects to our block
-     */
     @Override
     public void attach(@Nonnull IComputerAccess computer) {
         connectedComputers.add(computer);
