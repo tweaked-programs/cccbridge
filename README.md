@@ -6,7 +6,7 @@
     
   [![image](https://cf.way2muchnoise.eu/full_656214_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/cccbridge)
   [![image](https://modrinth-utils.vercel.app/api/badge/downloads/?id=fXt291FO&logo=true&style=for-the-badge)](https://modrinth.com/mod/cccbridge)
-  [![image](https://img.shields.io/badge/TP-Blog-030380?style=for-the-badge)](https://tweaked-programs.cc/cccbridge/)  
+  [![image](https://img.shields.io/badge/TP-Blog-030380?style=for-the-badge)](https://tweaked-programs.cc/tag/cccbridge/)  
     
   Requires [Create](https://github.com/Creators-of-Create/Create) *(v0.5.0c+146 or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(v1.100.4 or higher)*!  
 </div>  
