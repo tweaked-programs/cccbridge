@@ -1,5 +1,6 @@
 package cc.tweaked_programs.cccbridge;
 
+import cc.tweaked_programs.cccbridge.block.peripherals.PeripheralProvider;
 import cc.tweaked_programs.cccbridge.block.source.SourceBlock;
 import cc.tweaked_programs.cccbridge.block.source.SourceBlockDisplaySource;
 import cc.tweaked_programs.cccbridge.block.source.SourceBlockEntity;
@@ -11,6 +12,7 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
 
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -45,6 +47,7 @@ public class Main {
 
     public static final RegistryObject<BlockEntityType<SourceBlockEntity>> SOURCE_BLOCK_ENTITY = BLOCK_ENTITIES.register("source_block_entity", () -> BlockEntityType.Builder.of(SourceBlockEntity::new, SOURCE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<TargetBlockEntity>> TARGET_BLOCK_ENTITY = BLOCK_ENTITIES.register("target_block_entity", () -> BlockEntityType.Builder.of(TargetBlockEntity::new, TARGET_BLOCK.get()).build(null));
+    public static final IPeripheralProvider peripheralProvidor = new PeripheralProvider();
 
 
     public Main() {
@@ -63,6 +66,7 @@ public class Main {
             AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "target_block_display_source"), new TargetBlockDisplayTarget()), TARGET_BLOCK_ENTITY.get().delegate);
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ComputerCraftAPI.registerPeripheralProvider(peripheralProvidor);
         });
     }
 }
