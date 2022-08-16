@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class PeripheralProvider implements IPeripheralProvider {
 
-
     @NotNull
     @Override
     public LazyOptional<IPeripheral> getPeripheral(@NotNull Level world, @NotNull BlockPos pos, @NotNull Direction side) {

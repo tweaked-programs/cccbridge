@@ -2,7 +2,7 @@
   <img width="128px" alt="icon" src="./docs/icon.png">  
     
   <h1 align="center">CC:C Bridge</h1>  
-  <h3 align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:R and Create (v0.5) mod!</h3>  
+  <h3 align="center">CC:C Bridge is a MC mod that adds compatibility between the ComputerCraft:T and Create (v0.5) mod!</h3>  
     
   [![image](https://cf.way2muchnoise.eu/full_656214_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/cccbridge)
   [![image](https://modrinth-utils.vercel.app/api/badge/downloads/?id=fXt291FO&logo=true&style=for-the-badge)](https://modrinth.com/mod/cccbridge)
