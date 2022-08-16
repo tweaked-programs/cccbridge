@@ -38,7 +38,7 @@ public class TrainPeripheral implements IPeripheral {
     @NotNull
     @Override
     public String getType() {
-        return "Train_Station";
+        return "train_station";
     }
 
     @Override
