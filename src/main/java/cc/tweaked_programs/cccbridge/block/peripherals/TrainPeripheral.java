@@ -1,22 +1,21 @@
 package cc.tweaked_programs.cccbridge.block.peripherals;
 
+import com.simibubi.create.content.logistics.trains.entity.Train;
+import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationEditPacket;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationTileEntity;
+import com.simibubi.create.content.logistics.trains.management.edgePoint.station.TrainEditPacket;
+import com.simibubi.create.foundation.networking.AllPackets;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -63,7 +62,7 @@ public class TrainPeripheral implements IPeripheral {
 
     @LuaFunction
     public boolean disassemble() {
-        if (station.getStation().getNearestTrain().canDisassemble()) {
+        if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
             BlockPos position = station.edgePoint.getGlobalPosition().above();
             station.getStation().getPresentTrain().disassemble(direction, position);
@@ -79,58 +78,29 @@ public class TrainPeripheral implements IPeripheral {
 
     @LuaFunction
     public boolean isAssembled() {
-        if (station.getStation().getNearestTrain() == null) {
+        if (station.getStation().getPresentTrain() == null) {
             return false;
-        }else return station.getStation().getNearestTrain().canDisassemble();
+        } else return station.getStation().getPresentTrain().canDisassemble();
     }
 
     @LuaFunction
     public String getTrainName() {
-        return Objects.requireNonNull(station.getStation().getImminentTrain()).name.getContents();
+        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents();
     }
 
     @LuaFunction
     public boolean setStationName(@NotNull String name) {
-        station.getStation().name = name;
+        AllPackets.channel.sendToServer(StationEditPacket.configure(station.getBlockPos(), false, name));
         return true;
     }
 
     @LuaFunction
     public boolean setTrainName(@NotNull String name) {
-        if (station.getStation().getNearestTrain() == null) {
+        if (station.getStation().getPresentTrain() == null) {
             return false;
         }
-        station.getStation().getImminentTrain().name = new Component() {
-            @Override
-            public Style getStyle() {
-                return null;
-            }
-
-            @Override
-            public String getContents() {
-                return name;
-            }
-
-            @Override
-            public List<Component> getSiblings() {
-                return null;
-            }
-
-            @Override
-            public MutableComponent plainCopy() {
-                return null;
-            }
-
-            @Override
-            public MutableComponent copy() {
-                return null;
-            }
-
-            @Override
-            public FormattedCharSequence getVisualOrderText() {
-                return null;
-            }
-        };
+        Train train = station.getStation().getPresentTrain();
+        AllPackets.channel.sendToServer(new TrainEditPacket(train.id, name, train.icon.getId()));
         return true;
     }
     /**
