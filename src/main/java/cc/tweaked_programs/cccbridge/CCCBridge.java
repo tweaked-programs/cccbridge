@@ -28,11 +28,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 import org.slf4j.Logger;
 
-import static cc.tweaked_programs.cccbridge.Main.MOD_ID;
+import static cc.tweaked_programs.cccbridge.CCCBridge.MOD_ID;
 
 @Mod(MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class Main {
+public class CCCBridge {
     public static final String MOD_ID = "cccbridge";
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -47,7 +47,7 @@ public class Main {
     public static final RegistryObject<BlockEntityType<TargetBlockEntity>> TARGET_BLOCK_ENTITY = BLOCK_ENTITIES.register("target_block_entity", () -> BlockEntityType.Builder.of(TargetBlockEntity::new, TARGET_BLOCK.get()).build(null));
 
 
-    public Main() {
+    public CCCBridge() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 

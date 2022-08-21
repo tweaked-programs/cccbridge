@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.0'
+version = '1.1.0'
 group = 'cc.tweaked_programs.cccbridge'
 archivesBaseName = 'cccbridge'
 
