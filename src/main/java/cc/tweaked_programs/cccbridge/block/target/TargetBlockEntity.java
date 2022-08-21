@@ -23,16 +23,18 @@ public class TargetBlockEntity extends BlockEntity {
             return;
         int height = getHeight();
         int i=0;
+        String dot = Character.toString(183);
         for (String line : content) {
             if (i < height) {
                 // Replace chars that exist in C and can't be displayed in CC:
                 line = line.replaceAll("\u2588", "=");
                 line = line.replaceAll("\u2592", "-");
+                line = line.replaceAll("\u2591", dot);
 
                 peripheral.replaceLine(offset + i, line);
             }
+            i++;
         }
-
     }
     public IPeripheral getPeripheral(Direction side) {
         if (peripheral == null)
