@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TargetBlockPeripheral implements IPeripheral {
     private final TargetBlockEntity target_block_entity;
-    private Terminal term = new Terminal(32,16);
+    private Terminal term = new Terminal(32,24);
 
 
     TargetBlockPeripheral(TargetBlockEntity target_block_entity) { this.target_block_entity = target_block_entity; }
