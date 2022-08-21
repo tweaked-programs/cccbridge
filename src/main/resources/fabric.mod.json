@@ -19,7 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cc.tweaked_programs.cccbridge.Main"
+      "cc.tweaked_programs.cccbridge.CCCBridge"
+    ],
+    "client": [
+      "cc.tweaked_programs.cccbridge.CCCBridgeClient"
     ]
   },
   "mixins": [

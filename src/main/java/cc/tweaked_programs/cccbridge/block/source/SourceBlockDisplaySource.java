@@ -23,11 +23,8 @@ public class SourceBlockDisplaySource extends DisplaySource {
             return EMPTY;
 
         List<MutableText> content = new LinkedList<>();
-        Integer i=0;
-        for (String line : data) {
+        for (String line : data)
             content.add(new TranslatableText("").append(line));
-            i++;
-        }
 
         return content;
     }

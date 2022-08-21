@@ -1,6 +1,5 @@
 package cc.tweaked_programs.cccbridge;
 
-import cc.tweaked_programs.cccbridge.block.peripherals.PeripheralProvider;
 import cc.tweaked_programs.cccbridge.block.redrouter.RedRouterBlock;
 import cc.tweaked_programs.cccbridge.block.redrouter.RedRouterBlockEntity;
 import cc.tweaked_programs.cccbridge.block.source.SourceBlock;
@@ -10,9 +9,6 @@ import cc.tweaked_programs.cccbridge.block.target.TargetBlock;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlockDisplayTarget;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlockEntity;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
-import dan200.computercraft.ComputerCraft;
-import dan200.computercraft.api.ComputerCraftAPI;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -24,20 +20,20 @@ import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Main implements ModInitializer {
+public class CCCBridge implements ModInitializer {
 	public static final String MOD_ID = "cccbridge";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	// Create Source Block
-	private static final SourceBlock SOURCE_BLOCK = new SourceBlock();
+	public static final SourceBlock SOURCE_BLOCK = new SourceBlock();
 	public static final BlockEntityType<SourceBlockEntity> SOURCE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "source_block_entity"), FabricBlockEntityTypeBuilder.create(SourceBlockEntity::new, SOURCE_BLOCK).build(null));
 	// Create Target Block
-	private static final TargetBlock TARGET_BLOCK = new TargetBlock();
+	public static final TargetBlock TARGET_BLOCK = new TargetBlock();
 	public static final BlockEntityType<TargetBlockEntity> TARGET_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "target_block_entity"), FabricBlockEntityTypeBuilder.create(TargetBlockEntity::new, TARGET_BLOCK).build(null));
 	// RedRouter Block
-	private static final RedRouterBlock REDROUTER_BLOCK = new RedRouterBlock();
+	public static final RedRouterBlock REDROUTER_BLOCK = new RedRouterBlock();
 	public static final BlockEntityType<RedRouterBlockEntity> REDROUTER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "redrouter_block_entity"), FabricBlockEntityTypeBuilder.create(RedRouterBlockEntity::new, REDROUTER_BLOCK).build(null));
-	public static final IPeripheralProvider peripheralProvider = new PeripheralProvider();
+
 
 	@Override
 	public void onInitialize() {
@@ -52,6 +48,5 @@ public class Main implements ModInitializer {
 		// Red Router Block
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "redrouter_block"), REDROUTER_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "redrouter_block"), new BlockItem(REDROUTER_BLOCK, new FabricItemSettings().group(ItemGroup.REDSTONE)));
-		ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
 	}
 }

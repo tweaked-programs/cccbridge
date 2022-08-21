@@ -1,25 +1,21 @@
 package cc.tweaked_programs.cccbridge.block.target;
 
-import cc.tweaked_programs.cccbridge.Main;
-import com.simibubi.create.content.logistics.block.display.DisplayLinkBlock;
+import cc.tweaked_programs.cccbridge.CCCBridge;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class TargetBlockEntity extends BlockEntity implements IPeripheralTile {
     private TargetBlockPeripheral peripheral;
 
     public TargetBlockEntity(BlockPos pos, BlockState state) {
-        super(Main.TARGET_BLOCK_ENTITY, pos, state);
+        super(CCCBridge.TARGET_BLOCK_ENTITY, pos, state);
     }
 
     @Override
@@ -34,14 +30,17 @@ public class TargetBlockEntity extends BlockEntity implements IPeripheralTile {
             return;
         int height = getHeight();
         int i=0;
+        String dot = Character.toString(183);
         for (String line : content) {
             if (i < height) {
                 // Replace chars that exist in C and can't be displayed in CC:
                 line = line.replaceAll("\u2588", "=");
                 line = line.replaceAll("\u2592", "-");
+                line = line.replaceAll("\u2591", dot);
 
                 peripheral.repalceLine(offset + i, line);
             }
+            i++;
         }
     }
 
