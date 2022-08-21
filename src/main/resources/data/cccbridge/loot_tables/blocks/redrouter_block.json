@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cccbridge:source_block"
+          "name": "cccbridge:redrouter_block"
         }
       ]
     }
