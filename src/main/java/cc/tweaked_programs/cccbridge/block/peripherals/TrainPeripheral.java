@@ -5,24 +5,15 @@ import com.simibubi.create.content.logistics.trains.entity.Train;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationEditPacket;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationTileEntity;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.TrainEditPacket;
+import com.simibubi.create.content.logistics.trains.management.schedule.Schedule;
 import com.simibubi.create.foundation.networking.AllPackets;
-import dan200.computercraft.ComputerCraft;
-import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.core.apis.ComputerAccess;
-import dan200.computercraft.core.computer.Computer;
-import dan200.computercraft.core.computer.ComputerSide;
-import dan200.computercraft.core.computer.ComputerSystem;
-import dan200.computercraft.core.tracking.ComputerTracker;
-import net.minecraft.block.Block;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,6 +29,7 @@ public class TrainPeripheral implements IPeripheral {
     private final BlockPos pos;
     private final World level;
     private final StationTileEntity station;
+    private static Schedule schedule;
 
     public TrainPeripheral(@NotNull BlockPos pos, World level) {
         this.pos = pos;
@@ -57,55 +49,62 @@ public class TrainPeripheral implements IPeripheral {
         connectedComputers.remove(computer);
     }
 
-    private Block get_block() {
-        return this.level.getBlockEntity(pos).getCachedState().getBlock();
-    }
-
+    //assembles the train
     @LuaFunction
     public boolean assemble() {
+        if (station.getStation().getPresentTrain() != null) {
+            return false;
+        }
         if (station.tryEnterAssemblyMode()) {
             station.assemble(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
-            //assemble stuff here
+            station.tick();
+            if (this.schedule == null) {
+                return true;
+            }
+            station.getStation().getPresentTrain().runtime.setSchedule(this.schedule, true);
+            this.schedule = null;
             return true;
         }
         return false;
     }
 
+    //disassembles the train
     @LuaFunction
     public boolean disassemble() {
+        if (station.getStation().getPresentTrain() == null) {
+            return false;
+        }
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
             BlockPos position = station.edgePoint.getGlobalPosition().up();
-            ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("f3fa25b0-795f-4abb-a08b-53ad30c6f59e"), "MegaLuke1505"));
-            station.getStation().getPresentTrain().disassemble(player,direction, position);
+            this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
+            ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"));
+            station.getStation().getPresentTrain().disassemble(player, direction, position);
             return true;
         }
         return false;
     }
 
+    //returns the stations name
     @LuaFunction
     public String getStationName() {
         return station.getStation().name;
     }
 
-    @LuaFunction
-    public boolean isAssembled() {
-        if (station.getStation().getPresentTrain() == null) {
-            return false;
-        } else return station.getStation().getPresentTrain().canDisassemble();
-    }
-
+    //returns the train's name
     @LuaFunction
     public String getTrainName() {
-        return station.getStation().getPresentTrain().name.asString();
+        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getString();
     }
 
+    //sets the Stations name
     @LuaFunction
     public boolean setStationName(@NotNull String name) {
         AllPackets.channel.sendToServer(StationEditPacket.configure(station.getPos(), false, name));
         return true;
     }
 
+    //sets the Trains name
     @LuaFunction
     public boolean setTrainName(@NotNull String name) {
         if (station.getStation().getPresentTrain() == null) {
@@ -115,13 +114,32 @@ public class TrainPeripheral implements IPeripheral {
         AllPackets.channel.sendToServer(new TrainEditPacket(train.id, name, train.icon.getId()));
         return true;
     }
-    /**
-     * Will be called when a computer connects to our block
-     */
+
+    //gets the Number of Bogeys atteched to the Train
+    @LuaFunction
+    public int getBogeys() {
+        if (station.getStation().getPresentTrain() == null) {
+            return 0;
+        }
+        return station.getStation().getPresentTrain().carriages.size();
+    }
+
+    //gets if there is a train present
+    @LuaFunction
+    public boolean getPresentTrain() {
+        return station.getStation().getPresentTrain() != null;
+    }
+
+    //Clears the schedule saved in the station
+    @LuaFunction
+    public boolean clearSchedule() {
+        this.schedule = null;
+        return true;
+    }
+
     @Override
     public void attach(@Nonnull IComputerAccess computer) {
         connectedComputers.add(computer);
-
     }
 
     @Override
@@ -129,4 +147,3 @@ public class TrainPeripheral implements IPeripheral {
         return this == iPeripheral;
     }
 }
-
