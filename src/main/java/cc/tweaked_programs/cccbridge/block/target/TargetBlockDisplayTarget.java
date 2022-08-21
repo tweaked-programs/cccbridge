@@ -33,6 +33,6 @@ public class TargetBlockDisplayTarget extends DisplayBoardTarget {
         if (!(block instanceof TargetBlockEntity targetBlock))
             return new DisplayTargetStats(24, 1, this);
 
-        return new DisplayTargetStats(32, targetBlock.getWidth(), this);
+        return new DisplayTargetStats(24, targetBlock.getWidth(), this);
     }
 }
