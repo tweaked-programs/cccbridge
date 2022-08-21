@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
 modId="cccbridge"
-version="${file.jarVersion}"
+version="1.1.0"
 displayName="CC:C Bridge"
 updateJSONURL=""
 displayURL="https://tweaked-programs.cc/cccbridge/"

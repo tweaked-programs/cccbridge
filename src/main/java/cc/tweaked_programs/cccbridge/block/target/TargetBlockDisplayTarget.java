@@ -1,8 +1,10 @@
 package cc.tweaked_programs.cccbridge.block.target;
 
+import cc.tweaked_programs.cccbridge.CCCBridge;
 import com.simibubi.create.content.logistics.block.display.DisplayLinkContext;
 import com.simibubi.create.content.logistics.block.display.target.DisplayBoardTarget;
 import com.simibubi.create.content.logistics.block.display.target.DisplayTargetStats;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
