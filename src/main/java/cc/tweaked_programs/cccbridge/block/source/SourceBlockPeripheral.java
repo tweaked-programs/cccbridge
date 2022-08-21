@@ -1,23 +1,45 @@
 package cc.tweaked_programs.cccbridge.block.source;
 
+import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.core.terminal.Terminal;
 import dan200.computercraft.core.terminal.TextBuffer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
 public class SourceBlockPeripheral implements IPeripheral {
     private final SourceBlockEntity source_block_entity;
     private Terminal term = new Terminal(4,2);
+    private List<IComputerAccess> pcs = new LinkedList<>();
 
     SourceBlockPeripheral(SourceBlockEntity source_block_entity) { this.source_block_entity = source_block_entity; }
 
+    @Override
+    public void attach(@Nonnull IComputerAccess computer) {
+        pcs.add(computer);
+    }
+
+    @Override
+    public void detach(@Nonnull IComputerAccess computer) {
+        pcs.removeIf(p -> (p.getID() == computer.getID()));
+    }
+
+    public void resize() {
+        for (IComputerAccess pc : pcs)
+            pc.queueEvent("monitor_resize", pc.getAttachmentName());
+    }
+
     public void setSize(int width, int height) {
+        int oldW = term.getWidth(); int oldH = term.getHeight();
+        if (!(oldW != width || oldH != height)) return;
         term.resize(width,height);
+        resize();
     }
 
     public List<String> getContent() {
@@ -40,46 +62,78 @@ public class SourceBlockPeripheral implements IPeripheral {
     }
 
 
+    /**
+     * Sets the position of the cursor. term.write will begin from this position.
+     * @param x The new x position of the cursor.
+     * @param y The new y position of the cursor.
+     */
     @LuaFunction
     public final void setCursorPos(int x, int y) {
         term.setCursorPos(x-1,y-1);
     }
 
+    /**
+     * Will write the given input to the linked display.
+     * @param text The string to be written.
+     */
     @LuaFunction
     public final void write(String text) {
         term.write(text);
         term.setCursorPos(term.getCursorX()+text.length(), term.getCursorY());
     }
 
+    /**
+     * Scrolls the displays content vertically for [yDiff] lines.
+     * @param yDiff How many lines will the display scroll.
+     */
     @LuaFunction
     public final void scroll(int yDiff) {
         term.scroll(yDiff);
     }
 
+    /**
+     * Clears the whole screen.
+     */
     @LuaFunction
     public final void clear() {
         term.clear();
     }
 
+    /**
+     * Clears the line at the cursor position.
+     */
     @LuaFunction
     public final void clearLine() {
         term.clearLine();
     }
 
+    /**
+     * Returns the line at the wanted display position.
+     * @param y the y position on the display.
+     * @return The string at wanted position.
+     * @throws LuaException When given number is not in range 1-[terminal height]
+     */
     @LuaFunction
-    public final Object getLine(int y) {
-        if (y < 1 || y > term.getHeight())
-            return null;
+    public final String getLine(int y) throws LuaException {
+        if (y < 1 || y > term.getHeight()) throw new LuaException( "Expected number in range 1-"+term.getHeight() );
 
         TextBuffer line = term.getLine(y-1);
         return line.toString();
     }
 
+    /**
+     * Returns the current current cursor position.
+     * @return Object[] {posX, posY}
+     */
     @LuaFunction
     public final Object[] getCursorPos() {
         return new Object[] { term.getCursorX()+1, term.getCursorY()+1 };
     }
 
+    /**
+     * Returns the current display size.
+     * @return Object[] {width, height}
+     */
     @LuaFunction
     public final Object[] getSize() {
         return new Object[] { term.getWidth(), term.getHeight() };

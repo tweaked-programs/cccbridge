@@ -1,5 +1,6 @@
 {
   "block.cccbridge.source_block": "Create Source Block",
   "block.cccbridge.target_block": "Create Target Block",
+  "block.cccbridge.redrouter_block": "RedRouter Block",
   "cccbridge.display_source.source_block_display_source": "Given data from computer"
 }

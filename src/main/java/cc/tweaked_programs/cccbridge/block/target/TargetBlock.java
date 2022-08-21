@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class TargetBlock extends Block implements BlockEntityProvider {
     public TargetBlock() {
-        super(FabricBlockSettings.of(Material.METAL).strength(2.8f).requiresTool().sounds(BlockSoundGroup.COPPER));
+        super(FabricBlockSettings.of(Material.METAL).strength(2.0f).sounds(BlockSoundGroup.COPPER));
     }
 
     @Override
