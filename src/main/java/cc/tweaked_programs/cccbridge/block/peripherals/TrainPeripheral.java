@@ -7,6 +7,7 @@ import com.simibubi.create.content.logistics.trains.management.edgePoint.station
 import com.simibubi.create.content.logistics.trains.management.schedule.Schedule;
 import com.simibubi.create.foundation.networking.AllPackets;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
@@ -47,61 +48,61 @@ public class TrainPeripheral implements IPeripheral {
 
     //assembles the train
     @LuaFunction
-    public boolean assemble() {
+    public final MethodResult assemble() {
         if (station.getStation().getPresentTrain() != null) {
-            return false;
+            return MethodResult.of(false, "Train already assembled");
         }
         if (station.tryEnterAssemblyMode()) {
             station.assemble(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
             station.tick();
-            if (this.schedule == null) {
-                return true;
+            if (schedule == null) {
+                return MethodResult.of(true, "No schedule found");
             }
-            station.getStation().getPresentTrain().runtime.setSchedule(this.schedule, true);
-            this.schedule = null;
-            return true;
+            station.getStation().getPresentTrain().runtime.setSchedule(schedule, true);
+            schedule = null;
+            return MethodResult.of(true, "Train assembled");
         }
-        return false;
+        return MethodResult.of(false, "Could not assemble train");
     }
 
     //disassembles the train
     @LuaFunction
-    public boolean disassemble() {
+    public final MethodResult disassemble() {
         if (station.getStation().getPresentTrain() == null) {
-            return false;
+            return MethodResult.of(false, "Train not assembled");
         }
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
             BlockPos position = station.edgePoint.getGlobalPosition().above();
-            this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
+            schedule = station.getStation().getPresentTrain().runtime.getSchedule();
             station.getStation().getPresentTrain().disassemble(direction, position);
-            return true;
+            return MethodResult.of(true, "Train disassembled");
         }
-        return false;
+        return MethodResult.of(false, "Could not disassemble train");
     }
 
     //returns the stations name
     @LuaFunction
-    public String getStationName() {
+    public final String getStationName() {
         return station.getStation().name;
     }
 
     //returns the train's name
     @LuaFunction
-    public String getTrainName() {
+    public final String getTrainName() {
         return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents();
     }
 
     //sets the Stations name
     @LuaFunction
-    public boolean setStationName(@NotNull String name) {
+    public final boolean setStationName(@NotNull String name) {
         AllPackets.channel.sendToServer(StationEditPacket.configure(station.getBlockPos(), false, name));
         return true;
     }
 
     //sets the Trains name
     @LuaFunction
-    public boolean setTrainName(@NotNull String name) {
+    public final boolean setTrainName(@NotNull String name) {
         if (station.getStation().getPresentTrain() == null) {
             return false;
         }
@@ -112,7 +113,7 @@ public class TrainPeripheral implements IPeripheral {
 
     //gets the Number of Bogeys atteched to the Train
     @LuaFunction
-    public int getBogeys() {
+    public final int getBogeys() {
         if (station.getStation().getPresentTrain() == null) {
             return 0;
         }
@@ -121,14 +122,14 @@ public class TrainPeripheral implements IPeripheral {
 
     //gets if there is a train present
     @LuaFunction
-    public boolean getPresentTrain() {
+    public final boolean getPresentTrain() {
         return station.getStation().getPresentTrain() != null;
     }
 
     //Clears the schedule saved in the station
     @LuaFunction
-    public boolean clearSchedule() {
-        this.schedule = null;
+    public final boolean clearSchedule() {
+        schedule = null;
         return true;
     }
 
