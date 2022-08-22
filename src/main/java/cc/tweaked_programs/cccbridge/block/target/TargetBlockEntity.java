@@ -1,9 +1,7 @@
 package cc.tweaked_programs.cccbridge.block.target;
 
-import cc.tweaked_programs.cccbridge.Main;
-
+import cc.tweaked_programs.cccbridge.CCCBridge;
 import dan200.computercraft.api.peripheral.IPeripheral;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,7 +13,7 @@ public class TargetBlockEntity extends BlockEntity {
     private TargetBlockPeripheral peripheral;
 
     public TargetBlockEntity(BlockPos pos, BlockState state) {
-        super(Main.TARGET_BLOCK_ENTITY.get(), pos, state);
+        super(CCCBridge.TARGET_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void updateContent(int offset, List<String> content) {
