@@ -18,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,21 +53,21 @@ public class TrainPeripheral implements IPeripheral {
 
     //assembles the train
     @LuaFunction
-    public boolean assemble() {
+    public final MethodResult assemble() {
         if (station.getStation().getPresentTrain() != null) {
-            return false;
+            return MethodResult.of(false,"there is a assembled Train");
         }
         if (station.tryEnterAssemblyMode()) {
             station.assemble(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
             station.tick();
             if (this.schedule == null) {
-                return true;
+                return MethodResult.of(false,"No Schedule Saved");
             }
             station.getStation().getPresentTrain().runtime.setSchedule(this.schedule, true);
             this.schedule = null;
-            return true;
+            return MethodResult.of(true, "Train Assembled");
         }
-        return false;
+        return MethosResult.of(false, "can't assemble Train");
     }
 
     //disassembles the train
