@@ -8,6 +8,7 @@ import com.simibubi.create.content.logistics.trains.management.edgePoint.station
 import com.simibubi.create.content.logistics.trains.management.schedule.Schedule;
 import com.simibubi.create.foundation.networking.AllPackets;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -55,26 +56,26 @@ public class TrainPeripheral implements IPeripheral {
     @LuaFunction
     public final MethodResult assemble() {
         if (station.getStation().getPresentTrain() != null) {
-            return MethodResult.of(false,"there is a assembled Train");
+            return MethodResult.of(false, "There is a assembled Train");
         }
         if (station.tryEnterAssemblyMode()) {
             station.assemble(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
             station.tick();
             if (this.schedule == null) {
-                return MethodResult.of(false,"No Schedule Saved");
+                return MethodResult.of(false,"No Schedule saved");
             }
             station.getStation().getPresentTrain().runtime.setSchedule(this.schedule, true);
             this.schedule = null;
-            return MethodResult.of(true, "Train Assembled");
+            return MethodResult.of(true, "Train assembled");
         }
-        return MethosResult.of(false, "can't assemble Train");
+        return MethodResult.of(false, "Can't assemble Train");
     }
 
     //disassembles the train
     @LuaFunction
-    public boolean disassemble() {
+    public final MethodResult disassemble() {
         if (station.getStation().getPresentTrain() == null) {
-            return false;
+            return MethodResult.of(false,"there is no Train");
         }
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
@@ -82,9 +83,9 @@ public class TrainPeripheral implements IPeripheral {
             this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
             ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"));
             station.getStation().getPresentTrain().disassemble(player, direction, position);
-            return true;
+            return MethodResult.of(true, "Train disassembled");
         }
-        return false;
+        return MethodResult.of(false, "Can't disassemble Train");
     }
 
     //returns the stations name

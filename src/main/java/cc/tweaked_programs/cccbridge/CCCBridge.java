@@ -10,6 +10,8 @@ import cc.tweaked_programs.cccbridge.block.target.TargetBlockDisplayTarget;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlockEntity;
 import cc.tweaked_programs.cccbridge.block.peripherals.PeripheralProvider;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
+import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
