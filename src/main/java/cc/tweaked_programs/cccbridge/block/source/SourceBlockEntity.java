@@ -1,11 +1,14 @@
 package cc.tweaked_programs.cccbridge.block.source;
 
 import cc.tweaked_programs.cccbridge.CCCBridge;
+
 import dan200.computercraft.api.peripheral.IPeripheral;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

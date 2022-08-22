@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SourceBlock extends Block implements EntityBlock {
     public SourceBlock() {
-        super(Properties.of(Material.METAL).strength(2.8f).requiresCorrectToolForDrops().sound(SoundType.COPPER));
+        super(Properties.of(Material.METAL).strength(2.0f).sound(SoundType.COPPER));
     }
 
     @Nullable

@@ -1,6 +1,7 @@
 package cc.tweaked_programs.cccbridge.block.redrouter;
 
 import cc.tweaked_programs.cccbridge.CCCBridge;
+import cc.tweaked_programs.cccbridge.block.target.TargetBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,13 +60,13 @@ public class RedRouterBlockEntity extends BlockEntity {
     }
 
     private static void updateInputs(Level world, BlockPos blockPos, BlockState state, RedRouterBlockEntity redrouter) {
-        for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
+        for (Map.Entry<String,Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
             Direction dir = Direction.byName(side).getOpposite();
             BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
             int power = block.getBlock().getSignal(block, world, offsetPos, dir);
-            redrouter.inputDir.put(side, power);
+            redrouter.inputDir.put(side,power);
         }
     }
 
@@ -80,8 +81,7 @@ public class RedRouterBlockEntity extends BlockEntity {
         int value = 0;
         try {
             value = inputDir.get(side.getName());
-        } catch (NullPointerException e) {
-        }
+        } catch(NullPointerException e) { }
         return value;
     }
 
@@ -89,8 +89,7 @@ public class RedRouterBlockEntity extends BlockEntity {
         int value = 0;
         try {
             value = outputDir.get(side.getName());
-        } catch (NullPointerException e) {
-        }
+        } catch(NullPointerException e) { }
         return value;
     }
 
@@ -102,7 +101,7 @@ public class RedRouterBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        for (Map.Entry<String, Integer> entry : outputDir.entrySet()) {
+        for (Map.Entry<String,Integer> entry : outputDir.entrySet()) {
             String side = entry.getKey();
             outputDir.put(side, nbt.getInt(side));
         }
@@ -110,7 +109,7 @@ public class RedRouterBlockEntity extends BlockEntity {
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
-        for (Map.Entry<String, Integer> entry : outputDir.entrySet())
+        for (Map.Entry<String,Integer> entry : outputDir.entrySet())
             nbt.putInt(entry.getKey(), entry.getValue());
         super.saveAdditional(nbt);
     }

@@ -1,24 +1,30 @@
 package cc.tweaked_programs.cccbridge.block.target;
 
+import cc.tweaked_programs.cccbridge.CCCBridge;
 import com.simibubi.create.content.logistics.block.display.DisplayLinkContext;
-import com.simibubi.create.content.logistics.block.display.target.DisplayTarget;
+import com.simibubi.create.content.logistics.block.display.target.DisplayBoardTarget;
 import com.simibubi.create.content.logistics.block.display.target.DisplayTargetStats;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class TargetBlockDisplayTarget extends DisplayTarget {
+public class TargetBlockDisplayTarget extends DisplayBoardTarget {
     @Override
-    public void acceptText(int line, List<MutableComponent> text, DisplayLinkContext context) {
+    public void acceptFlapText(int line, List<List<MutableComponent>> text, DisplayLinkContext context) {
         BlockEntity block = context.getTargetTE();
         if (!(block instanceof TargetBlockEntity targetBlock))
             return;
 
         List<String> content = new LinkedList<>();
-        for (MutableComponent sLine : text)
-            content.add(sLine.getString());
+        for (List<MutableComponent> c : text) {
+            String parts = "";
+            for (MutableComponent sLine : c)
+                parts = parts + sLine.getString() + " ";
+            content.add(parts);
+        }
 
         targetBlock.updateContent(line, content);
     }
@@ -27,8 +33,8 @@ public class TargetBlockDisplayTarget extends DisplayTarget {
     public DisplayTargetStats provideStats(DisplayLinkContext context) {
         BlockEntity block = context.getTargetTE();
         if (!(block instanceof TargetBlockEntity targetBlock))
-            return new DisplayTargetStats(16, 1, this);
+            return new DisplayTargetStats(24, 1, this);
 
-        return new DisplayTargetStats(16, targetBlock.getWidth(), this);
+        return new DisplayTargetStats(24, targetBlock.getWidth(), this);
     }
 }
