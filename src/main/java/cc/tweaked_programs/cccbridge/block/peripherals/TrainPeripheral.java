@@ -132,7 +132,7 @@ public class TrainPeripheral implements IPeripheral {
             AllPackets.channel.send(PacketDistributor.ALL.noArg(), new TrainEditReturnPacket(Train.id, name, Train.icon.getId()));
             return MethodResult.of(true, "Train name set to" + name);
         }
-        //AllPackets.channel.sendToServer(new TrainEditPacket(train.id, name, train.icon.getId()));
+        //AllPackets.channel.sendToServer(new TrainEditPacket(train.id, name,train.icon.getId()));
         return MethodResult.of(false, "Train name cannot be blank");
     }
 
