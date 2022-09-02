@@ -6,7 +6,8 @@
   "name": "CC:C Bridge",
   "description": "Adds compatibility between the ComputerCraft and Create mod!\n\nCopyright 2022 Sammy L. Koch\nLicensed under the Apache License, Version 2.0 ",
   "authors": [
-    "Sammy L. Koch"
+    "Sammy L. Koch",
+    "Luke A. Hanssen"
   ],
   "contact": {
     "homepage": "https://tweaked-programs.cc/",
