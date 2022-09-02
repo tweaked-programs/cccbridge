@@ -1,5 +1,6 @@
 package cc.tweaked_programs.cccbridge;
 
+import cc.tweaked_programs.cccbridge.block.peripherals.PeripheralProvider;
 import cc.tweaked_programs.cccbridge.block.redrouter.RedRouterBlock;
 import cc.tweaked_programs.cccbridge.block.redrouter.RedRouterBlockEntity;
 import cc.tweaked_programs.cccbridge.block.source.SourceBlock;
@@ -8,11 +9,10 @@ import cc.tweaked_programs.cccbridge.block.source.SourceBlockEntity;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlock;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlockDisplayTarget;
 import cc.tweaked_programs.cccbridge.block.target.TargetBlockEntity;
-
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
-
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
 import org.slf4j.Logger;
 
 import static cc.tweaked_programs.cccbridge.CCCBridge.MOD_ID;
@@ -52,7 +51,7 @@ public class CCCBridge {
     public static final RegistryObject<BlockEntityType<SourceBlockEntity>> SOURCE_BLOCK_ENTITY = BLOCK_ENTITIES.register("source_block_entity", () -> BlockEntityType.Builder.of(SourceBlockEntity::new, SOURCE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<TargetBlockEntity>> TARGET_BLOCK_ENTITY = BLOCK_ENTITIES.register("target_block_entity", () -> BlockEntityType.Builder.of(TargetBlockEntity::new, TARGET_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<RedRouterBlockEntity>> REDROUTER_BLOCK_ENTITY = BLOCK_ENTITIES.register("redrouter_block_entity", () -> BlockEntityType.Builder.of(RedRouterBlockEntity::new, REDROUTER_BLOCK.get()).build(null));
-
+    public static IPeripheralProvider peripheralProvider = new PeripheralProvider();
     public CCCBridge() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -78,6 +77,7 @@ public class CCCBridge {
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
         });
     }
 }
