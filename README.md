@@ -20,8 +20,9 @@ In other words, you can display all your ***f a n c y*** stuff with e.g. Display
 Not only can you simulate a **Source Block** *(aka. the part that **sends** data to the Display Link)*, there is also a **Target Block**! This way you can ***get*** data from other sources!  
 For example, you can now get how much stress your network **exactly** has *(in SU)*, a death counter, how many <insert_item_name_here> you produce, etc.
   
-With these two blocks, many things you can imagine are now possible. To give more examples:  
-A fancy flippy monitor *(that you know from the airports)*, that shows a custom schedule plan for your trains! Or an oldschool scoreboard for your mini-games! *(like you may know them from baseball fields.)*
+There are also **Redstone Peripherals** *(RedRouter)* and a way of controlling a **Train Station**!
+  
+With these blocks, many things you can imagine are now possible.
 
 Thats all cool, but how do I use it!?
 ---------------------
