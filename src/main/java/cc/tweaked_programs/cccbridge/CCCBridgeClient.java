@@ -7,6 +7,6 @@ import net.minecraft.client.render.RenderLayer;
 public class CCCBridgeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(CCCBridge.REDROUTER_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.getBlock("target_block"), RenderLayer.getCutout());
     }
 }

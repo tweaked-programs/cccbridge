@@ -1,4 +1,4 @@
-package cc.tweaked_programs.cccbridge.block.peripherals;
+package cc.tweaked_programs.cccbridge.peripherals;
 
 import com.mojang.authlib.GameProfile;
 import com.simibubi.create.Create;
@@ -28,15 +28,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class TrainPeripheral implements IPeripheral {
-
-    private final List<IComputerAccess> connectedComputers = new ArrayList<>();
-    private final BlockPos pos;
+    private static Schedule schedule;
     private final World level;
     private final StationTileEntity station;
-    private static Schedule schedule;
 
     public TrainPeripheral(@NotNull BlockPos pos, World level) {
-        this.pos = pos;
         this.level = level;
         this.station = (StationTileEntity) level.getBlockEntity(pos);
     }
@@ -48,12 +44,11 @@ public class TrainPeripheral implements IPeripheral {
         return "train_station";
     }
 
-    @Override
-    public void detach(@Nonnull IComputerAccess computer) {
-        connectedComputers.remove(computer);
-    }
-
-    //assembles the train
+    /**
+     * Assembles a train.
+     *
+     * @return Whether it was successful or not with a message.
+     */
     @LuaFunction
     public final MethodResult assemble() {
         if (station.getStation().getPresentTrain() != null) {
@@ -63,7 +58,7 @@ public class TrainPeripheral implements IPeripheral {
             station.assemble(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"));
             station.tick();
             if (this.schedule == null) {
-                return MethodResult.of(false,"No Schedule saved");
+                return MethodResult.of(false, "No Schedule saved");
             }
             station.getStation().getPresentTrain().runtime.setSchedule(this.schedule, true);
             this.schedule = null;
@@ -72,11 +67,15 @@ public class TrainPeripheral implements IPeripheral {
         return MethodResult.of(false, "Can't assemble Train");
     }
 
-    //disassembles the train
+    /**
+     * Disassembles a train.
+     *
+     * @return Whether it was successful or not with a message.
+     */
     @LuaFunction
     public final MethodResult disassemble() {
         if (station.getStation().getPresentTrain() == null) {
-            return MethodResult.of(false,"there is no Train");
+            return MethodResult.of(false, "there is no Train");
         }
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
@@ -89,19 +88,32 @@ public class TrainPeripheral implements IPeripheral {
         return MethodResult.of(false, "Can't disassemble Train");
     }
 
-    //returns the stations name
+    /**
+     * Returns the current station name.
+     *
+     * @return Name of station.
+     */
     @LuaFunction
     public String getStationName() {
         return station.getStation().name;
     }
 
-    //returns the train's name
+    /**
+     * Returns the current trains name.
+     *
+     * @return Name of train.
+     */
     @LuaFunction
     public String getTrainName() {
         return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getString();
     }
 
-    //sets the Stations name
+    /**
+     * Sets the stations name
+     *
+     * @param name The new name.
+     * @return Whether it was successful or not.
+     */
     @LuaFunction
     public final boolean setStationName(@NotNull String name) {
         GlobalStation station2 = station.getStation();
@@ -117,7 +129,12 @@ public class TrainPeripheral implements IPeripheral {
         return false;
     }
 
-    //sets the Trains
+    /**
+     * Sets the current trains name.
+     *
+     * @param name The new name.
+     * @return Whether it was successful or not with a message.
+     */
     @LuaFunction
     public final MethodResult setTrainName(@NotNull String name) {
         if (station.getStation().getPresentTrain() == null) {
@@ -128,7 +145,7 @@ public class TrainPeripheral implements IPeripheral {
         if (Train == null) {
             return MethodResult.of(false, "Train not found");
         }
-        if(!name.isBlank()) {
+        if (!name.isBlank()) {
             Train.name = Text.of(name);
             station.tick();
             AllPackets.channel.sendToClientsInServer(new TrainEditReturnPacket(train.id, name, Train.icon.getId()), level.getServer());
@@ -138,7 +155,11 @@ public class TrainPeripheral implements IPeripheral {
         return MethodResult.of(false, "Train name cannot be blank");
     }
 
-    //gets the Number of Bogeys atteched to the Train
+    /**
+     * Gets the number of Bogeys attached to the current train.
+     *
+     * @return The number of Bogeys.
+     */
     @LuaFunction
     public int getBogeys() {
         if (station.getStation().getPresentTrain() == null) {
@@ -147,22 +168,22 @@ public class TrainPeripheral implements IPeripheral {
         return station.getStation().getPresentTrain().carriages.size();
     }
 
-    //gets if there is a train present
+    /**
+     * Returns boolean whether a train os present or not.
+     *
+     * @return Whether it was successful or not.
+     */
     @LuaFunction
     public boolean getPresentTrain() {
         return station.getStation().getPresentTrain() != null;
     }
 
-    //Clears the schedule saved in the station
+    /**
+     * Clears the schedule saved in the station.
+     */
     @LuaFunction
-    public boolean clearSchedule() {
+    public void clearSchedule() {
         this.schedule = null;
-        return true;
-    }
-
-    @Override
-    public void attach(@Nonnull IComputerAccess computer) {
-        connectedComputers.add(computer);
     }
 
     @Override
