@@ -25,7 +25,7 @@ public class RedRouterBlockEntity extends BlockEntity {
     private Direction facing;
 
     public RedRouterBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegister.getBlockEntityType("target_block"), pos, state);
+        super(BlockRegister.getBlockEntityType("redrouter_block"), pos, state);
         facing = state.get(Properties.HORIZONTAL_FACING);
         outputDir.put("up", 0);
         outputDir.put("down", 0);
