@@ -2,6 +2,8 @@ package cc.tweaked_programs.cccbridge.blockEntity;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
+import dan200.computercraft.api.peripheral.IPeripheral;
+import dan200.computercraft.api.peripheral.IPeripheralTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -12,12 +14,13 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RedRouterBlockEntity extends BlockEntity {
+public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile {
     private HashMap<String, Integer> outputDir = new HashMap<>();
     private HashMap<String, Integer> inputDir = new HashMap<>();
     private RedRouterBlockPeripheral peripheral;
@@ -74,6 +77,13 @@ public class RedRouterBlockEntity extends BlockEntity {
             return Direction.NORTH;
         }
         return facing;
+    }
+
+    @Override
+    public IPeripheral getPeripheral(@NotNull Direction side) {
+        if (peripheral == null)
+            peripheral = new RedRouterBlockPeripheral(this);
+        return peripheral;
     }
 
     public int getRedstoneInput(Direction side) {
