@@ -1,5 +1,6 @@
-package cc.tweaked_programs.cccbridge.block.peripherals;
+package cc.tweaked_programs.cccbridge;
 
+import cc.tweaked_programs.cccbridge.peripherals.TrainPeripheral;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationTileEntity;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
@@ -15,7 +16,7 @@ public class PeripheralProvider implements IPeripheralProvider {
     @Override
     public LazyOptional<IPeripheral> getPeripheral(@NotNull Level world, @NotNull BlockPos pos, @NotNull Direction side) {
         if (world.getBlockEntity(pos) instanceof StationTileEntity) {
-            return LazyOptional.of(() -> new TrainPeripheral(pos ,world));
+            return LazyOptional.of(() -> new TrainPeripheral(pos, world));
         }
         return LazyOptional.empty();
     }

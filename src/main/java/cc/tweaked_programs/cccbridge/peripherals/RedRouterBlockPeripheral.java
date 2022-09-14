@@ -1,5 +1,6 @@
-package cc.tweaked_programs.cccbridge.block.redrouter;
+package cc.tweaked_programs.cccbridge.peripherals;
 
+import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IPeripheral;
@@ -11,7 +12,9 @@ import org.jetbrains.annotations.Nullable;
 public class RedRouterBlockPeripheral implements IPeripheral {
     private final RedRouterBlockEntity redrouter_be;
 
-    RedRouterBlockPeripheral(RedRouterBlockEntity redrouter_block_entity) { this.redrouter_be = redrouter_block_entity; }
+    public RedRouterBlockPeripheral(RedRouterBlockEntity redrouter_block_entity) {
+        this.redrouter_be = redrouter_block_entity;
+    }
 
     @NotNull
     @Override
@@ -21,29 +24,22 @@ public class RedRouterBlockPeripheral implements IPeripheral {
 
     public Direction getActualSide(ComputerSide side) {
         Direction facing = redrouter_be.getFacing();
-        switch (side.getName()) {
-            case ("front"):
-                return facing.getOpposite();
-            case ("back"):
-                return facing;
-            case ("left"):
-                return facing.getClockWise();
-            case ("right"):
-                return facing.getCounterClockWise();
-            case ("top"):
-                return Direction.DOWN;
-            case ("bottom"):
-                return Direction.UP;
-            default:
-                return Direction.NORTH;
-        }
+        return switch (side.getName()) {
+            case ("front") -> facing.getOpposite();
+            case ("back") -> facing;
+            case ("left") -> facing.getClockWise();
+            case ("right") -> facing.getCounterClockWise();
+            case ("top") -> Direction.DOWN;
+            case ("bottom") -> Direction.UP;
+            default -> Direction.NORTH;
+        };
     }
 
     /**
      * Toggles a redstone signal for a specific side.
      *
      * @param side The side to set.
-     * @param on The signals state true(15) / false(0).
+     * @param on   The signals state true(15) / false(0).
      */
     @LuaFunction
     public final void setOutput(ComputerSide side, boolean on) {
@@ -76,13 +72,13 @@ public class RedRouterBlockPeripheral implements IPeripheral {
     /**
      * Set a redstone signal strength for a specific side.
      *
-     * @param side The side to set.
+     * @param side  The side to set.
      * @param value The signal strength between 0 and 15.
      * @throws LuaException If {@code value} is not betwene 0 and 15.
      */
     @LuaFunction({"setAnalogOutput", "setAnalogueOutput"})
     public final void setAnalogOutput(ComputerSide side, int value) throws LuaException {
-        if (value < 0 || value > 15) throw new LuaException( "Expected number in range 0-15" );
+        if (value < 0 || value > 15) throw new LuaException("Expected number in range 0-15");
         redrouter_be.setPower(getActualSide(side).getName(), value);
     }
 
@@ -105,7 +101,7 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      * @return The input signal strength, between 0 and 15.
      */
     @LuaFunction({"getAnalogInput", "getAnalogueInput"})
-    public final int getAnalogInput(ComputerSide side)  {
+    public final int getAnalogInput(ComputerSide side) {
         return redrouter_be.getRedstoneInput(getActualSide(side));
     }
 

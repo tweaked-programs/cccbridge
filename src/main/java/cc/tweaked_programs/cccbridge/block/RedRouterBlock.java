@@ -1,6 +1,8 @@
-package cc.tweaked_programs.cccbridge.block.redrouter;
+package cc.tweaked_programs.cccbridge.block;
 
+import cc.tweaked_programs.cccbridge.BlockRegister;
 import cc.tweaked_programs.cccbridge.CCCBridge;
+import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -47,7 +49,7 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return CCCBridge.REDROUTER_BLOCK_ENTITY.get() == type ? RedRouterBlockEntity::tick : null;
+        return BlockRegister.REDROUTER_BLOCK_ENTITY.get() == type ? RedRouterBlockEntity::tick : null;
     }
 
     @Override
