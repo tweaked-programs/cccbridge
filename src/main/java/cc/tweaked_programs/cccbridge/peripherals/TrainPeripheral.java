@@ -34,7 +34,7 @@ public class TrainPeripheral implements IPeripheral {
 
     public TrainPeripheral(@NotNull BlockPos pos, World level) {
         this.level = level;
-        this.station = (StationTileEntity) level.getBlockEntity(pos);
+        station = (StationTileEntity) level.getBlockEntity(pos);
     }
 
 
