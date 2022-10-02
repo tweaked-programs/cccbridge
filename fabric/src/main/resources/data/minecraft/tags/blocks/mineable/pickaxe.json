@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "cccbridge:source_block",
+    "cccbridge:target_block",
+    "cccbridge:redrouter_block"
+  ]
+}

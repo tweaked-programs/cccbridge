@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "cccbridge:block/target_block" }
+  }
+}

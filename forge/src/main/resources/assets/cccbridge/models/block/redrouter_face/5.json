@@ -1,0 +1,7 @@
+{
+	"credit": "By Sammy.K",
+	"parent": "cccbridge:block/redrouter_block",
+    "textures": {
+        "face": "cccbridge:block/redrouter_face/5"
+    }
+}
