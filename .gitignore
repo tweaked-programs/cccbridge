@@ -1,3 +1,6 @@
-/.idea/
-/package.json
-/package-lock.json
+/forge/.idea/
+/forge/package.json
+/forge/package-lock.json
+/fabric/.idea/
+/fabric/package.json
+/fabric/package-lock.json
