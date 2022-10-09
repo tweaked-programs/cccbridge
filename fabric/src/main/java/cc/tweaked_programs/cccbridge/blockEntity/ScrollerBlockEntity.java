@@ -47,48 +47,33 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
 
     @Override
     public void addBehaviours(List<TileEntityBehaviour> behaviours) {
-        ScrollValueBehaviour targetSpeed = new ScrollValueBehaviour(getCachedState().getBlock().getName(), this, new ControllerValueBoxTransform())
-                .between(-160, 160)
+        ScrollValueBehaviour scroller = new ScrollValueBehaviour(getCachedState().getBlock().getName(), this, new ControllerValueBoxTransform())
+                .between(-150, 150)
                 .moveText(new Vec3d(9, 0, 10))
+                .withUnit(i -> new TranslatableText("cccbridge.general.unit.scroller"))
+                .withCallback(i -> peripheral.newValue())
+                .withStepFunction(context -> context.shift ? 1 : 10)
                 .withFormatter(i -> {
                     StringBuilder number = new StringBuilder(String.valueOf(i));
                     if (i <= -10 || i >= 10)
-                        number.insert(number.length()-1,'.').toString();
-                    else {
-                        if (i >= 0)
-                            number.insert(0, "0.").toString();
-                        else
-                            number.insert(number.length(), ".0").toString();
-                    }
+                        number.insert(number.length()-1,'.');
+                    else
+                        number.insert( (i>=0) ? 0 : 1, "0.");
                     return number.toString();
-                })
-                .withUnit(i -> new TranslatableText("cccbridge.general.unit.scroller"))
-                .withCallback(i -> {
-                    peripheral.newValue();
-                })
-                .withStepFunction(ScrollerBlockEntity::step);
-        targetSpeed.value = 0;
+                });
+        scroller.value = 0;
 
-        behaviours.add(targetSpeed);
-
-        registerAwardables(behaviours, AllAdvancements.SPEED_CONTROLLER);
+        behaviours.add(scroller);
     }
 
-    public static int step(ScrollValueBehaviour.StepContext context) {
-        return context.shift ? 1 : 10;
-    }
-
-    private class ControllerValueBoxTransform extends ValueBoxTransform.Sided {
-
+    private static class ControllerValueBoxTransform extends ValueBoxTransform.Sided {
         @Override
         protected Vec3d getSouthLocation() {
-            return VecHelper.voxelSpace(8, 8, 1);
+            return VecHelper.voxelSpace(8, 8, 0);
         }
 
         @Override
-        protected boolean isSideActive(BlockState state, Direction direction) {
-            return state.get(Properties.FACING) == direction;
-        }
+        protected boolean isSideActive(BlockState state, Direction direction) { return state.get(Properties.FACING) == direction; }
 
         @Override
         protected float getScale() {

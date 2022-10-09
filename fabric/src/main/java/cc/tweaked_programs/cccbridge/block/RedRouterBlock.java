@@ -52,15 +52,17 @@ public class RedRouterBlock extends HorizontalFacingBlock implements BlockEntity
         if (!(tileentity instanceof RedRouterBlockEntity redrouter))
             return ActionResult.FAIL;
 
-        int north = redrouter.getPower(Direction.NORTH);
-        int east = redrouter.getPower(Direction.EAST);
-        int south = redrouter.getPower(Direction.SOUTH);
-        int west = redrouter.getPower(Direction.WEST);
+        if (context.getSide().getId() < 2) {
+            int north = redrouter.getPower(Direction.NORTH);
+            int east = redrouter.getPower(Direction.EAST);
+            int south = redrouter.getPower(Direction.SOUTH);
+            int west = redrouter.getPower(Direction.WEST);
 
-        redrouter.setPower("north", west);
-        redrouter.setPower("east", north);
-        redrouter.setPower("south", east);
-        redrouter.setPower("west", south);
+            redrouter.setPower("north", west);
+            redrouter.setPower("east", north);
+            redrouter.setPower("south", east);
+            redrouter.setPower("west", south);
+        }
 
         ActionResult result = IWrenchable.super.onWrenched(state, context);
         if (!result.isAccepted())
