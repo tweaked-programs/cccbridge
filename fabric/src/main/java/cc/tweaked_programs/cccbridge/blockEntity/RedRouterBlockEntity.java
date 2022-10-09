@@ -1,6 +1,7 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
+import cc.tweaked_programs.cccbridge.CCCBridge;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralTile;
@@ -49,7 +50,7 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
         if (!(be instanceof RedRouterBlockEntity redrouter)) return;
         if (state.get(Properties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            redrouter.facing = state.get(Properties.HORIZONTAL_FACING);
+            //redrouter.facing = state.get(Properties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
@@ -57,11 +58,10 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
                     .getBlock());
             redrouter.blockupdate = false;
         }
-
-        updateInputs(world, blockPos, state, redrouter);
+        updateInputs(world, blockPos, redrouter);
     }
 
-    private static void updateInputs(World world, BlockPos blockPos, BlockState state, RedRouterBlockEntity redrouter) {
+    private static void updateInputs(World world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
             Direction dir = Direction.byName(side).getOpposite();
@@ -97,10 +97,8 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
 
     public int getPower(Direction side) {
         int value = 0;
-        try {
-            value = outputDir.get(side.asString());
-        } catch (NullPointerException e) {
-        }
+        try { value = outputDir.get(side.asString());
+        } catch (NullPointerException e) { CCCBridge.LOGGER.warn(e.getMessage()); }
         return value;
     }
 
@@ -128,9 +126,7 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
     @Override
     public void markDirty() {
         super.markDirty();
-        if (this.hasWorld() && !world.isClient()) {
-            blockupdate = true;
-        }
+        blockupdate = true;
     }
 
     @Nullable

@@ -8,5 +8,6 @@ public class CCCBridgeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.getBlock("redrouter_block"), RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegister.getBlock("scroller_block"), RenderLayer.getCutout());
     }
 }

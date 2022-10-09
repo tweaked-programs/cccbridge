@@ -1,6 +1,8 @@
 {
-  "block.cccbridge.source_block": "Create Source Block",
-  "block.cccbridge.target_block": "Create Target Block",
+  "block.cccbridge.source_block": "Source Block",
+  "block.cccbridge.target_block": "Target Block",
   "block.cccbridge.redrouter_block": "RedRouter Block",
-  "cccbridge.display_source.source_block_display_source": "Given data from computer"
+  "block.cccbridge.scroller_block": "Scroller Block",
+  "cccbridge.display_source.source_block_display_source": "Given data from computer",
+  "cccbridge.general.unit.scroller": "Small Lua Number"
 }

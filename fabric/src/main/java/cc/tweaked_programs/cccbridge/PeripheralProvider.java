@@ -1,8 +1,6 @@
 package cc.tweaked_programs.cccbridge;
 
-import cc.tweaked_programs.cccbridge.peripherals.SpeedControllerPeripheral;
 import cc.tweaked_programs.cccbridge.peripherals.TrainPeripheral;
-import com.simibubi.create.content.contraptions.relays.advanced.SpeedControllerTileEntity;
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.StationTileEntity;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
@@ -19,8 +17,6 @@ public class PeripheralProvider implements IPeripheralProvider {
 
         if (block instanceof StationTileEntity) {
             return new TrainPeripheral(pos, world);
-        } else if (block instanceof SpeedControllerTileEntity) {
-            return new SpeedControllerPeripheral(pos, world);
         }
 
         return null;

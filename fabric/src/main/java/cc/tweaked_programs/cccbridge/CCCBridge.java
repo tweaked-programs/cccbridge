@@ -1,8 +1,10 @@
 package cc.tweaked_programs.cccbridge;
 
 import cc.tweaked_programs.cccbridge.block.RedRouterBlock;
+import cc.tweaked_programs.cccbridge.block.ScrollerBlock;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import cc.tweaked_programs.cccbridge.block.SourceBlock;
+import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
 import cc.tweaked_programs.cccbridge.display.SourceBlockDisplaySource;
 import cc.tweaked_programs.cccbridge.blockEntity.SourceBlockEntity;
 import cc.tweaked_programs.cccbridge.block.TargetBlock;
@@ -13,10 +15,12 @@ import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CCCBridge implements ModInitializer {
     public static final String MOD_ID = "cccbridge";
-    // public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static final IPeripheralProvider peripheralProvider = new PeripheralProvider();
 
@@ -29,6 +33,7 @@ public class CCCBridge implements ModInitializer {
         AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new Identifier(MOD_ID, "target_block_display_source"), new TargetBlockDisplayTarget()), BlockRegister.getBlockEntityType("target_block"));
 
         BlockRegister.registerBlockEntity("redrouter_block", RedRouterBlockEntity::new, new RedRouterBlock());
+        BlockRegister.registerBlockEntity("scroller_block", ScrollerBlockEntity::new, new ScrollerBlock());
 
         ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
     }
