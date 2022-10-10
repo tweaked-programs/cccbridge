@@ -73,11 +73,11 @@ public class RedRouterBlock extends HorizontalFacingBlock implements BlockEntity
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return BlockRegister.getBlockEntityType("target_block") == type ? RedRouterBlockEntity::tick : null;
+        return BlockRegister.getBlockEntityType("redrouter_block") == type ? RedRouterBlockEntity::tick : null;
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState) this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing().getOpposite());
     }
 }

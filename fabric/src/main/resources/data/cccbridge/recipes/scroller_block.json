@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BPB",
+    "BCB",
+    "BWB"
+  ],
+  "key": {
+    "B": {
+        "item": "create:brass_nugget"
+    },
+    "P": {
+        "item": "create:precision_mechanism"
+    },
+    "C": {
+        "item": "create:brass_casing"
+    },
+    "W": {
+        "item": "computercraft:wired_modem"
+    }
+  },
+  "result": {
+    "item": "cccbridge:scroller_block",
+    "count": 2
+  }
+}

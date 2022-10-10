@@ -2,11 +2,11 @@ package cc.tweaked_programs.cccbridge.peripherals;
 
 import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
-import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import net.minecraft.text.LiteralText;
+import net.minecraft.state.property.Properties;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,11 +16,12 @@ import java.util.List;
 
 public class ScrollerBlockPeripheral implements IPeripheral {
     private final ScrollerBlockEntity scroller;
+    private final World level;
     private final List<IComputerAccess> pcs = new LinkedList<>();
-    private boolean togglestate = true;
 
-    public ScrollerBlockPeripheral(ScrollerBlockEntity block_entity) {
+    public ScrollerBlockPeripheral(ScrollerBlockEntity block_entity, World level) {
         this.scroller = block_entity;
+        this.level = level;
     }
 
     @Override
@@ -33,25 +34,54 @@ public class ScrollerBlockPeripheral implements IPeripheral {
         pcs.removeIf(p -> (p.getID() == computer.getID()));
     }
 
-    public void newValue() {
+    public void newValue(int value) {
         for (IComputerAccess pc : pcs)
-            pc.queueEvent("scroller_changed", pc.getAttachmentName());
+            pc.queueEvent("scroller_changed", pc.getAttachmentName(), (double)(value/10));
     }
 
-    public boolean getToggleState() { return togglestate; }
 
-
+    /**
+     * Returns whether the Scroller Pane is locked or not.
+     * @return The state
+     */
     @LuaFunction
-    public final void isLocked(boolean state) {
-        togglestate = !state;
+    public final boolean isLocked() {
+        return level.getBlockState(scroller.getPos()).get(Properties.LOCKED);
     }
 
+    /**
+     * Unlocks the Scroller Pane with state = false (default) or state = true so that players cannot continue to use it.
+     * @param state Sate for lock
+     */
     @LuaFunction
-    public final int getValue() throws LuaException {
+    public final void setLock(boolean state) { scroller.setLock(state); }
+
+    /**
+     * Returns the current value of the Scroller Pane.
+     * @return Value (-15.0 - 15.0)
+     */
+    @LuaFunction
+    public final double getValue() {
         ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
-        if (scrollValueBehaviour == null) throw new LuaException("Internal Error! Could not get \'ScrollValueBehaviour\'!");
+        if (scrollValueBehaviour == null) return 0.0;
 
-        return scrollValueBehaviour.getValue();
+        return scrollValueBehaviour.getValue()/10;
+    }
+
+    /**
+     * Sets a new value for the Scroller Pane
+     * @param value The new value (Must be in between -15.0 - 15.0)
+     */
+    @LuaFunction
+    public final void setValue(double value) {
+        ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
+        if (scrollValueBehaviour == null) return;
+
+        if (value > 15) value = 15;
+        else if (value < -15) value = -15;
+
+        scrollValueBehaviour.setValue((int)(value*10));
+        scroller.playTickSound();
     }
 
 

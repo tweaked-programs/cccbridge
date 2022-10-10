@@ -14,7 +14,9 @@ import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +36,8 @@ public class CCCBridge implements ModInitializer {
 
         BlockRegister.registerBlockEntity("redrouter_block", RedRouterBlockEntity::new, new RedRouterBlock());
         BlockRegister.registerBlockEntity("scroller_block", ScrollerBlockEntity::new, new ScrollerBlock());
+
+        CCCSoundEvents.init();
 
         ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
     }
