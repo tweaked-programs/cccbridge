@@ -64,11 +64,7 @@ public class RedRouterBlock extends HorizontalFacingBlock implements BlockEntity
             redrouter.setPower("west", south);
         }
 
-        ActionResult result = IWrenchable.super.onWrenched(state, context);
-        if (!result.isAccepted())
-            return result;
-
-        return result;
+        return IWrenchable.super.onWrenched(state, context);
     }
 
     @Override

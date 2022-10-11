@@ -45,11 +45,13 @@ public class CCCBridge {
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.SCROLLER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
         });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(BlockRegister.REDROUTER_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegister.SCROLLER_BLOCK.get(), RenderType.translucent());
     }
 }

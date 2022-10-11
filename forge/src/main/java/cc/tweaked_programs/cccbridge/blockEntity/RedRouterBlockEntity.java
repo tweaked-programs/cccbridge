@@ -48,7 +48,7 @@ public class RedRouterBlockEntity extends BlockEntity {
         if (!(be instanceof RedRouterBlockEntity redrouter)) return;
         if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            //redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
@@ -57,10 +57,10 @@ public class RedRouterBlockEntity extends BlockEntity {
             redrouter.blockupdate = false;
         }
 
-        updateInputs(world, blockPos, state, redrouter);
+        updateInputs(world, blockPos, redrouter);
     }
 
-    private static void updateInputs(Level world, BlockPos blockPos, BlockState state, RedRouterBlockEntity redrouter) {
+    private static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
             Direction dir = Direction.byName(side).getOpposite();

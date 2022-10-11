@@ -1,11 +1,13 @@
 package cc.tweaked_programs.cccbridge.block;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
+import com.simibubi.create.content.contraptions.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -20,9 +22,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 
-public class RedRouterBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public class RedRouterBlock extends HorizontalDirectionalBlock implements EntityBlock, IWrenchable {
     public RedRouterBlock() {
-        super(Properties.of(Material.STONE).strength(1.3f).requiresCorrectToolForDrops().sound(SoundType.STONE));
+        super(Properties.of(Material.STONE).strength(1.3f).sound(SoundType.STONE));
         registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
     }
 
@@ -45,6 +47,27 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
         if (!(block instanceof RedRouterBlockEntity redrouter))
             return 0;
         return redrouter.getPower(dir);
+    }
+
+    @Override
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        BlockEntity tileentity = context.getLevel().getBlockEntity(context.getClickedPos());
+        if (!(tileentity instanceof RedRouterBlockEntity redrouter))
+            return InteractionResult.FAIL;
+
+        if (context.getClickedFace().get3DDataValue() < 2) {
+            int north = redrouter.getPower(Direction.NORTH);
+            int east = redrouter.getPower(Direction.EAST);
+            int south = redrouter.getPower(Direction.SOUTH);
+            int west = redrouter.getPower(Direction.WEST);
+
+            redrouter.setPower("north", west);
+            redrouter.setPower("east", north);
+            redrouter.setPower("south", east);
+            redrouter.setPower("west", south);
+        }
+
+        return IWrenchable.super.onWrenched(state, context);
     }
 
     @Override

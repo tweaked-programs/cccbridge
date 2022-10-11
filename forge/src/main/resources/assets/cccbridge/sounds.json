@@ -1,0 +1,15 @@
+{
+  "cage_lock": {
+    "subtitle": "subtitles.cccbridge.cage_lock",
+    "sounds": [
+      "cccbridge:cage_lock"
+    ]
+  },
+  "cage_unlock": {
+    "subtitle": "subtitles.cccbridge.cage_unlock",
+    "sounds": [
+      "cccbridge:cage_unlock"
+    ]
+  }
+}
+

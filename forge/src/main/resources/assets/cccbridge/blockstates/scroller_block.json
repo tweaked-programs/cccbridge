@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    { "when": { "facing": "north", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "uvlock": true }
+    },
+    { "when": { "facing": "east", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "y": 90, "uvlock": true }
+    },
+    { "when": { "facing": "south", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "y": 180, "uvlock": true }
+    },
+    { "when": { "facing": "west", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "y": 270, "uvlock": true }
+    },
+    { "when": { "facing": "up", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "x": -90, "uvlock": true }
+    },
+    { "when": { "facing": "down", "locked": "false" },
+      "apply": { "model": "cccbridge:block/scroller_block", "x": 90, "uvlock": true }
+    },
+
+    { "when": { "facing": "north", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "uvlock": true }
+    },
+    { "when": { "facing": "east", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "y": 90, "uvlock": true }
+    },
+    { "when": { "facing": "south", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "y": 180, "uvlock": true }
+    },
+    { "when": { "facing": "west", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "y": 270, "uvlock": true }
+    },
+    { "when": { "facing": "up", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": -90, "uvlock": true }
+    },
+    { "when": { "facing": "down", "locked": "true" },
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": 90, "uvlock": true }
+    }
+]
+}
