@@ -5,16 +5,16 @@ issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
 modId="cccbridge"
-version="1.2.1"
+version="1.3.0"
 displayName="CC:C Bridge"
 updateJSONURL=""
-displayURL="https://tweaked-programs.cc/cccbridge/"
+displayURL="https://tweaked-programs.cc/tag/cccbridge/"
 logoFile="icon.png"
 credits="Thanks for this mod goes out to agnor99, who understands forge way better than me!!"
 authors="Sammy L. Koch & Luke A. Hanssen"
-description='''With this mod, it is possible to use Create Displays within CC:T PCs!
-Not only that, but also source blocks by Create can be read in CC:T too!
-'''
+description='''Adds compatibility between the ComputerCraft and Create mod!
+
+Copyright 20222 Sammy L. Koch'''
 
 [[dependencies.cccbridge]]
     modId="forge"
