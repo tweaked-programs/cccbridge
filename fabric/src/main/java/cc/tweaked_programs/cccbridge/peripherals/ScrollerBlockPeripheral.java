@@ -65,7 +65,7 @@ public class ScrollerBlockPeripheral implements IPeripheral {
         ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
         if (scrollValueBehaviour == null) return 0.0;
 
-        return scrollValueBehaviour.getValue()/10;
+        return (double)scrollValueBehaviour.getValue()/10;
     }
 
     /**

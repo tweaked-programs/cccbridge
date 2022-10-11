@@ -63,9 +63,9 @@ public class ScrollerBlockPeripheral implements IPeripheral {
     @LuaFunction
     public final double getValue() {
         ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
-        if (scrollValueBehaviour == null) return 0.0;
+        if (scrollValueBehaviour == null) return 0.0f;
 
-        return scrollValueBehaviour.getValue()/10;
+        return (double)scrollValueBehaviour.getValue()/10;
     }
 
     /**
