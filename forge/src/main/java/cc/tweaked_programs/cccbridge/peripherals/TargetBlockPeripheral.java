@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TargetBlockPeripheral implements IPeripheral {
     private final TargetBlockEntity target_block_entity;
-    private final Terminal term = new Terminal(32, 24);
+    private final Terminal term = new Terminal(32, 24, false);
 
 
     public TargetBlockPeripheral(TargetBlockEntity target_block_entity) {
@@ -22,6 +22,7 @@ public class TargetBlockPeripheral implements IPeripheral {
         if (y < 0 || y >= term.getHeight())
             return;
         term.setCursorPos(0, y);
+        term.clearLine();
         term.write(line);
     }
 

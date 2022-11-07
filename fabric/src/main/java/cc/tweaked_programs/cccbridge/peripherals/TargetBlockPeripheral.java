@@ -22,6 +22,7 @@ public class TargetBlockPeripheral implements IPeripheral {
         if (y < 0 || y >= term.getHeight())
             return;
         term.setCursorPos(0, y);
+        term.clearLine();
         term.write(line);
     }
 

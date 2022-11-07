@@ -8,8 +8,8 @@
   [![image](https://modrinth-utils.vercel.app/api/badge/downloads/?id=fXt291FO&logo=true&style=for-the-badge)](https://modrinth.com/mod/cccbridge)
   [![image](https://img.shields.io/badge/TP-Blog-030380?style=for-the-badge)](https://tweaked-programs.cc/tag/cccbridge/)  
     
-  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(v0.5.0c+146 or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(v1.100.4 or higher)*!  
-  For Fabric, requires the [Fabric API](https://github.com/fabricmc/fabric), [Create](https://github.com/Fabricators-of-Create/Create) *(v0.5.0c-691 or higher)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(v1.100.3 or higher)*!  
+  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(v0.5.0c+146 or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(v1.101.0 or higher)*!  
+  For Fabric, requires the [Fabric API](https://github.com/fabricmc/fabric), [Create](https://github.com/Fabricators-of-Create/Create) *(v0.5.0c-691 or higher)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(v1.100.5 or higher)*!  
 </div>
   
 About

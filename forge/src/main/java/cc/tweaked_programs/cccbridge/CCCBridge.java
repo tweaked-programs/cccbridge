@@ -2,24 +2,18 @@ package cc.tweaked_programs.cccbridge;
 
 import cc.tweaked_programs.cccbridge.display.SourceBlockDisplaySource;
 import cc.tweaked_programs.cccbridge.display.TargetBlockDisplayTarget;
-import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
 
 import static cc.tweaked_programs.cccbridge.CCCBridge.MOD_ID;
 

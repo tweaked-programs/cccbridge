@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
 modId="cccbridge"
-version="1.3.0"
+version="1.3.1"
 displayName="CC:C Bridge"
 updateJSONURL=""
 displayURL="https://tweaked-programs.cc/tag/cccbridge/"
@@ -14,7 +14,7 @@ credits="Thanks for this mod goes out to agnor99, who understands forge way bett
 authors="Sammy L. Koch & Luke A. Hanssen"
 description='''Adds compatibility between the ComputerCraft and Create mod!
 
-Copyright 20222 Sammy L. Koch'''
+Copyright 2022 Sammy L. Koch'''
 
 [[dependencies.cccbridge]]
     modId="forge"

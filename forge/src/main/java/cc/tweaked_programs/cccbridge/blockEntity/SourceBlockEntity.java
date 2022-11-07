@@ -1,7 +1,6 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
 import cc.tweaked_programs.cccbridge.peripherals.SourceBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
