@@ -32,7 +32,7 @@
 
   "depends": {
     "create": "*",
-    "computercraft": ">=1.100.3",
+    "computercraft": ">=1.100.5",
     "fabricloader": ">=0.14.6",
     "fabric": "*",
     "minecraft": "~1.18.2",
