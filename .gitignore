@@ -1,6 +1,13 @@
 /forge/.idea/
 /forge/package.json
 /forge/package-lock.json
+/forge/run
+/forge/build
+/forge/.gradle
 /fabric/.idea/
 /fabric/package.json
 /fabric/package-lock.json
+/fabric/run
+/fabric/build
+/fabric/.gradle
+.idea
