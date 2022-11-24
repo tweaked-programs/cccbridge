@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralTile;
@@ -15,7 +16,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -90,7 +90,7 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
         ScrollValueBehaviour scroller = new ScrollValueBehaviour(getCachedState().getBlock().getName(), this, new ControllerValueBoxTransform())
                 .between(-150, 150)
                 .moveText(new Vec3d(9, 0, 10))
-                .withUnit(i -> new TranslatableText("cccbridge.general.unit.scroller"))
+                .withUnit(i -> Lang.translateDirect("cccbridge.general.unit.scroller"))
                 .withCallback(i -> { if (this.peripheral != null) peripheral.newValue(i); })
                 .interactiveWhen(playerEntity -> !(playerEntity.getWorld().getBlockState(this.getPos()).get(Properties.LOCKED)))
                 .withStepFunction(context -> context.shift ? 1 : 10)

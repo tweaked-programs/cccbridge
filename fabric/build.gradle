@@ -41,14 +41,10 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modLocalRuntime("maven.modrinth:lazydfu:0.1.2") // lazydfu - improves start times
-	modLocalRuntime("maven.modrinth:suggestion-tweaker:${project.suggestion_tweaker_version}") // suggestion tweaker - dev QOL, improves command suggestions
-	modLocalRuntime("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") { exclude(group: "net.fabricmc.fabric-api") } // required for suggestion tweaker and REI
+	modLocalRuntime("maven.modrinth:lazydfu:${project.lazydfu_version}") // lazydfu - improves start times
 	modLocalRuntime("com.terraformersmc:modmenu:${project.modmenu_version}") { exclude group: "net.fabricmc"; exclude group: "net.fabricmc.fabric-api" } // always good to have
 
 	// recipe viewers
-	modRuntimeOnly("dev.architectury:architectury-fabric:${project.architectury_version}") // for REI
-	modRuntimeOnly("me.shedaniel.cloth:basic-math:0.6.0") // for REI
 	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}") { transitive = false }
 	modCompileOnly("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") { transitive = false }
 	modCompileOnly("dev.emi:emi:${project.emi_version}") { transitive = false }
@@ -57,7 +53,10 @@ dependencies {
 	if (recipeViewer == "emi") {
 		modLocalRuntime("dev.emi:emi:${project.emi_version}")  { transitive = false }
 	} else if (recipeViewer == "rei") {
+		modRuntimeOnly("dev.architectury:architectury-fabric:${project.architectury_version}") { transitive = false }
+		modRuntimeOnly("me.shedaniel.cloth:basic-math:0.6.0") { transitive = false }
 		modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") { transitive = false }
+		modLocalRuntime("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") { exclude(group: "net.fabricmc.fabric-api"); transitive = false }
 	} else {
 		println("unknown recipe viewer: $recipeViewer")
 	}
@@ -67,14 +66,13 @@ dependencies {
 	modImplementation("com.github.AlphaMode:fakeconfigtoml:master-SNAPSHOT") { exclude(group: "net.fabricmc.fabric-api") }
 
 	// create setup
-	modImplementation("com.simibubi:Create:${project.create_version}") { transitive = false }
-	modImplementation("io.github.fabricators_of_create:Porting-Lib:${project.port_lib_version}+${project.minecraft_version}-dev.${project.port_lib_hash}")
-	modImplementation("me.alphamode:ForgeTags:${project.forge_tags_version}")
+	modImplementation("com.simibubi.create:create-fabric-${project.minecraft_version}:${project.create_version}") { transitive = false }
+	modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:${project.port_lib_version}+${project.minecraft_version}")
 	modImplementation(include("com.electronwill.night-config:core:${project.night_config_core_version}"))
 	modImplementation(include("com.electronwill.night-config:toml:${project.night_config_toml_version}"))
 	modImplementation("curse.maven:forge-config-api-port-fabric-547434:${project.config_api_id}") { transitive = false }
-	modImplementation("com.tterrag.registrate:Registrate:${project.registrate_version}")
-	modImplementation("com.jozufozu.flywheel:flywheel-fabric-1.18.2:${project.flywheel_version}")
+	modImplementation("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}-MC${project.minecraft_version}")
+	modImplementation("com.jozufozu.flywheel:flywheel-fabric-${project.minecraft_version}:${project.flywheel_version}")
 	modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}")
 	modImplementation("dev.cafeteria:fake-player-api:${project.fake_player_api_version}")
 	modImplementation("io.github.tropheusj:milk-lib:${project.milk_lib_version}")
@@ -82,32 +80,12 @@ dependencies {
 
 	// CC:R setup
 	modImplementation("com.github.cc-tweaked:cc-restitched:${project.cc_version}")
+	modApi("com.github.cc-tweaked:cc-restitched:${project.cc_version}")
 
 	// dependencies
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 
 
-
-
-
-
-
-
-
-
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-
-
-	modApi "com.github.cc-tweaked:cc-restitched:${project.cc_version}"
-
-	// create setup
-	modImplementation("com.simibubi:Create:${project.create_version}") { transitive = false }
-
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
 processResources {

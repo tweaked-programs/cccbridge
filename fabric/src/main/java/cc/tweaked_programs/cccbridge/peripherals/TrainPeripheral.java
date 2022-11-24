@@ -81,7 +81,7 @@ public class TrainPeripheral implements IPeripheral {
             Direction direction = station.getAssemblyDirection();
             BlockPos position = station.edgePoint.getGlobalPosition().up();
             this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
-            ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"));
+            ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"), null);
             station.getStation().getPresentTrain().disassemble(player, direction, position);
             return MethodResult.of(true, "Train disassembled");
         }
