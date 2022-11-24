@@ -8,13 +8,13 @@ import com.simibubi.create.content.logistics.trains.management.edgePoint.station
 import com.simibubi.create.content.logistics.trains.management.edgePoint.station.TrainEditPacket.TrainEditReturnPacket;
 import com.simibubi.create.content.logistics.trains.management.schedule.Schedule;
 import com.simibubi.create.foundation.networking.AllPackets;
+import com.simibubi.create.foundation.utility.Lang;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
@@ -103,7 +103,7 @@ public class TrainPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final String getTrainName() {
-        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents();
+        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getString();
     }
 
     /**
@@ -144,7 +144,7 @@ public class TrainPeripheral implements IPeripheral {
             return MethodResult.of(false, "Train not found");
         }
         if (!name.isBlank()) {
-            Train.name = new TextComponent(name);
+            Train.name = Lang.translateDirect(name);
             station.tick();
             AllPackets.channel.send(PacketDistributor.ALL.noArg(), new TrainEditReturnPacket(Train.id, name, Train.icon.getId()));
             return MethodResult.of(true, "Train name set to" + name);

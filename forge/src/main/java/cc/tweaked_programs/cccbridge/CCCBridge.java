@@ -4,6 +4,7 @@ import cc.tweaked_programs.cccbridge.display.SourceBlockDisplaySource;
 import cc.tweaked_programs.cccbridge.display.TargetBlockDisplayTarget;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.ForgeComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -33,14 +34,14 @@ public class CCCBridge {
     @SubscribeEvent
     public static void complete(FMLLoadCompleteEvent event) {
         event.enqueueWork(() -> {
-            AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), BlockRegister.SOURCE_BLOCK_ENTITY.get().delegate);
-            AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "target_block_display_source"), new TargetBlockDisplayTarget()), BlockRegister.TARGET_BLOCK_ENTITY.get().delegate);
+            AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), BlockRegister.SOURCE_BLOCK_ENTITY.get());
+            AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "target_block_display_source"), new TargetBlockDisplayTarget()), BlockRegister.TARGET_BLOCK_ENTITY.get());
 
-            ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.SCROLLER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
+            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.SCROLLER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
+            ForgeComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
         });
     }
 
