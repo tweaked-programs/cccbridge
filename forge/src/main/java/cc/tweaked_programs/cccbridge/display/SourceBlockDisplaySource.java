@@ -4,8 +4,8 @@ import cc.tweaked_programs.cccbridge.blockEntity.SourceBlockEntity;
 import com.simibubi.create.content.logistics.block.display.DisplayLinkContext;
 import com.simibubi.create.content.logistics.block.display.source.DisplaySource;
 import com.simibubi.create.content.logistics.block.display.target.DisplayTargetStats;
+import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.LinkedList;
@@ -25,7 +25,7 @@ public class SourceBlockDisplaySource extends DisplaySource {
 
         List<MutableComponent> content = new LinkedList<>();
         for (String line : data) {
-            content.add(new TextComponent("").append(line));
+            content.add(Lang.translateDirect("").append(line));
         }
 
         return content;

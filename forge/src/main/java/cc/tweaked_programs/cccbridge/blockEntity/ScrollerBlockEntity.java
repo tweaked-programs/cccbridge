@@ -8,8 +8,8 @@ import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.phys.Vec3;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
@@ -88,7 +88,7 @@ public class ScrollerBlockEntity extends SmartTileEntity {
         ScrollValueBehaviour scroller = new ScrollValueBehaviour(this.getBlockState().getBlock().getName(), this, new ControllerValueBoxTransform())
                 .between(-150, 150)
                 .moveText(new Vec3(9, 0, 10))
-                .withUnit(i -> new TranslatableComponent("cccbridge.general.unit.scroller"))
+                .withUnit(i -> Lang.translateDirect("cccbridge.general.unit.scroller"))
                 .withCallback(i -> { if (this.peripheral != null) peripheral.newValue(i); })
                 .onlyActiveWhen(() -> !(this.getLevel().getBlockState(this.getBlockPos()).getValue(BlockStateProperties.LOCKED)))
                 .withStepFunction(context -> context.shift ? 1 : 10)

@@ -116,7 +116,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}") // Adds the full JEI mod as a runtime dependency
 
     implementation fg.deobf("org.squiddev:cc-tweaked-${mc_version}:${cc_version}")
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
