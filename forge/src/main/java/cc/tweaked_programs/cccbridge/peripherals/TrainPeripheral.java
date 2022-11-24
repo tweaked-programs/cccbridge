@@ -99,11 +99,15 @@ public class TrainPeripheral implements IPeripheral {
     /**
      * Returns the current trains name.
      *
-     * @return Name of train.
+     * @return @return Whether it was successful or not with the train's name.
      */
     @LuaFunction
-    public final String getTrainName() {
-        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents();
+    public final MethodResult getTrainName() {
+        if (station.getStation().getPresentTrain() == null) {
+            return MethodResult.of(false, "There is no assembled train to get the name of");
+        }else {
+            return MethodResult.of(true, Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents());
+        }
     }
 
     /**
@@ -154,12 +158,12 @@ public class TrainPeripheral implements IPeripheral {
     }
 
     /**
-     * Gets the number of Bogeys attached to the current train.
+     * Gets the number of Carriages attached to the current train.
      *
-     * @return The number of Bogeys.
+     * @return The number of Carriages.
      */
     @LuaFunction
-    public final int getBogeys() {
+    public final int getCarriageCount() {
         if (station.getStation().getPresentTrain() == null) {
             return 0;
         }
