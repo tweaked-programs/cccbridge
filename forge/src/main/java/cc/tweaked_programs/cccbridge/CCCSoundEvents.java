@@ -2,6 +2,7 @@ package cc.tweaked_programs.cccbridge;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +21,8 @@ public class CCCSoundEvents {
         return sound;
     }
 
-    public static void init() {
-        //for (ResourceLocation id : entries.keySet())
-            //Registry.register(Registry.SOUND_EVENT, id, entries.get(id));
+    public static void init(DeferredRegister<SoundEvent> SOUNDS) {
+        for (ResourceLocation id : entries.keySet())
+            SOUNDS.register(id.getPath(), () -> entries.get(id));
     }
 }

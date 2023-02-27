@@ -1,6 +1,7 @@
 {
 	"credit": "By Sammy.K via Blockbench",
-	"parent": "cccbridge:block/base",
+	"parent": "minecraft:block/block",
+	"render_type": "cutout",
 	"textures": {
 		"2": "cccbridge:block/redrouter/background",
 		"3": "cccbridge:block/redrouter/redrouter_side",

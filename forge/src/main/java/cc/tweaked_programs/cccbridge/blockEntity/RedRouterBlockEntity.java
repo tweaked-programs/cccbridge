@@ -23,6 +23,7 @@ public class RedRouterBlockEntity extends BlockEntity {
     private final HashMap<String, Integer> outputDir = new HashMap<>();
     private final HashMap<String, Integer> inputDir = new HashMap<>();
     private boolean blockupdate = false;
+    private boolean newInputs = false;
     private RedRouterBlockPeripheral peripheral;
     private Direction facing;
 
@@ -46,18 +47,21 @@ public class RedRouterBlockEntity extends BlockEntity {
 
     public static void tick(Level world, BlockPos blockPos, BlockState state, BlockEntity be) {
         if (!(be instanceof RedRouterBlockEntity redrouter)) return;
+
         if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
             //redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
-            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos())
-                    .getBlock());
+            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos()).getBlock());
             redrouter.blockupdate = false;
+            updateInputs(world, blockPos, redrouter);
         }
-
-        updateInputs(world, blockPos, redrouter);
+        if (redrouter.newInputs && redrouter.peripheral != null) {
+            redrouter.peripheral.redstoneEvent();
+            redrouter.newInputs = false;
+        }
     }
 
     private static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
@@ -66,7 +70,10 @@ public class RedRouterBlockEntity extends BlockEntity {
             Direction dir = Direction.byName(side).getOpposite();
             BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
+
             int power = block.getBlock().getSignal(block, world, offsetPos, dir);
+            if (redrouter.inputDir.get(side) != power)
+                redrouter.newInputs = true;
             redrouter.inputDir.put(side, power);
         }
     }

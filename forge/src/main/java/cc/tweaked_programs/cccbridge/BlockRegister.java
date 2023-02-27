@@ -8,6 +8,8 @@ import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
 import cc.tweaked_programs.cccbridge.blockEntity.SourceBlockEntity;
 import cc.tweaked_programs.cccbridge.blockEntity.TargetBlockEntity;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -20,7 +22,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockRegister {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CCCBridge.MOD_ID);
-    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, CCCBridge.MOD_ID);
+    private static final DeferredRegister<PaintingVariant> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, CCCBridge.MOD_ID);
+    private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CCCBridge.MOD_ID);
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CCCBridge.MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CCCBridge.MOD_ID);
 
     public static final RegistryObject<Block> SOURCE_BLOCK = BLOCKS.register("source_block", SourceBlock::new);
@@ -43,6 +47,9 @@ public class BlockRegister {
         ITEMS.register("scroller_block", () -> new BlockItem(SCROLLER_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        //CCCSoundEvents.init();
+        PAINTINGS.register("funny_redrouters", () -> new PaintingVariant(32,16));
+        PAINTINGS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        CCCSoundEvents.init(SOUNDS);
     }
 }

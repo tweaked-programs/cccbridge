@@ -11,15 +11,16 @@ import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollVal
 import com.simibubi.create.foundation.utility.VecHelper;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralTile;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,9 +38,9 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
 
     @Override
     public IPeripheral getPeripheral(@NotNull Direction side) {
-        if (side == this.getCachedState().get(Properties.FACING).getOpposite()) {
+        if (side == this.getBlockState().getValue(BlockStateProperties.FACING).getOpposite()) {
             if (peripheral == null)
-                peripheral = new ScrollerBlockPeripheral(this, this.getWorld());
+                peripheral = new ScrollerBlockPeripheral(this, this.getLevel());
             return peripheral;
         }
         return null;
@@ -56,19 +57,19 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
         return null;
     }
 
-    public static void tick(World world, BlockPos blockPos, BlockState state, BlockEntity be) {
+    public static void tick(Level world, BlockPos blockPos, BlockState state, BlockEntity be) {
         if (!(be instanceof ScrollerBlockEntity scroller))
             return;
 
-        if (scroller.updateLock && state.get(Properties.LOCKED) != scroller.locked) {
+        if (scroller.updateLock && state.getValue(BlockStateProperties.LOCKED) != scroller.locked) {
             world.playSound(
                     null,
                     blockPos,
                     scroller.locked ? CCCSoundEvents.CAGE_LOCK : CCCSoundEvents.CAGE_UNLOCK,
-                    SoundCategory.BLOCKS,
+                    SoundSource.BLOCKS,
                     1.0f,
                     1.5f);
-            world.setBlockState(blockPos, state.with(Properties.LOCKED, scroller.locked));
+            world.setBlock(blockPos, state.setValue(BlockStateProperties.LOCKED, scroller.locked), 19); // 19 = BLOCK_UPDATE_FLAGS
             scroller.updateLock = false;
         }
         if (scroller.playTickSound) {
@@ -76,7 +77,7 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
                     null,
                     blockPos,
                     AllSoundEvents.SCROLL_VALUE.getMainEvent(),
-                    SoundCategory.BLOCKS,
+                    SoundSource.BLOCKS,
                     0.25f,
                     1.5f);
             scroller.playTickSound = false;
@@ -87,12 +88,12 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
 
     @Override
     public void addBehaviours(List<TileEntityBehaviour> behaviours) {
-        ScrollValueBehaviour scroller = new ScrollValueBehaviour(getCachedState().getBlock().getName(), this, new ControllerValueBoxTransform())
+        ScrollValueBehaviour scroller = new ScrollValueBehaviour(this.getBlockState().getBlock().getName(), this, new ControllerValueBoxTransform())
                 .between(-150, 150)
-                .moveText(new Vec3d(9, 0, 10))
-                .withUnit(i -> new TranslatableText("cccbridge.general.unit.scroller"))
+                .moveText(new Vec3(9, 0, 10))
+                .withUnit(i -> MutableComponent.create(new TranslatableContents("cccbridge.general.unit.scroller")))
                 .withCallback(i -> { if (this.peripheral != null) peripheral.newValue(i); })
-                .interactiveWhen(playerEntity -> !(playerEntity.getWorld().getBlockState(this.getPos()).get(Properties.LOCKED)))
+                .interactiveWhen(playerEntity -> !(playerEntity.getLevel().getBlockState(this.getBlockPos()).getValue(BlockStateProperties.LOCKED)))
                 .withStepFunction(context -> context.shift ? 1 : 10)
                 .withFormatter(i -> {
                     StringBuilder number = new StringBuilder(String.valueOf(i));
@@ -109,12 +110,12 @@ public class ScrollerBlockEntity extends SmartTileEntity implements IPeripheralT
 
     private static class ControllerValueBoxTransform extends ValueBoxTransform.Sided {
         @Override
-        protected Vec3d getSouthLocation() {
+        protected Vec3 getSouthLocation() {
             return VecHelper.voxelSpace(8, 8, 0);
         }
 
         @Override
-        protected boolean isSideActive(BlockState state, Direction direction) { return state.get(Properties.FACING) == direction; }
+        protected boolean isSideActive(BlockState state, Direction direction) { return state.getValue(BlockStateProperties.FACING) == direction; }
 
         @Override
         protected float getScale() {
