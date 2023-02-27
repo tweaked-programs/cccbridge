@@ -5,8 +5,8 @@ import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollVal
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import net.minecraft.state.property.Properties;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,10 +16,10 @@ import java.util.List;
 
 public class ScrollerBlockPeripheral implements IPeripheral {
     private final ScrollerBlockEntity scroller;
-    private final World level;
+    private final Level level;
     private final List<IComputerAccess> pcs = new LinkedList<>();
 
-    public ScrollerBlockPeripheral(ScrollerBlockEntity block_entity, World level) {
+    public ScrollerBlockPeripheral(ScrollerBlockEntity block_entity, Level level) {
         this.scroller = block_entity;
         this.level = level;
     }
@@ -46,7 +46,7 @@ public class ScrollerBlockPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final boolean isLocked() {
-        return level.getBlockState(scroller.getPos()).get(Properties.LOCKED);
+        return level.getBlockState(scroller.getBlockPos()).getValue(BlockStateProperties.LOCKED);
     }
 
     /**

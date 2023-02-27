@@ -3,17 +3,38 @@ package cc.tweaked_programs.cccbridge.peripherals;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.core.computer.ComputerSide;
 import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
+import java.util.LinkedList;
+import java.util.List;
+
 public class RedRouterBlockPeripheral implements IPeripheral {
     private final RedRouterBlockEntity redrouter_be;
+    private final List<IComputerAccess> pcs = new LinkedList<>();
 
     public RedRouterBlockPeripheral(RedRouterBlockEntity redrouter_block_entity) {
         this.redrouter_be = redrouter_block_entity;
+    }
+
+    @Override
+    public void attach(@Nonnull IComputerAccess computer) {
+        pcs.add(computer);
+    }
+
+    @Override
+    public void detach(@Nonnull IComputerAccess computer) {
+        pcs.removeIf(p -> (p.getID() == computer.getID()));
+    }
+
+    public void redstoneEvent() {
+        for (IComputerAccess pc : pcs)
+            pc.queueEvent("redstone", pc.getAttachmentName());
     }
 
     @NotNull

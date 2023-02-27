@@ -5,11 +5,11 @@ issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
 modId="cccbridge"
-version="1.3.1"
+version="1.4.0"
 displayName="CC:C Bridge"
 updateJSONURL=""
 displayURL="https://tweaked-programs.cc/tag/cccbridge/"
-logoFile="icon.png"
+logoFile= "icon.png"
 credits="Thanks for this mod goes out to agnor99, who understands forge way better than me!!"
 authors="Sammy L. Koch & Luke A. Hanssen"
 description='''Adds compatibility between the ComputerCraft and Create mod!
@@ -19,24 +19,24 @@ Copyright 2022 Sammy L. Koch'''
 [[dependencies.cccbridge]]
     modId="forge"
     mandatory=true
-    versionRange="[40,)"
+    versionRange="[43,)"
     ordering="NONE" # NONE; BEFORE; AFTER
     side="BOTH"
 [[dependencies.cccbridge]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19.2,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.cccbridge]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.0c,)"
+    versionRange="[0.5.0.g,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.cccbridge]]
     modId="computercraft"
     mandatory=true
-    versionRange="[1.101.0,)"
+    versionRange="[1.101.2,)"
     ordering="NONE"
     side="BOTH"

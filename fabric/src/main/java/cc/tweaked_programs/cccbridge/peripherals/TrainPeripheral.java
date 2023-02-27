@@ -11,28 +11,24 @@ import com.simibubi.create.content.logistics.trains.management.schedule.Schedule
 import com.simibubi.create.foundation.networking.AllPackets;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.lua.MethodResult;
-import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class TrainPeripheral implements IPeripheral {
     private static Schedule schedule;
-    private final World level;
+    private final Level level;
     private final StationTileEntity station;
 
-    public TrainPeripheral(@NotNull BlockPos pos, World level) {
+    public TrainPeripheral(@NotNull BlockPos pos, Level level) {
         this.level = level;
         station = (StationTileEntity) level.getBlockEntity(pos);
     }
@@ -79,9 +75,14 @@ public class TrainPeripheral implements IPeripheral {
         }
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
-            BlockPos position = station.edgePoint.getGlobalPosition().up();
+            BlockPos position = station.edgePoint.getGlobalPosition().above();
             this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
-            ServerPlayerEntity player = new ServerPlayerEntity(level.getServer(), level.getServer().getOverworld(), new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"));
+            ServerPlayer player = new ServerPlayer(
+                    level.getServer(),
+                    level.getServer().overworld(),
+                    new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"),
+                    null
+            );
             station.getStation().getPresentTrain().disassemble(player, direction, position);
             return MethodResult.of(true, "Train disassembled");
         }
@@ -146,7 +147,7 @@ public class TrainPeripheral implements IPeripheral {
             return MethodResult.of(false, "Train not found");
         }
         if (!name.isBlank()) {
-            Train.name = Text.of(name);
+            Train.name = Component.literal(name);
             station.tick();
             AllPackets.channel.sendToClientsInServer(new TrainEditReturnPacket(train.id, name, Train.icon.getId()), level.getServer());
             return MethodResult.of(true, "Train name set to " + name);

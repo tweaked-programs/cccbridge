@@ -14,7 +14,7 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
@@ -79,8 +79,14 @@ public class TrainPeripheral implements IPeripheral {
         if (station.getStation().getPresentTrain().canDisassemble()) {
             Direction direction = station.getAssemblyDirection();
             BlockPos position = station.edgePoint.getGlobalPosition().above();
-            schedule = station.getStation().getPresentTrain().runtime.getSchedule();
-            station.getStation().getPresentTrain().disassemble(direction, position);
+            this.schedule = station.getStation().getPresentTrain().runtime.getSchedule();
+            /*ServerPlayer player = new ServerPlayer(
+                    level.getServer(),
+                    level.getServer().overworld(),
+                    new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), "Notch"),
+                    null
+            );*/
+            station.getStation().getPresentTrain().disassemble(/*player,*/ direction, position);
             return MethodResult.of(true, "Train disassembled");
         }
         return MethodResult.of(false, "Could not disassemble train");
@@ -103,7 +109,7 @@ public class TrainPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final String getTrainName() {
-        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getContents();
+        return Objects.requireNonNull(station.getStation().getPresentTrain()).name.getString();
     }
 
     /**
@@ -144,7 +150,7 @@ public class TrainPeripheral implements IPeripheral {
             return MethodResult.of(false, "Train not found");
         }
         if (!name.isBlank()) {
-            Train.name = new TextComponent(name);
+            Train.name = Component.literal(name);
             station.tick();
             AllPackets.channel.send(PacketDistributor.ALL.noArg(), new TrainEditReturnPacket(Train.id, name, Train.icon.getId()));
             return MethodResult.of(true, "Train name set to" + name);
