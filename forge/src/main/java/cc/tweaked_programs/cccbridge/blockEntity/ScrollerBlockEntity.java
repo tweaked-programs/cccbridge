@@ -9,22 +9,22 @@ import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.VecHelper;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.phys.Vec3;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ScrollerBlockEntity extends SmartTileEntity {
+public class ScrollerBlockEntity extends SmartTileEntity implements PeripheralBlockEntity {
     private ScrollerBlockPeripheral peripheral;
     private boolean locked = false;
     private boolean updateLock = false;
@@ -34,7 +34,6 @@ public class ScrollerBlockEntity extends SmartTileEntity {
         super(BlockRegister.SCROLLER_BLOCK_ENTITY.get(), pos, state);
     }
 
-    @Nullable
     public IPeripheral getPeripheral(Direction side) {
         if (side == this.getBlockState().getValue(BlockStateProperties.FACING).getOpposite()) {
             if (peripheral == null)

@@ -1,10 +1,8 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -15,19 +13,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile {
+public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlockEntity {
     private final HashMap<String, Integer> outputDir = new HashMap<>();
     private final HashMap<String, Integer> inputDir = new HashMap<>();
-    private RedRouterBlockPeripheral peripheral;
     private boolean blockupdate = false;
     private boolean newInputs = false;
-    private final Direction facing;
+    private RedRouterBlockPeripheral peripheral;
+    private Direction facing;
 
     public RedRouterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockRegister.getBlockEntityType("redrouter_block"), pos, state);
@@ -52,7 +49,7 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
 
         if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            //redrouter.facing = state.get(Properties.HORIZONTAL_FACING);
+            //redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
@@ -87,25 +84,21 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
         return facing;
     }
 
-    @Override
-    public IPeripheral getPeripheral(@NotNull Direction side) {
-        if (peripheral == null)
-            peripheral = new RedRouterBlockPeripheral(this);
-        return peripheral;
-    }
-
     public int getRedstoneInput(Direction side) {
+        int value = 0;
         try {
-            return inputDir.get(side.getName());
-        } catch (NullPointerException ignored) {
-            return 0;
+            value = inputDir.get(side.getName());
+        } catch (NullPointerException e) {
         }
+        return value;
     }
 
     public int getPower(Direction side) {
         int value = 0;
-        try { value = outputDir.get(side.toString());
-        } catch (NullPointerException e) { CCCBridge.LOGGER.warn(e.getMessage()); }
+        try {
+            value = outputDir.get(side.getName());
+        } catch (NullPointerException e) {
+        }
         return value;
     }
 
@@ -143,8 +136,13 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
     }
 
     @Override
-    @NotNull
     public CompoundTag getUpdateTag() {
         return saveWithoutMetadata();
+    }
+
+    public IPeripheral getPeripheral(Direction side) {
+        if (peripheral == null)
+            peripheral = new RedRouterBlockPeripheral(this);
+        return peripheral;
     }
 }

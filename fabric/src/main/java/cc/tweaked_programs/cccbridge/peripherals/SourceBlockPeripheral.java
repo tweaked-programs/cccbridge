@@ -14,6 +14,12 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This peripheral is used by the Source Block. It is used to give some kind of Create Display Targets data.
+ * The peripheral acts similar to a normal Terminal, with some implementations from the Window API and other limitations like no control over the colors.
+ *
+ * @version 1.0
+ */
 public class SourceBlockPeripheral implements IPeripheral {
     private final SourceBlockEntity source_block_entity;
     private final Terminal term = new Terminal(4, 2);
@@ -130,7 +136,7 @@ public class SourceBlockPeripheral implements IPeripheral {
     }
 
     /**
-     * Returns the current cursor position.
+     * Returns the current current cursor position.
      *
      * @return Object[] {posX, posY}
      */

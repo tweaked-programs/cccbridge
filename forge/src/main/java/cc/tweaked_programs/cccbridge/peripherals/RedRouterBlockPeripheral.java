@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This peripheral is used by the RedRouter. It works very similar to the Redstone API.
+ *
+ * @version 1.0
+ */
 public class RedRouterBlockPeripheral implements IPeripheral {
     private final RedRouterBlockEntity redrouter_be;
     private final List<IComputerAccess> pcs = new LinkedList<>();

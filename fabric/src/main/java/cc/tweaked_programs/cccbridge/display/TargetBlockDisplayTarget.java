@@ -19,10 +19,10 @@ public class TargetBlockDisplayTarget extends DisplayBoardTarget {
 
         List<String> content = new LinkedList<>();
         for (List<MutableComponent> c : text) {
-            StringBuilder parts = new StringBuilder();
+            String parts = "";
             for (MutableComponent sLine : c)
-                parts.append(sLine.getString()).append(" ");
-            content.add(parts.toString());
+                parts = parts + sLine.getString() + " ";
+            content.add(parts);
         }
 
         targetBlock.updateContent(line, content);

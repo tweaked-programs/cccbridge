@@ -9,19 +9,14 @@ import cc.tweaked_programs.cccbridge.display.SourceBlockDisplaySource;
 import cc.tweaked_programs.cccbridge.display.TargetBlockDisplayTarget;
 import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.decoration.PaintingVariant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CCCBridge implements ModInitializer {
     public static final String MOD_ID = "cccbridge";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-    public static final IPeripheralProvider peripheralProvider = new PeripheralProvider();
+    //public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
@@ -39,6 +34,6 @@ public class CCCBridge implements ModInitializer {
         // Misc
         Registry.register(Registry.PAINTING_VARIANT, new ResourceLocation(MOD_ID, "funny_redrouters"), new PaintingVariant(32,16));
         CCCSoundEvents.init();
-        ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
+        ComputerCraftAPI.registerPeripheralProvider(new PeripheralProvider());
     }
 }

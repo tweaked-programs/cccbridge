@@ -3,7 +3,6 @@ package cc.tweaked_programs.cccbridge.blockEntity;
 import cc.tweaked_programs.cccbridge.BlockRegister;
 import cc.tweaked_programs.cccbridge.peripherals.SourceBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -13,15 +12,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SourceBlockEntity extends BlockEntity implements IPeripheralTile {
+public class SourceBlockEntity extends BlockEntity implements PeripheralBlockEntity {
     private SourceBlockPeripheral peripheral;
 
     public SourceBlockEntity(BlockPos pos, BlockState state) {
         super(BlockRegister.getBlockEntityType("source_block"), pos, state);
     }
 
-    @Override
-    public IPeripheral getPeripheral(@NotNull Direction side) {
+    public IPeripheral getPeripheral(Direction side) {
         if (peripheral == null)
             peripheral = new SourceBlockPeripheral(this);
         return peripheral;

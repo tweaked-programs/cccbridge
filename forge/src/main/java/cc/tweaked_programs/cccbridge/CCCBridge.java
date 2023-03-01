@@ -30,8 +30,6 @@ public class CCCBridge {
     public static final String MOD_ID = "cccbridge";
     //private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static IPeripheralProvider peripheralProvider = new PeripheralProvider();
-
     public CCCBridge() {
         BlockRegister.register();
     }
@@ -46,14 +44,7 @@ public class CCCBridge {
             ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, BlockRegister.TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos,BlockRegister.SCROLLER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ForgeComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
+            ForgeComputerCraftAPI.registerPeripheralProvider(new PeripheralProvider());
         });
-    }
-
-    @SubscribeEvent
-    public static void addPackFinders(AddPackFindersEvent event) {
-        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-
-        }
     }
 }

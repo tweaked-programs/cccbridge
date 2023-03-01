@@ -9,6 +9,11 @@ import dan200.computercraft.core.terminal.TextBuffer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * This peripheral is used by the Target Block. It is used to get data from Create Display Sources. The data has to be synced by the BlockEntity.
+ *
+ * @version 1.0
+ */
 public class TargetBlockPeripheral implements IPeripheral {
     private final TargetBlockEntity target_block_entity;
     private final Terminal term = new Terminal(32, 24, false);
