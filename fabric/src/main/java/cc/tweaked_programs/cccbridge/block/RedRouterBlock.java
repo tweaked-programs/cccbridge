@@ -3,7 +3,6 @@ package cc.tweaked_programs.cccbridge.block;
 import cc.tweaked_programs.cccbridge.BlockRegister;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import com.simibubi.create.content.contraptions.wrench.IWrenchable;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -22,12 +21,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
-import org.jetbrains.annotations.Nullable;
 
 public class RedRouterBlock extends HorizontalDirectionalBlock implements EntityBlock, IWrenchable {
     public RedRouterBlock() {
-        super(FabricBlockSettings.of(Material.STONE).strength(1.3f).sounds(SoundType.STONE));
-        registerDefaultState(this.getStateDefinition().any().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
+        super(Properties.of(Material.STONE).strength(1.3f).sound(SoundType.STONE));
+        registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
     }
 
     @Override
@@ -36,7 +34,9 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new RedRouterBlockEntity(pos, state); }
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new RedRouterBlockEntity(pos, state);
+    }
 
     public boolean isSignalSource(BlockState state) {
         return true;

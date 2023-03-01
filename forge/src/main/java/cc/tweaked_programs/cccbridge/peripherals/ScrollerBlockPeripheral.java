@@ -14,6 +14,12 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This peripheral is used by the Scroller Pane. It allows to interact with its valued that the player can manipulate
+ * (as long as this pripheral allows though, as it call lock it for outside interactions)
+ *
+ * @version 1.0
+ */
 public class ScrollerBlockPeripheral implements IPeripheral {
     private final ScrollerBlockEntity scroller;
     private final Level level;

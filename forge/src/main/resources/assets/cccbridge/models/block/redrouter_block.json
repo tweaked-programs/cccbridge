@@ -9,7 +9,8 @@
 		"5": "cccbridge:block/redrouter/redrouter_front",
 		"6": "cccbridge:block/redrouter/connector",
 		"particle": "cccbridge:block/redrouter/background",
-		"face": "cccbridge:block/redrouter/face/1"
+		"face": "cccbridge:block/redrouter/face/1",
+		"all": "#cutout"
 	},
 	"elements": [
 		{

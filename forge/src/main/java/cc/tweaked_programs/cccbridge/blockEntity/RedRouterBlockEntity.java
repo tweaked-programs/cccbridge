@@ -1,7 +1,6 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
 import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RedRouterBlockEntity extends BlockEntity {
+public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlockEntity {
     private final HashMap<String, Integer> outputDir = new HashMap<>();
     private final HashMap<String, Integer> inputDir = new HashMap<>();
     private boolean blockupdate = false;

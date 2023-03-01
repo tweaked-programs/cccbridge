@@ -1,14 +1,12 @@
 {
 	"credit": "By Sammy.K via Blockbench",
 	"parent": "block/block",
-	"render_type": "cutout",
 	"textures": {
 		"0": "cccbridge:block/scroller/scroller_side",
 		"1": "cccbridge:block/scroller/scroller_front",
 		"2": "cccbridge:block/scroller/interface",
 		"3": "cccbridge:block/scroller/cage",
-		"particle": "cccbridge:block/scroller/scroller_side",
-		"all": "#cutout"
+		"particle": "cccbridge:block/scroller/scroller_side"
 	},
 	"elements": [
 		{
