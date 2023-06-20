@@ -9,8 +9,8 @@
   [![image](https://img.shields.io/badge/TP-Blog-030380?style=for-the-badge)](https://tweaked-programs.cc/tag/cccbridge/)  
     
   Available for **1.18.2** and **1.19.2**.  
-  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(0.5.0.g-19 or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(1.101.2 or higher)*!  
-  For Fabric, requires the [Fabric API](https://github.com/fabricmc/fabric), [Create](https://github.com/Fabricators-of-Create/Create) *(0.5.0.g-837 or higher)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(1.101.2-ccr or higher)*!  
+  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(0.5.0.g-19 to 0.5.0i)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(1.101.2 or higher)*!  
+  For Fabric, requires the [Fabric API](https://github.com/fabricmc/fabric), [Create](https://github.com/Fabricators-of-Create/Create) *(0.5.0.g-837 to 0.5.0i)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(1.101.2-ccr or higher)*!  
 </div>
   
 About
