@@ -1,3 +1,2 @@
 local motd = settings.get("motd.path") or ""
-motd = motd..":/rom/cccbridge_motd.txt"
-settings.set("motd.path", motd)
+settings.set("motd.path", motd..":/rom/cccbridge_motd.txt")

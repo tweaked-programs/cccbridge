@@ -1,76 +1,224 @@
 {
-  "variants": {
-    "facing=north": [
-      { "model": "cccbridge:block/redrouter_face/1", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/2", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/3", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/4", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/5", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/6", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/7", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/8", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/9", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/10", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/11", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/12", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/13", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/14", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/15", "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/16", "uvlock": true }
-    ],
-    "facing=east": [
-      { "model": "cccbridge:block/redrouter_face/1", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/2", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/3", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/4", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/5", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/6", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/7", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/8", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/9", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/10", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/11", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/12", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/13", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/14", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/15", "y":  90, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/16", "y":  90, "uvlock": true }
-    ],
-    "facing=south": [
-      { "model": "cccbridge:block/redrouter_face/1", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/2", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/3", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/4", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/5", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/6", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/7", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/8", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/9", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/10", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/11", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/12", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/13", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/14", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/15", "y":  180, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/16", "y":  180, "uvlock": true }
-    ],
-    "facing=west": [
-      { "model": "cccbridge:block/redrouter_face/1", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/2", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/3", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/4", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/5", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/6", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/7", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/8", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/9", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/10", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/11", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/12", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/13", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/14", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/15", "y":  270, "uvlock": true },
-      { "model": "cccbridge:block/redrouter_face/16", "y":  270, "uvlock": true }
-    ]
-  }
+  "multipart": [
+    { "when": { "facing": "north",  "face": 0 },
+      "apply": { "model": "cccbridge:block/redrouter_face/0", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 0 },
+      "apply": { "model": "cccbridge:block/redrouter_face/0", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 0 },
+      "apply": { "model": "cccbridge:block/redrouter_face/0", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 0 },
+      "apply": { "model": "cccbridge:block/redrouter_face/0", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 1 },
+      "apply": { "model": "cccbridge:block/redrouter_face/1", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 1 },
+      "apply": { "model": "cccbridge:block/redrouter_face/1", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 1 },
+      "apply": { "model": "cccbridge:block/redrouter_face/1", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 1 },
+      "apply": { "model": "cccbridge:block/redrouter_face/1", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 2 },
+      "apply": { "model": "cccbridge:block/redrouter_face/2", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 2 },
+      "apply": { "model": "cccbridge:block/redrouter_face/2", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 2 },
+      "apply": { "model": "cccbridge:block/redrouter_face/2", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 2 },
+      "apply": { "model": "cccbridge:block/redrouter_face/2", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 3 },
+      "apply": { "model": "cccbridge:block/redrouter_face/3", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 3 },
+      "apply": { "model": "cccbridge:block/redrouter_face/3", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 3 },
+      "apply": { "model": "cccbridge:block/redrouter_face/3", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 3 },
+      "apply": { "model": "cccbridge:block/redrouter_face/3", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 4 },
+      "apply": { "model": "cccbridge:block/redrouter_face/4", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 4 },
+      "apply": { "model": "cccbridge:block/redrouter_face/4", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 4 },
+      "apply": { "model": "cccbridge:block/redrouter_face/4", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 4 },
+      "apply": { "model": "cccbridge:block/redrouter_face/4", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 5 },
+      "apply": { "model": "cccbridge:block/redrouter_face/5", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 5 },
+      "apply": { "model": "cccbridge:block/redrouter_face/5", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 5 },
+      "apply": { "model": "cccbridge:block/redrouter_face/5", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 5 },
+      "apply": { "model": "cccbridge:block/redrouter_face/5", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 6 },
+      "apply": { "model": "cccbridge:block/redrouter_face/6", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 6 },
+      "apply": { "model": "cccbridge:block/redrouter_face/6", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 6 },
+      "apply": { "model": "cccbridge:block/redrouter_face/6", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 6 },
+      "apply": { "model": "cccbridge:block/redrouter_face/6", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 7 },
+      "apply": { "model": "cccbridge:block/redrouter_face/7", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 7 },
+      "apply": { "model": "cccbridge:block/redrouter_face/7", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 7 },
+      "apply": { "model": "cccbridge:block/redrouter_face/7", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 7 },
+      "apply": { "model": "cccbridge:block/redrouter_face/7", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 8 },
+      "apply": { "model": "cccbridge:block/redrouter_face/8", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 8 },
+      "apply": { "model": "cccbridge:block/redrouter_face/8", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 8 },
+      "apply": { "model": "cccbridge:block/redrouter_face/8", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 8 },
+      "apply": { "model": "cccbridge:block/redrouter_face/8", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 9 },
+      "apply": { "model": "cccbridge:block/redrouter_face/9", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 9 },
+      "apply": { "model": "cccbridge:block/redrouter_face/9", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 9 },
+      "apply": { "model": "cccbridge:block/redrouter_face/9", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 9 },
+      "apply": { "model": "cccbridge:block/redrouter_face/9", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 10 },
+      "apply": { "model": "cccbridge:block/redrouter_face/10", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 10 },
+      "apply": { "model": "cccbridge:block/redrouter_face/10", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 10 },
+      "apply": { "model": "cccbridge:block/redrouter_face/10", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 10 },
+      "apply": { "model": "cccbridge:block/redrouter_face/10", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 11 },
+      "apply": { "model": "cccbridge:block/redrouter_face/11", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 11 },
+      "apply": { "model": "cccbridge:block/redrouter_face/11", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 11 },
+      "apply": { "model": "cccbridge:block/redrouter_face/11", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 11 },
+      "apply": { "model": "cccbridge:block/redrouter_face/11", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 12 },
+      "apply": { "model": "cccbridge:block/redrouter_face/12", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 12 },
+      "apply": { "model": "cccbridge:block/redrouter_face/12", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 12 },
+      "apply": { "model": "cccbridge:block/redrouter_face/12", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 12 },
+      "apply": { "model": "cccbridge:block/redrouter_face/12", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 13 },
+      "apply": { "model": "cccbridge:block/redrouter_face/13", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 13 },
+      "apply": { "model": "cccbridge:block/redrouter_face/13", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 13 },
+      "apply": { "model": "cccbridge:block/redrouter_face/13", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 13 },
+      "apply": { "model": "cccbridge:block/redrouter_face/13", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 14 },
+      "apply": { "model": "cccbridge:block/redrouter_face/14", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 14 },
+      "apply": { "model": "cccbridge:block/redrouter_face/14", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 14 },
+      "apply": { "model": "cccbridge:block/redrouter_face/14", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 14 },
+      "apply": { "model": "cccbridge:block/redrouter_face/14", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 15 },
+      "apply": { "model": "cccbridge:block/redrouter_face/15", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 15 },
+      "apply": { "model": "cccbridge:block/redrouter_face/15", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 15 },
+      "apply": { "model": "cccbridge:block/redrouter_face/15", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 15 },
+      "apply": { "model": "cccbridge:block/redrouter_face/15", "y": 270, "uvlock": false }
+    },
+
+    { "when": { "facing": "north",  "face": 16 },
+      "apply": { "model": "cccbridge:block/redrouter_face/16", "uvlock": false }
+    },
+    { "when": { "facing": "east",   "face": 16 },
+      "apply": { "model": "cccbridge:block/redrouter_face/16", "y": 90, "uvlock": false }
+    },
+    { "when": { "facing": "south",  "face": 16 },
+      "apply": { "model": "cccbridge:block/redrouter_face/16", "y": 180, "uvlock": false }
+    },
+    { "when": { "facing": "west",   "face": 16 },
+      "apply": { "model": "cccbridge:block/redrouter_face/16", "y": 270, "uvlock": false }
+    }
+  ]
 }

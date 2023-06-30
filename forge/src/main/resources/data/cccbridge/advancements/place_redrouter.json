@@ -7,7 +7,7 @@
         "show_toast": false,
         "announce_to_chat": true,
         "hidden": false,
-        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+        "background": "cccbridge:textures/gui/advancements/backgrounds/luarocks.png"
     },
     "criteria": {
         "placed_redrouter": {

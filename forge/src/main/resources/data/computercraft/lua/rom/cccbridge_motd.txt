@@ -1,10 +1,9 @@
 Hello from CC:C Bridge!
-Connect a Display Link to a Source Block and see what happens :o
-Get creative!
+You can connect a Display Link with a Source Block to have your own text on Display Boards. :o
 Create.
-RedRouter is good. RedRouter is life.
-Caught in 4k!
-Aha- oh wait, nvm.
 EMOTIONAL DAMAGE!
-Visit tweaked-programs.cc for detailed changelogs of CC:C Bridge!
-There is hidden LORE - 1Turtle!!!
+Visit tweaked-programs.cc for detailed changelogs about CC:C Bridge!
+CC:C Bridge stands for ComputerCraft:Create Bridge.
+Scroller Panes are neat to configure values while being easy to integrate in your buildings.
+RedRouter Blocks use a similar function set of the Redstone API, try it out!
+Target Blocks can help you process Create related information.

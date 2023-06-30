@@ -1,25 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GDG",
-    "PCP",
-    "GAG"
+    "AGA",
+    "GQG",
+    "ARA"
   ],
   "key": {
-    "G": {
-        "item": "create:golden_sheet"
-    },
-    "D": {
-        "item": "computercraft:disk"
-    },
-    "P": {
-        "item": "minecraft:paper"
-    },
-    "C": {
-        "item": "create:brass_casing"
-    },
     "A": {
-        "item": "minecraft:glass"
+        "item": "create:cut_asurine"
+    },
+    "G": {
+        "item": "minecraft:glass_pane"
+    },
+    "Q": {
+        "item": "create:rose_quartz_lamp"
+    },
+    "R": {
+        "item": "minecraft:redstone"
     }
   },
   "result": {
