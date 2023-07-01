@@ -41,7 +41,6 @@ repositories {
 }
 
 dependencies {
-	// Lern' erst mal die Basics!
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.layered() {
 		officialMojangMappings()
@@ -49,10 +48,11 @@ dependencies {
 	}
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	// Woah, we don't do that here!
 	//modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${minecraft_version}")
 
 	// Create
-	modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_version}+${minecraft_version}")
+	modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_version}+mc${minecraft_version}")
 
 	// CC:R
 	modImplementation("com.github.cc-tweaked:cc-restitched:${project.cc_version}")

@@ -1,6 +1,7 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
-import cc.tweaked_programs.cccbridge.BlockRegister;
+import cc.tweaked_programs.cccbridge.CCCRegister;
+import cc.tweaked_programs.cccbridge.block.RedRouterBlock;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
@@ -13,10 +14,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlockEntity {
     private final HashMap<String, Integer> outputDir = new HashMap<>();
@@ -27,7 +30,7 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
     private Direction facing;
 
     public RedRouterBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegister.getBlockEntityType("redrouter_block"), pos, state);
+        super(CCCRegister.getBlockEntityType("redrouter_block"), pos, state);
         facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         outputDir.put("up", 0);
         outputDir.put("down", 0);
@@ -49,31 +52,35 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
 
         if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            //redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
             world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos()).getBlock());
             redrouter.blockupdate = false;
-            updateInputs(world, blockPos, redrouter);
         }
+            updateInputs(world, blockPos, redrouter);
+
         if (redrouter.newInputs && redrouter.peripheral != null) {
-            redrouter.peripheral.redstoneEvent();
+            redrouter.peripheral.sendEvent(RedRouterBlockPeripheral.REDSTONE_EVENT);
             redrouter.newInputs = false;
         }
     }
 
-    private static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
+    public static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
-            Direction dir = Direction.byName(side).getOpposite();
+            Direction dir = Objects.requireNonNull(Direction.byName(side)).getOpposite();
             BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
 
-            int power = block.getBlock().getSignal(block, world, offsetPos, dir);
-            if (redrouter.inputDir.get(side) != power)
-                redrouter.newInputs = true;
-            redrouter.inputDir.put(side, power);
+            if (block.getBlock() instanceof RedRouterBlock) {
+                int power = block.getBlock().getSignal(block, world, offsetPos, dir);
+
+                if (redrouter.inputDir.get(side) != power)
+                    redrouter.newInputs = true;
+                redrouter.inputDir.put(side, power);
+            }
         }
     }
 
@@ -108,7 +115,7 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         for (Map.Entry<String, Integer> entry : outputDir.entrySet()) {
             String side = entry.getKey();
@@ -117,7 +124,7 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
+    public void saveAdditional(@NotNull CompoundTag nbt) {
         for (Map.Entry<String, Integer> entry : outputDir.entrySet())
             nbt.putInt(entry.getKey(), entry.getValue());
         super.saveAdditional(nbt);
@@ -136,11 +143,11 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         return saveWithoutMetadata();
     }
 
-    public IPeripheral getPeripheral(Direction side) {
+    public IPeripheral getPeripheral(@NotNull Direction side) {
         if (peripheral == null)
             peripheral = new RedRouterBlockPeripheral(this);
         return peripheral;

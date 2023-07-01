@@ -1,50 +1,21 @@
 package cc.tweaked_programs.cccbridge.peripherals;
 
 import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
-import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * This peripheral is used by the Scroller Pane. It allows to interact with its valued that the player can manipulate
- * (as long as this pripheral allows though, as it call lock it for outside interactions)
+ * (as long as this peripheral allows though, as it call lock it for outside interactions)
  *
- * @version 1.0
+ * @version 2.0
  */
-public class ScrollerBlockPeripheral implements IPeripheral {
-    private final ScrollerBlockEntity scroller;
-    private final Level level;
-    private final List<IComputerAccess> pcs = new LinkedList<>();
+public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEntity> {
 
-    public ScrollerBlockPeripheral(ScrollerBlockEntity block_entity, Level level) {
-        this.scroller = block_entity;
-        this.level = level;
+    public ScrollerBlockPeripheral(ScrollerBlockEntity blockentity) {
+        super("scroller", blockentity);
     }
-
-    @Override
-    public void attach(@Nonnull IComputerAccess computer) {
-        pcs.add(computer);
-    }
-
-    @Override
-    public void detach(@Nonnull IComputerAccess computer) {
-        pcs.removeIf(p -> (p.getID() == computer.getID()));
-    }
-
-    public void newValue(int value) {
-        for (IComputerAccess pc : pcs)
-            pc.queueEvent("scroller_changed", pc.getAttachmentName(), (double)(value/10));
-    }
-
 
     /**
      * Returns whether the Scroller Pane is locked or not.
@@ -52,7 +23,15 @@ public class ScrollerBlockPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final boolean isLocked() {
-        return level.getBlockState(scroller.getBlockPos()).getValue(BlockStateProperties.LOCKED);
+        ScrollerBlockEntity be = getTarget();
+        if (be != null) {
+            Level level = getTarget().getLevel();
+
+            if (level != null)
+                return level.getBlockState(be.getBlockPos()).getValue(BlockStateProperties.LOCKED);
+        }
+
+        return false;
     }
 
     /**
@@ -60,45 +39,88 @@ public class ScrollerBlockPeripheral implements IPeripheral {
      * @param state Sate for lock
      */
     @LuaFunction
-    public final void setLock(boolean state) { scroller.setLock(state); }
-
-    /**
-     * Returns the current value of the Scroller Pane.
-     * @return Value (-15.0 - 15.0)
-     */
-    @LuaFunction
-    public final double getValue() {
-        ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
-        if (scrollValueBehaviour == null) return 0.0f;
-
-        return (double)scrollValueBehaviour.getValue()/10;
+    public final void setLock(boolean state) {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            be.setLock(state);
     }
 
     /**
-     * Sets a new value for the Scroller Pane
-     * @param value The new value (Must be in between -15.0 - 15.0)
+     * Returns the selected value of the Scroller Pane.
+     *
+     * @return The selected value.
      */
     @LuaFunction
-    public final void setValue(double value) {
-        ScrollValueBehaviour scrollValueBehaviour = scroller.getBehaviour();
-        if (scrollValueBehaviour == null) return;
+    public final int getValue() {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            return be.getValue();
 
-        if (value > 15) value = 15;
-        else if (value < -15) value = -15;
-
-        scrollValueBehaviour.setValue((int)(value*10));
-        scroller.playTickSound();
+        return 0;
     }
 
-
-    @NotNull
-    @Override
-    public String getType() {
-        return "scroller";
+    /**
+     * Changes the selected value.
+     * @param value The new value to select.
+     */
+    @LuaFunction
+    public final void setValue(int value) {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            be.setValue(value);
     }
 
-    @Override
-    public boolean equals(@Nullable IPeripheral other) {
-        return this == other || other instanceof ScrollerBlockPeripheral s && s.scroller == scroller;
+    /**
+     * Returns the limit relative to zero.
+     * E.g. 15 for from 0 to 15.
+     *
+     * @return The limit.
+     */
+    @LuaFunction
+    public final int getLimit() {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            return be.getLimit();
+
+        return 0;
+    }
+
+    /**
+     * Returns whenever the Scroller Pane has the minus spectrum enabled.
+     *
+     * @return true for when the minus spectrum is enabled, and false for the opposite.
+     */
+    @LuaFunction
+    public final boolean hasMinusSpectrum() {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            return be.hasMinus();
+
+        return false;
+    }
+
+    /**
+     * Enables or disables the minus spectrum.
+     *
+     * @param state true for enabled minus spectrum, false for the opposite.
+     */
+    @LuaFunction
+    public final void toggleMinusSpectrum(boolean state) {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            be.toggleMinusSpectrum(state);
+    }
+
+    /**
+     * Sets a new limit relative to zero.
+     * If minus spectrum enabled, the limit then gets mirrored to the minus spectrum too.
+     *
+     * @param limit The new limit.
+     */
+    @LuaFunction
+    public final void setLimit(int limit) {
+        ScrollerBlockEntity be = getTarget();
+        if (be != null)
+            be.setLimit(limit);
     }
 }
