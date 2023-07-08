@@ -10,8 +10,8 @@
 
     
   Available for **1.18.2** and **1.19.2**.  
-  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(0.5.0.g-19 to 0.5.0i)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(1.101.2 or higher)*!  
-  For Fabric, requires the [Fabric API](https://github.com/fabricmc/fabric), [Create](https://github.com/Fabricators-of-Create/Create) *(0.5.0.g-837 to 0.5.0i)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(1.101.2-ccr or higher)*!  
+  For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(0.5.1.b or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(1.101.2 or higher)*!  
+  For Fabric, requires [Create](https://github.com/Fabricators-of-Create/Create) *(0.5.1.b or higher)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(1.100.5-ccr or higher)*!  
 </div>
   
 About
@@ -27,4 +27,4 @@ With these blocks, many things you always wanted to handle precicely and easily 
 
 Documentation
 -------------------------------------
-To find out more, check out the [wiki section](https://github.com/tweaked-programs/cccbridge/wiki)!
+~~To find out more, check out the [wiki section](https://github.com/tweaked-programs/cccbridge/wiki)!~~
