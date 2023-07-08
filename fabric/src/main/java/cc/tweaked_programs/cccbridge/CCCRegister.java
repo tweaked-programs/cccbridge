@@ -47,11 +47,8 @@ public class CCCRegister {
         Registry.register(Registry.ITEM, new ResourceLocation(CCCBridge.MOD_ID, id), item);
     }
 
-    public static <T extends Entity, R extends EntityRendererProvider<T>> void registerEntity(String id, EntityType<T> entitytype, R renderer, ModelLayerLocation layerLocation, EntityModelLayerRegistry.TexturedModelDataProvider createBodyLayer) {
+    public static <T extends Entity> void registerEntity(String id, EntityType<T> entitytype) {
         EntityType<T> registeredEntityType = Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(CCCBridge.MOD_ID, id), entitytype);
-
-        EntityRendererRegistry.register(registeredEntityType, renderer);
-        EntityModelLayerRegistry.registerModelLayer(layerLocation, createBodyLayer);
 
         entities.put(id, registeredEntityType);
     }

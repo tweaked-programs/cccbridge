@@ -2,6 +2,7 @@ package cc.tweaked_programs.cccbridge.peripherals;
 
 import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
 import dan200.computercraft.api.lua.LuaFunction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -119,6 +120,7 @@ public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEnti
      */
     @LuaFunction
     public final void setLimit(int limit) {
+        limit = Mth.clamp(Math.abs(limit), 1, 200);
         ScrollerBlockEntity be = getTarget();
         if (be != null)
             be.setLimit(limit);

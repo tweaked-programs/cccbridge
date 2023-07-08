@@ -32,7 +32,7 @@ public class CCCBridge implements ModInitializer {
         CCCRegister.registerBlockEntity("animatronic_block", AnimatronicBlockEntity::new, new AnimatronicBlock());
 
         // Entities
-        CCCRegister.registerEntity("animatronic", FabricEntityTypeBuilder.create(MobCategory.MISC, AnimatronicEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.8F)).build(), AnimatronicRenderer::new, AnimatronicModel.LAYER_LOCATION, AnimatronicModel::createBodyLayer);
+        CCCRegister.registerEntity("animatronic", FabricEntityTypeBuilder.create(MobCategory.MISC, AnimatronicEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.8F)).build());
 
         // Create Display Stuff
         AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), CCCRegister.getBlockEntityType("source_block"));
