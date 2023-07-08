@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "HTH",
+    " R "
+  ],
+  "key": {
+    "M": {
+      "item": "computercraft:monitor_normal"
+    },
+    "T": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "H": {
+      "item": "create:brass_hand"
+    }
+  },
+  "result": {
+    "item": "cccbridge:animatronic_block",
+    "count": 1
+  }
+}

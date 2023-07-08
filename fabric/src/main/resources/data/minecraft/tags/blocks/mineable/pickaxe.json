@@ -3,6 +3,8 @@
   "values": [
     "cccbridge:source_block",
     "cccbridge:target_block",
-    "cccbridge:redrouter_block"
+    "cccbridge:redrouter_block",
+    "cccbridge:scroller_block",
+    "cccbridge:animatronic_block"
   ]
 }

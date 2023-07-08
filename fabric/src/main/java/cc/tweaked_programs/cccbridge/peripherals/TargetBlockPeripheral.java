@@ -9,13 +9,16 @@ import dan200.computercraft.core.terminal.TextBuffer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TargetBlockPeripheral implements IPeripheral {
-    private final TargetBlockEntity target_block_entity;
+/**
+ * This peripheral is used by the Target Block. It is used to get data from Create Display Sources. The data has to be synced by the BlockEntity.
+ *
+ * @version 1.1
+ */
+public class TargetBlockPeripheral extends TweakedPeripheral<TargetBlockEntity> {
     private final Terminal term = new Terminal(32, 24);
 
-
-    public TargetBlockPeripheral(TargetBlockEntity target_block_entity) {
-        this.target_block_entity = target_block_entity;
+    public TargetBlockPeripheral(TargetBlockEntity blockentity) {
+        super("create_target", blockentity);
     }
 
     public void replaceLine(int y, String line) {
@@ -30,6 +33,10 @@ public class TargetBlockPeripheral implements IPeripheral {
         return term.getWidth();
     }
 
+    public int getHeight() {
+        return term.getHeight();
+    }
+
     /**
      * Sets the new width of the display. Cannot be larger than 164 chars.
      *
@@ -40,10 +47,6 @@ public class TargetBlockPeripheral implements IPeripheral {
     public final void setWidth(int width) throws LuaException {
         if (width < 1 || width > 164) throw new LuaException("Expected number in range 1-164");
         term.resize(width, 16);
-    }
-
-    public int getHeight() {
-        return term.getHeight();
     }
 
     /**
@@ -72,7 +75,7 @@ public class TargetBlockPeripheral implements IPeripheral {
      *
      * @param y The y position on the display.
      * @return The string from the given Y position.
-     * @throws LuaException When given number is not in range 1-[terminal height].
+     * @throws LuaException When given number is not in range 1-[terminal height]
      */
     @LuaFunction
     public final String getLine(int y) throws LuaException {
@@ -90,16 +93,5 @@ public class TargetBlockPeripheral implements IPeripheral {
     @LuaFunction
     public final Object[] getSize() {
         return new Object[]{term.getWidth(), term.getHeight()};
-    }
-
-    @NotNull
-    @Override
-    public String getType() {
-        return "create_target";
-    }
-
-    @Override
-    public boolean equals(@Nullable IPeripheral other) {
-        return this == other || other instanceof TargetBlockPeripheral target && target.target_block_entity == target_block_entity;
     }
 }

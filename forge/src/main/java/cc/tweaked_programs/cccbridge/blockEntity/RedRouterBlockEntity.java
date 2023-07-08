@@ -1,7 +1,7 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
-import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
+import cc.tweaked_programs.cccbridge.CCCRegister;
+import cc.tweaked_programs.cccbridge.block.RedRouterBlock;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.core.BlockPos;
@@ -14,20 +14,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class RedRouterBlockEntity extends BlockEntity {
+public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlockEntity {
     private final HashMap<String, Integer> outputDir = new HashMap<>();
     private final HashMap<String, Integer> inputDir = new HashMap<>();
     private boolean blockupdate = false;
+    private boolean newInputs = false;
     private RedRouterBlockPeripheral peripheral;
     private Direction facing;
 
     public RedRouterBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegister.REDROUTER_BLOCK_ENTITY.get(), pos, state);
+        super(CCCRegister.REDROUTER_BLOCK_ENTITY.get(), pos, state);
         facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         outputDir.put("up", 0);
         outputDir.put("down", 0);
@@ -46,26 +49,31 @@ public class RedRouterBlockEntity extends BlockEntity {
 
     public static void tick(Level world, BlockPos blockPos, BlockState state, BlockEntity be) {
         if (!(be instanceof RedRouterBlockEntity redrouter)) return;
+
         if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            //redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
-            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos())
-                    .getBlock());
+            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos()).getBlock());
             redrouter.blockupdate = false;
         }
+            updateInputs(world, blockPos, redrouter);
 
-        updateInputs(world, blockPos, redrouter);
+        if (redrouter.newInputs && redrouter.peripheral != null) {
+            redrouter.peripheral.sendEvent(RedRouterBlockPeripheral.REDSTONE_EVENT);
+            redrouter.newInputs = false;
+        }
     }
 
-    private static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
+    public static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
             Direction dir = Direction.byName(side).getOpposite();
             BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
+
             int power = block.getBlock().getSignal(block, world, offsetPos, dir);
             redrouter.inputDir.put(side, power);
         }
@@ -102,7 +110,7 @@ public class RedRouterBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         for (Map.Entry<String, Integer> entry : outputDir.entrySet()) {
             String side = entry.getKey();
@@ -111,7 +119,7 @@ public class RedRouterBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
+    public void saveAdditional(@NotNull CompoundTag nbt) {
         for (Map.Entry<String, Integer> entry : outputDir.entrySet())
             nbt.putInt(entry.getKey(), entry.getValue());
         super.saveAdditional(nbt);
@@ -130,11 +138,11 @@ public class RedRouterBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         return saveWithoutMetadata();
     }
 
-    public IPeripheral getPeripheral(Direction side) {
+    public IPeripheral getPeripheral(@NotNull Direction side) {
         if (peripheral == null)
             peripheral = new RedRouterBlockPeripheral(this);
         return peripheral;

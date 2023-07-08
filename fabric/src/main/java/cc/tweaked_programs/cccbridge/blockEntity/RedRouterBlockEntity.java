@@ -1,36 +1,37 @@
 package cc.tweaked_programs.cccbridge.blockEntity;
 
-import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.CCCBridge;
+import cc.tweaked_programs.cccbridge.CCCRegister;
+import cc.tweaked_programs.cccbridge.block.RedRouterBlock;
 import cc.tweaked_programs.cccbridge.peripherals.RedRouterBlockPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralTile;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile {
-    private HashMap<String, Integer> outputDir = new HashMap<>();
-    private HashMap<String, Integer> inputDir = new HashMap<>();
-    private RedRouterBlockPeripheral peripheral;
+public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlockEntity {
+    private final HashMap<String, Integer> outputDir = new HashMap<>();
+    private final HashMap<String, Integer> inputDir = new HashMap<>();
     private boolean blockupdate = false;
+    private boolean newInputs = false;
+    private RedRouterBlockPeripheral peripheral;
     private Direction facing;
 
     public RedRouterBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegister.getBlockEntityType("redrouter_block"), pos, state);
-        facing = state.get(Properties.HORIZONTAL_FACING);
+        super(CCCRegister.getBlockEntityType("redrouter_block"), pos, state);
+        facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         outputDir.put("up", 0);
         outputDir.put("down", 0);
         outputDir.put("north", 0);
@@ -46,28 +47,34 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
         inputDir.put("west", 0);
     }
 
-    public static void tick(World world, BlockPos blockPos, BlockState state, BlockEntity be) {
+    public static void tick(Level world, BlockPos blockPos, BlockState state, BlockEntity be) {
         if (!(be instanceof RedRouterBlockEntity redrouter)) return;
-        if (state.get(Properties.HORIZONTAL_FACING) != redrouter.facing) {
+
+        if (state.getValue(BlockStateProperties.HORIZONTAL_FACING) != redrouter.facing) {
             redrouter.blockupdate = true;
-            //redrouter.facing = state.get(Properties.HORIZONTAL_FACING);
+            redrouter.facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         if (redrouter.blockupdate) {
-            world.updateNeighbors(be.getPos(), world.getBlockState(be.getPos())
-                    .getBlock());
+            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos()).getBlock());
             redrouter.blockupdate = false;
         }
-        updateInputs(world, blockPos, redrouter);
+            updateInputs(world, blockPos, redrouter);
+
+        if (redrouter.newInputs && redrouter.peripheral != null) {
+            redrouter.peripheral.sendEvent(RedRouterBlockPeripheral.REDSTONE_EVENT);
+            redrouter.newInputs = false;
+        }
     }
 
-    private static void updateInputs(World world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
+    public static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
             Direction dir = Direction.byName(side).getOpposite();
-            BlockPos offsetPos = blockPos.offset(dir);
+            BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
-            int power = block.getBlock().getWeakRedstonePower(block, world, offsetPos, dir);
+
+            int power = block.getBlock().getSignal(block, world, offsetPos, dir);
             redrouter.inputDir.put(side, power);
         }
     }
@@ -79,17 +86,10 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
         return facing;
     }
 
-    @Override
-    public IPeripheral getPeripheral(@NotNull Direction side) {
-        if (peripheral == null)
-            peripheral = new RedRouterBlockPeripheral(this);
-        return peripheral;
-    }
-
     public int getRedstoneInput(Direction side) {
         int value = 0;
         try {
-            value = inputDir.get(side.asString());
+            value = inputDir.get(side.getName());
         } catch (NullPointerException e) {
         }
         return value;
@@ -97,19 +97,21 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
 
     public int getPower(Direction side) {
         int value = 0;
-        try { value = outputDir.get(side.asString());
-        } catch (NullPointerException e) { CCCBridge.LOGGER.warn(e.getMessage()); }
+        try {
+            value = outputDir.get(side.getName());
+        } catch (NullPointerException e) {
+        }
         return value;
     }
 
     public void setPower(String side, int power) {
         outputDir.put(side, power);
-        markDirty();
+        setChanged();
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(@NotNull CompoundTag nbt) {
+        super.load(nbt);
         for (Map.Entry<String, Integer> entry : outputDir.entrySet()) {
             String side = entry.getKey();
             outputDir.put(side, nbt.getInt(side));
@@ -117,26 +119,32 @@ public class RedRouterBlockEntity extends BlockEntity implements IPeripheralTile
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
+    public void saveAdditional(@NotNull CompoundTag nbt) {
         for (Map.Entry<String, Integer> entry : outputDir.entrySet())
             nbt.putInt(entry.getKey(), entry.getValue());
-        super.writeNbt(nbt);
+        super.saveAdditional(nbt);
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void setChanged() {
+        super.setChanged();
         blockupdate = true;
     }
 
     @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+    public @NotNull CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
+    }
+
+    public IPeripheral getPeripheral(@NotNull Direction side) {
+        if (peripheral == null)
+            peripheral = new RedRouterBlockPeripheral(this);
+        return peripheral;
     }
 }

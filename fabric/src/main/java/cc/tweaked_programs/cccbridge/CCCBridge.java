@@ -1,44 +1,46 @@
 package cc.tweaked_programs.cccbridge;
 
-import cc.tweaked_programs.cccbridge.block.RedRouterBlock;
-import cc.tweaked_programs.cccbridge.block.ScrollerBlock;
-import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
-import cc.tweaked_programs.cccbridge.block.SourceBlock;
-import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
+import cc.tweaked_programs.cccbridge.block.*;
+import cc.tweaked_programs.cccbridge.blockEntity.*;
 import cc.tweaked_programs.cccbridge.display.SourceBlockDisplaySource;
-import cc.tweaked_programs.cccbridge.blockEntity.SourceBlockEntity;
-import cc.tweaked_programs.cccbridge.block.TargetBlock;
 import cc.tweaked_programs.cccbridge.display.TargetBlockDisplayTarget;
-import cc.tweaked_programs.cccbridge.blockEntity.TargetBlockEntity;
-import com.simibubi.create.content.logistics.block.display.AllDisplayBehaviours;
+import cc.tweaked_programs.cccbridge.entity.animatronic.AnimatronicEntity;
+import cc.tweaked_programs.cccbridge.entity.animatronic.AnimatronicModel;
+import cc.tweaked_programs.cccbridge.entity.animatronic.AnimatronicRenderer;
+import com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours;
 import dan200.computercraft.api.ComputerCraftAPI;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.decoration.Motive;
 
 public class CCCBridge implements ModInitializer {
     public static final String MOD_ID = "cccbridge";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-    public static final IPeripheralProvider peripheralProvider = new PeripheralProvider();
+    //public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        BlockRegister.registerBlockEntity("source_block", SourceBlockEntity::new, new SourceBlock());
-        AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new Identifier(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), BlockRegister.getBlockEntityType("source_block"));
+        // Block (-entities)
+        CCCRegister.registerBlockEntity("source_block", SourceBlockEntity::new, new SourceBlock());
+        CCCRegister.registerBlockEntity("target_block", TargetBlockEntity::new, new TargetBlock());
 
-        BlockRegister.registerBlockEntity("target_block", TargetBlockEntity::new, new TargetBlock());
-        AllDisplayBehaviours.assignTile(AllDisplayBehaviours.register(new Identifier(MOD_ID, "target_block_display_source"), new TargetBlockDisplayTarget()), BlockRegister.getBlockEntityType("target_block"));
+        CCCRegister.registerBlockEntity("redrouter_block", RedRouterBlockEntity::new, new RedRouterBlock());
+        CCCRegister.registerBlockEntity("scroller_block", ScrollerBlockEntity::new, new ScrollerBlock());
+        CCCRegister.registerBlockEntity("animatronic_block", AnimatronicBlockEntity::new, new AnimatronicBlock());
 
-        BlockRegister.registerBlockEntity("redrouter_block", RedRouterBlockEntity::new, new RedRouterBlock());
-        BlockRegister.registerBlockEntity("scroller_block", ScrollerBlockEntity::new, new ScrollerBlock());
+        // Entities
+        CCCRegister.registerEntity("animatronic", FabricEntityTypeBuilder.create(MobCategory.MISC, AnimatronicEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.8F)).build(), AnimatronicRenderer::new, AnimatronicModel.LAYER_LOCATION, AnimatronicModel::createBodyLayer);
 
+        // Create Display Stuff
+        AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), CCCRegister.getBlockEntityType("source_block"));
+        AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "target_block_display_target"), new TargetBlockDisplayTarget()), CCCRegister.getBlockEntityType("target_block"));
+
+        // Misc
+        Registry.register(Registry.MOTIVE, new ResourceLocation(MOD_ID, "funny_redrouters"), new Motive(32,16));
         CCCSoundEvents.init();
-
-        ComputerCraftAPI.registerPeripheralProvider(peripheralProvider);
+        ComputerCraftAPI.registerPeripheralProvider(new PeripheralProvider());
     }
 }

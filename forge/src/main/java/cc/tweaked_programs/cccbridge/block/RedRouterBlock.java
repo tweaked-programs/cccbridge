@@ -1,8 +1,9 @@
 package cc.tweaked_programs.cccbridge.block;
 
-import cc.tweaked_programs.cccbridge.BlockRegister;
+import cc.tweaked_programs.cccbridge.CCCRegister;
+import cc.tweaked_programs.cccbridge.Misc;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
-import com.simibubi.create.content.contraptions.wrench.IWrenchable;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -20,29 +21,51 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
+import org.jetbrains.annotations.NotNull;
 
 public class RedRouterBlock extends HorizontalDirectionalBlock implements EntityBlock, IWrenchable {
+    public static final IntegerProperty FACE = IntegerProperty.create("face", 0, 16);
+
     public RedRouterBlock() {
-        super(Properties.of(Material.STONE).strength(1.3f).sound(SoundType.STONE));
-        registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
+        super(Properties.of(Material.STONE).strength(1.3f).sound(SoundType.STONE).noOcclusion());
+        registerDefaultState(this.stateDefinition.any()
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                .setValue(FACE, 0)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(BlockStateProperties.HORIZONTAL_FACING);
+        stateManager
+                .add(BlockStateProperties.HORIZONTAL_FACING)
+                .add(FACE);
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean pIsMoving) {
+        if (!level.isClientSide) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (!(be instanceof RedRouterBlockEntity rbe))
+                return;
+            RedRouterBlockEntity.updateInputs(level, pos, rbe);
+            rbe.setChanged();
+        }
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new RedRouterBlockEntity(pos, state);
     }
 
-    public boolean isSignalSource(BlockState state) {
+    @Override
+    public boolean isSignalSource(@NotNull BlockState state) {
         return true;
     }
 
-    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction dir) {
+    @Override
+    public int getSignal(@NotNull BlockState state, BlockGetter world, @NotNull BlockPos pos, @NotNull Direction dir) {
         BlockEntity block = world.getBlockEntity(pos);
         if (!(block instanceof RedRouterBlockEntity redrouter))
             return 0;
@@ -72,11 +95,13 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return BlockRegister.REDROUTER_BLOCK_ENTITY.get() == type ? RedRouterBlockEntity::tick : null;
+        return CCCRegister.REDROUTER_BLOCK_ENTITY.get() == type ? RedRouterBlockEntity::tick : null;
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, ctx.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, ctx.getHorizontalDirection().getOpposite())
+                .setValue(FACE, (ctx.getLevel().isClientSide) ? 0 : Misc.randomFace());
     }
 }

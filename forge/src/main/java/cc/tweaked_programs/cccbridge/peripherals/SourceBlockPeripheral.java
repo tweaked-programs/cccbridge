@@ -11,31 +11,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.xml.transform.Source;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SourceBlockPeripheral implements IPeripheral {
-    private final SourceBlockEntity source_block_entity;
+/**
+ * This peripheral is used by the Source Block. It is used to give some kind of Create Display Targets data.
+ * The peripheral acts similar to a normal Terminal, with some implementations from the Window API and other limitations like no control over the colors.
+ *
+ * @version 1.1
+ */
+public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> {
     private final Terminal term = new Terminal(4, 2, false);
-    private final List<IComputerAccess> pcs = new LinkedList<>();
 
-    public SourceBlockPeripheral(SourceBlockEntity source_block_entity) {
-        this.source_block_entity = source_block_entity;
-    }
-
-    @Override
-    public void attach(@Nonnull IComputerAccess computer) {
-        pcs.add(computer);
-    }
-
-    @Override
-    public void detach(@Nonnull IComputerAccess computer) {
-        pcs.removeIf(p -> (p.getID() == computer.getID()));
-    }
-
-    public void resize() {
-        for (IComputerAccess pc : pcs)
-            pc.queueEvent("monitor_resize", pc.getAttachmentName());
+    public SourceBlockPeripheral(SourceBlockEntity blockentity) {
+        super("create_source", blockentity);
     }
 
     public void setSize(int width, int height) {
@@ -43,24 +33,14 @@ public class SourceBlockPeripheral implements IPeripheral {
         int oldH = term.getHeight();
         if (!(oldW != width || oldH != height)) return;
         term.resize(width, height);
-        resize();
+        super.sendEvent("monitor_resize");
     }
 
     public List<String> getContent() {
         List<String> content = new LinkedList<>();
 
-        // Replace chars that exist in CC and can't be displayed in C:
-        for (int i = 0; i < term.getHeight(); i++) {
-            String line = term.getLine(i).toString();
-            for (int j = 0; j < line.length(); j++) {
-                char ch = line.charAt(j);
-
-                // Printable chars in byte range
-                if (ch < 32 || (ch > 126 && ch < 161))
-                    line = line.substring(0, j) + '?' + line.substring(j + 1);
-            }
-            content.add(line);
-        }
+        for (int i = 0; i < term.getHeight(); i++)
+            content.add( term.getLine(i).toString());
 
         return content;
     }
@@ -130,7 +110,7 @@ public class SourceBlockPeripheral implements IPeripheral {
     }
 
     /**
-     * Returns the current current cursor position.
+     * Returns the current cursor position.
      *
      * @return Object[] {posX, posY}
      */
@@ -147,17 +127,5 @@ public class SourceBlockPeripheral implements IPeripheral {
     @LuaFunction
     public final Object[] getSize() {
         return new Object[]{term.getWidth(), term.getHeight()};
-    }
-
-
-    @NotNull
-    @Override
-    public String getType() {
-        return "create_source";
-    }
-
-    @Override
-    public boolean equals(@Nullable IPeripheral other) {
-        return this == other || other instanceof SourceBlockPeripheral source && source.source_block_entity == source_block_entity;
     }
 }

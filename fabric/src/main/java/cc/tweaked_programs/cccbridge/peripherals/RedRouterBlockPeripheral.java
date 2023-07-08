@@ -3,36 +3,43 @@ package cc.tweaked_programs.cccbridge.peripherals;
 import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.peripheral.IPeripheral;
+import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.core.computer.ComputerSide;
-import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.core.Direction;
 
-public class RedRouterBlockPeripheral implements IPeripheral {
-    private final RedRouterBlockEntity redrouter_be;
+import java.util.LinkedList;
+import java.util.List;
 
-    public RedRouterBlockPeripheral(RedRouterBlockEntity redrouter_block_entity) {
-        this.redrouter_be = redrouter_block_entity;
-    }
+/**
+ * This peripheral is used by the RedRouter. It works very similar to the Redstone API.
+ *
+ * @version 1.1
+ */
+public class RedRouterBlockPeripheral extends TweakedPeripheral<RedRouterBlockEntity> {
+    public static final String REDSTONE_EVENT = "redstone";
+    private final List<IComputerAccess> pcs = new LinkedList<>();
 
-    @NotNull
-    @Override
-    public String getType() {
-        return "redrouter";
+    public RedRouterBlockPeripheral(RedRouterBlockEntity blockentity) {
+        super("redrouter", blockentity);
     }
 
     public Direction getActualSide(ComputerSide side) {
-        Direction facing = redrouter_be.getFacing();
-        return switch (side.getName()) {
-            case ("front") -> facing.getOpposite();
-            case ("back") -> facing;
-            case ("left") -> facing.rotateYClockwise();
-            case ("right") -> facing.rotateYCounterclockwise();
-            case ("top") -> Direction.DOWN;
-            case ("bottom") -> Direction.UP;
-            default -> Direction.NORTH;
-        };
+        RedRouterBlockEntity be = getTarget();
+
+        if (be != null) {
+            Direction facing = getTarget().getFacing();
+            return switch (side.getName()) {
+                case ("front") -> facing.getOpposite();
+                case ("back") -> facing;
+                case ("left") -> facing.getClockWise();
+                case ("right") -> facing.getCounterClockWise();
+                case ("top") -> Direction.DOWN;
+                case ("bottom") -> Direction.UP;
+                default -> Direction.NORTH;
+            };
+        }
+
+        return Direction.NORTH;
     }
 
     /**
@@ -43,7 +50,9 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final void setOutput(ComputerSide side, boolean on) {
-        redrouter_be.setPower(getActualSide(side).getName(), on ? 15 : 0);
+        RedRouterBlockEntity be = getTarget();
+        if (be != null)
+            be.setPower(getActualSide(side).getName(), on ? 15 : 0);
     }
 
     /**
@@ -55,7 +64,11 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final boolean getOutput(ComputerSide side) {
-        return redrouter_be.getPower(getActualSide(side)) > 0;
+        RedRouterBlockEntity be = getTarget();
+        if (be != null)
+            return be.getPower(getActualSide(side)) > 0;
+
+        return false;
     }
 
     /**
@@ -66,7 +79,11 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      */
     @LuaFunction
     public final boolean getInput(ComputerSide side) {
-        return redrouter_be.getRedstoneInput(getActualSide(side)) > 0;
+        RedRouterBlockEntity be = getTarget();
+        if (be != null)
+            return be.getRedstoneInput(getActualSide(side)) > 0;
+
+        return false;
     }
 
     /**
@@ -79,7 +96,10 @@ public class RedRouterBlockPeripheral implements IPeripheral {
     @LuaFunction({"setAnalogOutput", "setAnalogueOutput"})
     public final void setAnalogOutput(ComputerSide side, int value) throws LuaException {
         if (value < 0 || value > 15) throw new LuaException("Expected number in range 0-15");
-        redrouter_be.setPower(getActualSide(side).getName(), value);
+        RedRouterBlockEntity be = getTarget();
+
+        if (be != null)
+            be.setPower(getActualSide(side).getName(), value);
     }
 
     /**
@@ -91,7 +111,11 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      */
     @LuaFunction({"getAnalogOutput", "getAnalogueOutput"})
     public final int getAnalogOutput(ComputerSide side) {
-        return redrouter_be.getPower(getActualSide(side));
+        RedRouterBlockEntity be = getTarget();
+        if (be != null)
+            return be.getPower(getActualSide(side));
+
+        return 0;
     }
 
     /**
@@ -102,11 +126,10 @@ public class RedRouterBlockPeripheral implements IPeripheral {
      */
     @LuaFunction({"getAnalogInput", "getAnalogueInput"})
     public final int getAnalogInput(ComputerSide side) {
-        return redrouter_be.getRedstoneInput(getActualSide(side));
-    }
+        RedRouterBlockEntity be = getTarget();
+        if (be != null)
+            return be.getRedstoneInput(getActualSide(side));
 
-    @Override
-    public boolean equals(@Nullable IPeripheral other) {
-        return this == other || other instanceof RedRouterBlockPeripheral redrouter && redrouter.redrouter_be == redrouter_be;
+        return 0;
     }
 }

@@ -6,11 +6,11 @@
         "frame": "task",
         "show_toast": false,
         "announce_to_chat": true,
-        "hidden": true,
-        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+        "hidden": false,
+        "background": "cccbridge:textures/gui/advancements/backgrounds/luarocks.png"
     },
     "criteria": {
-        "c1": {
+        "placed_redrouter": {
             "trigger": "minecraft:placed_block",
             "conditions": {
                 "block": "cccbridge:redrouter_block"

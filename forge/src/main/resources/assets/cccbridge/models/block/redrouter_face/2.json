@@ -1,7 +1,6 @@
 {
-	"credit": "By Sammy.K",
 	"parent": "cccbridge:block/redrouter_block",
     "textures": {
-        "face": "cccbridge:block/redrouter/face/2"
+        "6": "cccbridge:block/redrouter/face/2"
     }
 }

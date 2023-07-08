@@ -1,0 +1,6 @@
+{
+	"parent": "cccbridge:block/redrouter_block",
+    "textures": {
+        "6": "cccbridge:block/redrouter/face/0"
+    }
+}

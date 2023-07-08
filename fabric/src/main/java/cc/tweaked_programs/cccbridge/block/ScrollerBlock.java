@@ -1,90 +1,90 @@
 package cc.tweaked_programs.cccbridge.block;
 
-import cc.tweaked_programs.cccbridge.BlockRegister;
-import cc.tweaked_programs.cccbridge.blockEntity.RedRouterBlockEntity;
+import cc.tweaked_programs.cccbridge.CCCRegister;
 import cc.tweaked_programs.cccbridge.blockEntity.ScrollerBlockEntity;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import dan200.computercraft.shared.util.WaterloggableHelpers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
-public class ScrollerBlock extends FacingBlock implements BlockEntityProvider, Waterloggable {
+import javax.annotation.Nonnull;
+
+import static dan200.computercraft.shared.util.WaterloggableHelpers.getFluidStateForPlacement;
+
+public class ScrollerBlock extends DirectionalBlock implements EntityBlock, SimpleWaterloggedBlock  {
     public ScrollerBlock() {
-        super(FabricBlockSettings.of(Material.WOOD).strength(1.0f).sounds(BlockSoundGroup.WOOD));
-        setDefaultState(this.stateManager.getDefaultState()
-                .with(Properties.FACING, Direction.NORTH)
-                .with(Properties.WATERLOGGED, false)
-                .with(Properties.LOCKED, false));
+        super(BlockBehaviour.Properties.of(Material.METAL).strength(1.0f).sound(SoundType.METAL));
+        registerDefaultState(this.stateDefinition.any()
+                .setValue(BlockStateProperties.FACING, Direction.NORTH)
+                .setValue(BlockStateProperties.WATERLOGGED, false)
+                .setValue(BlockStateProperties.LOCKED, false));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
-        stateManager.add(Properties.FACING, Properties.WATERLOGGED, Properties.LOCKED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
+        stateManager.add(BlockStateProperties.FACING, BlockStateProperties.WATERLOGGED, BlockStateProperties.LOCKED);
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new ScrollerBlockEntity(pos, state);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ctx) {
-        Direction dir = state.get(FACING);
-        switch(dir) {
-            case SOUTH:
-                return VoxelShapes.cuboid(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.125f);
-            case NORTH:
-                return VoxelShapes.cuboid(0.0f, 0.0f, 1-0.125f, 1.0f, 1.0f, 1.0f);
-            case WEST:
-                return VoxelShapes.cuboid(1-0.125f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-            case EAST:
-                return VoxelShapes.cuboid(0.0f, 0.0f, 0.0f, 0.125f, 1.0f, 1.0f);
-            case UP:
-                return VoxelShapes.cuboid(0.0f, 0.0f, 0.0f, 1.0f, 0.125f, 1.0f);
-            case DOWN:
-                return VoxelShapes.cuboid(0.0f, 1-0.125f, 0.0f, 1.0f, 1.0f, 1.0f);
-            default:
-                return VoxelShapes.fullCube();
-        }
+    public @NotNull FluidState getFluidState(@Nonnull BlockState state)
+    {
+        return WaterloggableHelpers.getFluidState(state);
     }
 
     @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    public @NotNull BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction side, @Nonnull BlockState otherState, @Nonnull LevelAccessor world, @Nonnull BlockPos pos, @Nonnull BlockPos otherPos ) {
+        WaterloggableHelpers.updateShape( state, world, pos );
+        return state;
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(Properties.WATERLOGGED))
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ctx) {
+        return switch (state.getValue(FACING)) {
+            case SOUTH -> newBox(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.125f);
+            case NORTH -> newBox(0.0f, 0.0f, 1 - 0.125f, 1.0f, 1.0f, 1.0f);
+            case WEST -> newBox(1 - 0.125f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+            case EAST -> newBox(0.0f, 0.0f, 0.0f, 0.125f, 1.0f, 1.0f);
+            case UP -> newBox(0.0f, 0.0f, 0.0f, 1.0f, 0.125f, 1.0f);
+            case DOWN -> newBox(0.0f, 1 - 0.125f, 0.0f, 1.0f, 1.0f, 1.0f);
+            default -> newBox(0, 0, 0, 1, 1, 1);
+        };
+    }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    private static VoxelShape newBox(float p1, float p2, float p3, float p4, float p5, float p6) {
+        return Block.box(p1*16,p2*16,p3*16,p4*16,p5*16,p6*16);
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return BlockRegister.getBlockEntityType("scroller_block") == type ? ScrollerBlockEntity::tick : null;
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level world, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return CCCRegister.getBlockEntityType("scroller_block") == type ? ScrollerBlockEntity::tick : null;
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState()
-                .with(Properties.FACING, ctx.getSide())
-                .with(Properties.WATERLOGGED,ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER)
-                .with(Properties.LOCKED, false);
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState()
+                .setValue(BlockStateProperties.FACING, ctx.getClickedFace())
+                .setValue(BlockStateProperties.WATERLOGGED, getFluidStateForPlacement(ctx))
+                .setValue(BlockStateProperties.LOCKED, false);
     }
 }
