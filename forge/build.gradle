@@ -127,6 +127,14 @@ dependencies {
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 }
 
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand(project.properties)
+    }
+}
+
 jar {
     manifest {
         attributes([
@@ -134,11 +142,12 @@ jar {
                 "Specification-Vendor"    : "cccbridgesareus",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Version"  : project.mod_version,
                 "Implementation-Vendor"   : "cccbridgesareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+    archiveName = "${archives_base_name}-mc${mc_version}-${modloader}-v${mod_version}.${jar.getArchiveExtension().get()}"
 }
 
 jar.finalizedBy('reobfJar')

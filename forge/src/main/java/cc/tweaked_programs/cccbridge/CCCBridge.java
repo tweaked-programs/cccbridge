@@ -33,10 +33,6 @@ public class CCCBridge {
             AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), CCCRegister.SOURCE_BLOCK_ENTITY.get());
             AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(MOD_ID, "target_block_display_target"), new TargetBlockDisplayTarget()), CCCRegister.TARGET_BLOCK_ENTITY.get());
 
-            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, CCCRegister.SOURCE_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, CCCRegister.TARGET_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, CCCRegister.REDROUTER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
-            ForgeComputerCraftAPI.registerPeripheralProvider((world, pos, side) -> world.getBlockEntity(pos, CCCRegister.SCROLLER_BLOCK_ENTITY.get()).map(be -> be.getPeripheral(side)).map(val -> LazyOptional.of(() -> val)).orElse(LazyOptional.empty()));
             ForgeComputerCraftAPI.registerPeripheralProvider(new PeripheralProvider());
         });
     }

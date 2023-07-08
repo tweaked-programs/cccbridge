@@ -1,21 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "cccbridge",
-  "version": "${version}",
+  "id": "${archives_base_name}",
+  "version": "${version}-${modloader}",
 
   "name": "CC:C Bridge",
-  "description": "Adds compatibility between the ComputerCraft and Create mod!\n\nCopyright 2022 Sammy L. Koch\nLicensed under the Apache License, Version 2.0 ",
+  "description": "This mod adds compatibility between the ComputerCraft and Create mod!\n\nCopyright ${copyright_year} Sammy L. Koch",
   "authors": [
     "Sammy L. Koch",
     "Luke A. Hanssen"
   ],
   "contact": {
-    "homepage": "https://tweaked-programs.cc/tag/cccbridge/",
-    "sources": "https://github.com/tweaked-programs/cccbridge"
+    "homepage": "https://tweaked-programs.cc/",
+    "sources": "https://github.com/tweaked-programs/cccbridge",
+    "issues": "https://github.com/tweaked-programs/cccbridge/issues"
   },
 
-  "license": "Apache-2.0",
-  "icon": "icon.png",
+  "license": "${license}",
+  "icon": "iconHD.png",
 
   "environment": "*",
   "entrypoints": {
@@ -31,13 +32,10 @@
   ],
 
   "depends": {
-    "create": "*",
-    "computercraft": ">=1.100.7",
-    "fabricloader": ">=0.14.6",
-    "minecraft": "~1.19.2",
+    "create": ">=${create_version_production}",
+    "computercraft": ">=${cc_version}",
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "~${mc_version}",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

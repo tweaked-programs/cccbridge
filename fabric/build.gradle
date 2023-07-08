@@ -7,8 +7,8 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
+archivesBaseName = "${archives_base_name}-mc${mc_version}-${modloader}"
+version = "v${mod_version}"
 group = project.maven_group
 
 repositories {
@@ -41,10 +41,10 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	minecraft "com.mojang:minecraft:${project.mc_version}"
 	mappings loom.layered() {
 		officialMojangMappings()
-		parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+		parchment("org.parchmentmc.data:parchment-${project.mc_version}:${project.parchment_version}@zip")
 	}
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
@@ -52,11 +52,11 @@ dependencies {
 	//modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${minecraft_version}")
 
 	// Create
-	modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_version}+mc${minecraft_version}")
+	modImplementation("com.simibubi.create:create-fabric-${mc_version}:${create_version}+mc${mc_version}")
 
 	// CC:R
-	modImplementation("com.github.cc-tweaked:cc-restitched:${project.cc_version}")
-	modApi "com.github.cc-tweaked:cc-restitched:${project.cc_version}"
+	modImplementation("com.github.cc-tweaked:cc-restitched:v${cc_mc_version}-${project.cc_version}-ccr")
+	modApi "com.github.cc-tweaked:cc-restitched:v${cc_mc_version}-${project.cc_version}-ccr"
 
 	// dev qol
 	modLocalRuntime("maven.modrinth:lazydfu:${lazydfu_version}")
@@ -79,7 +79,7 @@ processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand(project.properties)
 	}
 }
 
@@ -88,9 +88,24 @@ tasks.withType(JavaCompile).configureEach {
 	options.compilerArgs <<"-Xlint:deprecation"
 }
 
-java { withSourcesJar() }
-
-jar { from("LICENSE") { rename { "${it}_${project.archivesBaseName}"} } }
+jar {
+	from("LICENSE") {
+		rename {
+			"${it}_${project.archivesBaseName}"
+		}
+	}
+	manifest {
+		attributes([
+				"Specification-Title"     : "${project.archives_base_name}",
+				"Specification-Vendor"    : "${project.maven_group}",
+				"Specification-Version"   : "1",
+				"Implementation-Title"    : project.name,
+				"Implementation-Version"  : project.mod_version,
+				"Implementation-Vendor"   : "${project.maven_group}",
+				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+		])
+	}
+}
 
 publishing {
 	publications {
@@ -98,12 +113,5 @@ publishing {
 			from components.java
 		}
 	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
-	}
+	repositories { }
 }

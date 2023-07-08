@@ -70,17 +70,12 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
     public static void updateInputs(Level world, BlockPos blockPos, RedRouterBlockEntity redrouter) {
         for (Map.Entry<String, Integer> entry : redrouter.inputDir.entrySet()) {
             String side = entry.getKey();
-            Direction dir = Objects.requireNonNull(Direction.byName(side)).getOpposite();
+            Direction dir = Direction.byName(side).getOpposite();
             BlockPos offsetPos = blockPos.relative(dir);
             BlockState block = world.getBlockState(offsetPos);
 
-            if (block.getBlock() instanceof RedRouterBlock) {
-                int power = block.getBlock().getSignal(block, world, offsetPos, dir);
-
-                if (redrouter.inputDir.get(side) != power)
-                    redrouter.newInputs = true;
-                redrouter.inputDir.put(side, power);
-            }
+            int power = block.getBlock().getSignal(block, world, offsetPos, dir);
+            redrouter.inputDir.put(side, power);
         }
     }
 

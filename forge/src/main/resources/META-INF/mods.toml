@@ -1,42 +1,42 @@
 modLoader="javafml"
 loaderVersion="[40,)"
-license="Apache-2.0"
+license="${license}"
 issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
-modId="cccbridge"
-version="1.5.0"
+modId="${archives_base_name}"
+version="${version}-${modloader}"
 displayName="CC:C Bridge"
-updateJSONURL=""
+updateJSONURL="https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
 displayURL="https://tweaked-programs.cc/"
-logoFile= "icon.png"
-credits="Thanks for this mod goes out to agnor99, who understands modding much better!"
+logoFile= "iconHD.png"
+credits="Thanks to agnor99, who understands modding much better!"
 authors="Sammy L. Koch & Luke A. Hanssen"
 description='''This mod adds compatibility between the ComputerCraft and Create mod!
 
-Copyright 2023 Sammy L. Koch'''
+Copyright ${copyright_year} Sammy L. Koch'''
 
-[[dependencies.cccbridge]]
+[[dependencies.${archives_base_name}]]
     modId="forge"
     mandatory=true
-    versionRange="[43,)"
+    versionRange="[${forge_version},)"
     ordering="NONE" # NONE; BEFORE; AFTER
     side="BOTH"
-[[dependencies.cccbridge]]
+[[dependencies.${archives_base_name}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,)"
+    versionRange="[${mc_version},)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.cccbridge]]
+[[dependencies.${archives_base_name}]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.b,)"
+    versionRange="[${create_version_production},)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.cccbridge]]
+[[dependencies.${archives_base_name}]]
     modId="computercraft"
     mandatory=true
-    versionRange="[1.101.2,)"
+    versionRange="[${cc_version},)"
     ordering="NONE"
     side="BOTH"
