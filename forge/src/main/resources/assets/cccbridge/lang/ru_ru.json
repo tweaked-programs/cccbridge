@@ -1,0 +1,16 @@
+{
+  "block.cccbridge.source_block": "Блок - источник",
+  "block.cccbridge.target_block": "Блок - цель",
+  "block.cccbridge.redrouter_block": "РедРоутер",
+  "block.cccbridge.scroller_block": "Скролл панель",
+  "block.cccbridge.animatronic_block": "Аниматроник",
+
+  "cccbridge.display_source.source_block_display_source": "Полученные данные от компьютера",
+
+  "cccbridge.general.unit.scroller": "Lua Число",
+  "cccbridge.general.unit.scroller.positive": "Lua Чис. +",
+  "cccbridge.general.unit.scroller.negative": "Lua Чис. -",
+
+  "subtitles.cccbridge.cage_lock": "Скроллер заблокирован",
+  "subtitles.cccbridge.cage_unlock": "Скроллер разблокирован"
+}
