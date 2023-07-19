@@ -5,6 +5,16 @@
   "block.cccbridge.scroller_block": "Scroller Pane",
   "block.cccbridge.animatronic_block": "Animatronic",
 
+  "block.cccbridge.source_block.description": "§6Can mirror text to other §otargets§r§6 via a §eDisplay Link§6.\n\n§7When lamp flashes\n §6Transmits the currently buffered text to the §otarget§r§6.\n§7When resolution changes\n §6Queues an §oevent§r§6 to all connected §eComputer§6's.",
+  "block.cccbridge.target_block.description": "§6Acts as an §otarget§r§6 to other §osources§r§6. §eComputer§6's can access all kinds of information from §eCreate§6 this way.",
+  "block.cccbridge.redrouter_block.description":  "§6Can control §eRedstone§6 signals via the §oRedstone API§r§6.",
+  "block.cccbridge.scroller_block.description": "§6Provides an interface to select a number. Can be read, controlled and manipulated with a §eComputer§6.",
+  "block.cccbridge.animatronic_block.description":  "§6Its facial expression as well as the whole body can be changed and positioned using a §eComputer§6.\n\n§7When pushing\n §6Applies the buffered §orotations§r§6 to the §eAnimatronic§6.",
+
+  "cccbridge.tooltip.holdForDescription": "§8Hold [{0}Shift§8] for more details",
+  "cccbridge.tooltip.peripheral": "Peripheral v{0}",
+  "cccbridge.tooltip.no_peripheral": "&oDoesn't have an Peripheral",
+
   "cccbridge.display_source.source_block_display_source": "Given data from computer",
 
   "cccbridge.general.unit.scroller": "Lua Number",
@@ -12,5 +22,12 @@
   "cccbridge.general.unit.scroller.negative": "Lua Num. -",
 
   "subtitles.cccbridge.cage_lock": "Scroller locked",
-  "subtitles.cccbridge.cage_unlock": "Scroller unlocked"
+  "subtitles.cccbridge.cage_unlock": "Scroller unlocked",
+
+  "itemGroup.cccbridge.cccbridge_group": "CC:C Bridge",
+
+  "cccbridge.screen.config_screen": "CC:C Bridge Configuration",
+  "category.cccbridge.visuals": "Visuals",
+  "option.cccbridge.flickering": "Light flickering",
+  "option.cccbridge.flickering.tooltip": "Determines whether or not the faces of RedRouter blocks or animatronics flicker in dark places."
 }
