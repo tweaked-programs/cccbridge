@@ -21,12 +21,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cc.tweaked_programs.cccbridge.modloader.CCCBridge"
+      "cc.tweaked_programs.cccbridge.common.modloader.CCCBridge"
     ],
     "client": [
-      "cc.tweaked_programs.cccbridge.modloader.CCCBridgeClient"
+      "cc.tweaked_programs.cccbridge.client.modloader.CCCBridgeClient"
     ],
-    "modmenu": [ "cc.tweaked_programs.cccbridge.optional_dependencies.ModMenuApiImpl" ]
+    "modmenu": [ "cc.tweaked_programs.cccbridge.client.optional_dependencies.ModMenuApiImpl" ]
   },
   "mixins": [
     "cccbridge.mixins.json"
@@ -41,7 +41,6 @@
     "java": ">=17"
   },
   "recommends": {
-    "modmenu": ">=${modmenu_version}",
-    "cloth-config": "~${cloth_config}"
+    "modmenu": ">=${modmenu_version}"
   }
 }

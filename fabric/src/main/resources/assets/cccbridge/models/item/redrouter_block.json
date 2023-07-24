@@ -1,3 +1,10 @@
 {
-  "parent": "cccbridge:block/redrouter_block"
+  "parent": "cccbridge:block/redrouter_block",
+  "textures": {
+    "3": "cccbridge:block/redrouter/redrouter_side",
+    "4": "cccbridge:block/redrouter/redrouter_top",
+    "5": "cccbridge:block/redrouter/redrouter_front",
+    "6": "cccbridge:block/redrouter/demo_face",
+    "particle": "cccbridge:block/redrouter/background"
+  }
 }

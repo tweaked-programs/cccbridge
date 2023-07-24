@@ -1,9 +1,10 @@
 {
-  "required": false,
+  "required": true,
   "minVersion": "0.8",
-  "package": "cc.tweaked_programs.cccbridge.mixin",
+  "package": "cc.tweaked_programs.cccbridge.common.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CarriageContraptionMixin"
   ],
   "client": [
   ],
