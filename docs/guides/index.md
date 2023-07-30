@@ -1,6 +1,6 @@
 # Guides
 
-Here are some guides that may be helpful.
+Here are some guides that might be helpful.
 
 | Title | Description |
 |-------|-------------|

@@ -1,7 +1,7 @@
 # Source Block
 
 ![Image title](../assets/images/peripherals/source_block.png){ align=left width="100" }
-This peripheral is used by the **Source Block**. It is used to display data on **Create Display Targets**.
+This peripheral is provided by the **Source Block**. It is used to display data on **Create Display Targets**.
 
 The peripheral acts similar to a normal [Terminal](https://tweaked.cc/module/term.html) with some implementations from the [Window API](https://tweaked.cc/module/window.html). It does not support formatted text.
 
@@ -39,7 +39,7 @@ Will write the given input to the linked display.
 
 **Parameters**
 
- 1. `text`: [string](https://www.lua.org/manual/5.1/manual.html#5.4) The string to write on the current cursor position.  
+ 1. `text`: [string](https://www.lua.org/manual/5.1/manual.html#5.4) The string to write at the current cursor position.  
 
 ---
 ### `scroll(y)`
@@ -47,7 +47,7 @@ Scrolls the content of the display vertically for `y` lines.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) How many lines will the display scroll.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) How many lines the display will scroll.  
 
 ---
 

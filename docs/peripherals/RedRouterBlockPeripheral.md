@@ -1,10 +1,10 @@
 # RedRouter Block
 
 ![Image title](../assets/images/peripherals/redrouter_block.png){ align=left width="100" }
-This peripheral is used by the **RedRouter Block**. It is used to control redstone signals.
+This peripheral is provided by the **RedRouter Block**. It is used to control redstone signals.
 
-The peripheral acts similar to the [Redstone API](https://tweaked.cc/module/redstone.html) with some exceptions like bundled cable support.  
-The sides are configured similar to the turtle, where `"left"` is **relative to the blocks facing.**
+The peripheral acts similar to the [Redstone API](https://tweaked.cc/module/redstone.html) with some exceptions like missing bundled cable support.  
+The sides are configured similarly to the turtle, where `"left"` is **relative to the blocks facing.**
 
 ## Metadata
 
@@ -26,7 +26,7 @@ The RedRouter can send the following event:
 ## Functions
 
 ### `setOutput(side, on)`
-Toggles a redstone signal for a specific side.  
+Set a redstone signal for a specific side.  
 
 **Parameters**
 

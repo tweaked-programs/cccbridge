@@ -1,9 +1,9 @@
 # Animatronic
 
 ![Image title](../assets/images/peripherals/animatronic_block.png){ align=left width="65" }
-This peripheral is used by the Animatronic. It is an electronic puppet that can be positioned however needed.
+This peripheral is provided by the Animatronic. It is an electronic puppet that can be positioned however needed.
 
-The transition from one pose to a new one is fully automatic. And rusty.
+The transition from one pose to a new one is fully automatic - and rusty.
 
 ## Metadata
 
@@ -49,10 +49,10 @@ Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
 
 ### `setBodyRot(x, y, z)`
 Sets the body rotation.  
-Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
+Can only be set within the bounds -180° to 180° for `Y` and `Z`.
 
 !!! info
-    `X` can be set within 360°.
+    `X` can be set to any number within 360°.
 
 **Parameters**
 
