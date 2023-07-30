@@ -5,7 +5,7 @@ _This mod allows you to write [Lua](https://www.lua.org/start.html) scripts in [
 
 ## Programming for beginners
 
-If you are new to CC: Tweaked or Lua programming in general, consider to take a look at the following ancent _(but still usable)_ resources:
+If you are new to CC: Tweaked or Lua programming in general, consider to take a look at the following ancient _(but still usable)_ resources:
 
  * [SethBling - "Programming Tutorial with Minecraft Turtles"](https://youtu.be/DSsx4VSe-Uk) on YouTube,
  * [Direwolf20's ComputerCraft tutorials](https://youtube.com/playlist?list=PLaiPn4ewcbkHYflo2jl0OuNaHK6Mj-koG) series on YouTube as well and
@@ -19,4 +19,4 @@ If you are new to CC: Tweaked or Lua programming in general, consider to take a 
 [ :material-calculator-variant-outline: Guides :material-calculator-variant-outline: ](guides/index.md){ .md-button .md-button--primary .md-button-right }
 
 [ :octicons-x-circle-24: Issue Tracker :octicons-x-circle-24: ](https://github.com/tweaked-programs/cccbridge/issues){ .md-button }
-[ :fontawesome-brands-github-alt: GitHub :fontawesome-brands-github-alt: ](#https://github.com/tweaked-programs/cccbridge){ .md-button .md-button-right }
+[ :fontawesome-brands-github-alt: GitHub :fontawesome-brands-github-alt: ](https://github.com/tweaked-programs/cccbridge){ .md-button .md-button-right }

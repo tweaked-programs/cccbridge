@@ -1,10 +1,10 @@
 # RedRouter Block
 
 ![Image title](../assets/images/peripherals/redrouter_block.png){ align=left width="100" }
-This peripheral is used by the **RedRouter Block**. It is used to control redstone signals.
+This peripheral is provided by the **RedRouter Block**. It is used to control redstone signals.
 
-The peripheral acts similar to the [Redstone API](https://tweaked.cc/module/redstone.html) with some exceptions like bundled cable support.  
-The sides are configured similar to the turtle, where `"left"` is **relative to the blocks facing.**
+The peripheral acts similar to the [Redstone API](https://tweaked.cc/module/redstone.html) with some exceptions like missing bundled cable support.  
+The sides are configured similarly to the turtle, where `"left"` is **relative to the blocks facing.**
 
 ## Metadata
 
@@ -19,14 +19,14 @@ The RedRouter can send the following event:
 
 | Name | Description | Parameter 1 |
 |------|-------------|-------------|
-| `"redstone"` | Whenever a redstone signal has changed. | `string`: **attatched_name** |
+| `"redstone"` | Whenever a redstone signal has changed. | `string`: **attached_name** |
 
 ---
 
 ## Functions
 
 ### `setOutput(side, on)`
-Toggles a redstone signal for a specific side.  
+Set a redstone signal for a specific side.  
 
 **Parameters**
 
@@ -50,7 +50,7 @@ Set a redstone signal strength for a specific side.
 ---
 
 ### `getOutput(side)`
-Get the current redstone output of a specific side. *(see ``setOutput``)*  
+Get the current redstone output of a specific side. *(see `setOutput`)*  
 
 **Parameters**
 
@@ -76,7 +76,7 @@ Get the current redstone input of a specific side.
 ---
 
 ### `getAnalogOutput(side)`
-Get the redstone output signal strength for a specific side.  *(see ``setAnalogOutput``)*  
+Get the redstone output signal strength for a specific side.  *(see `setAnalogOutput`)*  
 
 **Parameters**
 

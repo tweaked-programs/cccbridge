@@ -1,9 +1,9 @@
 # Scroller Pane
 
 ![Image title](../assets/images/peripherals/scroller_block.png){ align=left width="65" }
-This peripheral is used by the **Scroller Pane**. It allows players to provide an input as an number inside the world. The interface can be manipulated.
+This peripheral is provided by the **Scroller Pane**. It allows players to provide an input as an number inside the world. The interface can be manipulated.
 
-The peripheral uses Create's NumberBehaviour selection screen. _(The same one you see whenever you e.g. adjust the speed on an **RotationalSpeedController**)_
+The peripheral uses Create's `NumberBehaviour` selection screen. _(The same one you see when you for example adjust the speed on an **RotationalSpeedController**)_
 
 ## Metadata
 
@@ -18,7 +18,7 @@ The RedRouter can send the following event:
 
 | Name | Description | Parameter 1 | Parameter 2 |
 |------|-------------|-------------|-------------|
-| `"scroller_changed"` | Whenever the value got changed by a player.* | `string`: **attatched_name** | `number`: **new_value** |
+| `"scroller_changed"` | Whenever the value got changed by a player. | `string`: **attached_name** | `number`: **new_value** |
 
 !!! warning
     The event `"scroller_changed"` also fires when the value gets changed by an Computer. This is a bug that will be fixed!
@@ -37,11 +37,11 @@ Returns whether the Scroller Pane is locked or not.
 ---
 
 ### `setLock(state)`
-Unlocks the Scroller Pane with state = false (default) or state = true so that players cannot continue to use it.
+Unlocks the Scroller Pane with `state = false` (default) or locks it with `state = true` so that players cannot continue to use it.
 
 **Parameters**
 
- 1. `state`: [boolean](https://www.lua.org/manual/5.1/manual.html#2.2) Whenever the lock should be active or disabled.
+ 1. `state`: [boolean](https://www.lua.org/manual/5.1/manual.html#2.2) Wether the lock should be active or disabled.
 
 ---
 ### `getValue()`
@@ -72,7 +72,7 @@ Returns the limit relative to zero.
 ---
 
 ### `hasMinusSpectrum()`
-Returns whenever the Scroller Pane has the minus spectrum enabled.
+Returns wether the Scroller Pane has the minus spectrum enabled.
 
 **Returns**
 

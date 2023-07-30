@@ -1,9 +1,9 @@
 # Target Block
 
 ![Image title](../assets/images/peripherals/target_block.png){ align=left width="100" }
-This peripheral is used by the **Target Block**. It is used to get data from **Create Display Sources**.
+This peripheral is provided by the **Target Block**. It is used to get data from **Create Display Sources**.
 
-The peripheral only has some implementations from the [Window API](https://tweaked.cc/module/window.html) to receive data. It can't be much manipulated manipulated.
+The peripheral only has some implementations from the [Window API](https://tweaked.cc/module/window.html) to receive data. It can't be manipulated much.
 
 ## Metadata
 
@@ -25,7 +25,7 @@ Sets the new width of the display. Cannot be larger than 164 chars.
 
 **Throws**
 
- 1. Whenever the given number is not in the range from `1` to `164`.  
+ 1. Whenever the given number is not in the range `1` to `164`.  
 
 ---
 
@@ -39,7 +39,7 @@ Clears the line at the cursor position.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y position of the to be cleared line.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` position of the to be cleared line.  
 
 ---
 
@@ -48,15 +48,15 @@ Returns the line at the wanted display position.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The y position on the display.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` position on the display.  
 
 **Returns**
 
- 1. `string` The string from the given Y position.  
+ 1. `string` The string from the given `y` position.  
 
 **Throws**
 
- 1. Whenever the given number is not in the range from `1` to `<terminal height>`  
+ 1. Whenever the given number is not in the range `1` to `<terminal height>`  
 
 ---
 
