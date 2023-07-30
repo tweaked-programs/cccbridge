@@ -55,11 +55,18 @@ markdown_extensions:
       permalink: true
 
 plugins:
+    - minify:
+        minify_html: true
+        minify_js: true
+        minify_css: true
+        htmlmin_opts:
+          remove_comments: true
     - social:
-      cards_layout: default
-      cards_layout_options:
-        font_family: ComputerCraft
-    - glightbox
+        cards_layout: default
+        cards_layout_options:
+          font_family: ComputerCraft
+    - glightbox:
+    - search:
     
 theme:
   name: material
