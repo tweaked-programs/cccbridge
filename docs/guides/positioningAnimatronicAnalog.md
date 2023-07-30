@@ -5,7 +5,7 @@ However, some people might not want to use _another Computer_, just to position 
 
 But the Animatronic **can actually be used without a Computer**.
 
-## Viewing rotation
+## Viewing Rotation
 
 **To take a look at the current pose of an Animatronic**, simply run the following command in Minecraft:
 ```mcfunction
@@ -13,7 +13,7 @@ data get block <x> <y> <z>
 ```
 _The coordinates here represent where the Animatronic is standing._
 
-## Changing rotation
+## Changing Rotation
 
 To change the rotation of a body part, you can run a similar command in Minecraft:
 ```mcfunction
