@@ -54,6 +54,15 @@ markdown_extensions:
   - toc:
       permalink: true
 
+plugins:
+    - privacy:
+        enabled: true
+    - social:
+      cards_layout: default
+      cards_layout_options:
+        font_family: ComputerCraft
+    - glightbox
+    
 theme:
   name: material
 
@@ -63,15 +72,6 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.indexes
-
-  plugins:
-    - privacy:
-        enabled: true
-    - social:
-      cards_layout: default
-      cards_layout_options:
-        font_family: ComputerCraft
-    - glightbox
 
   font: false
   palette:
