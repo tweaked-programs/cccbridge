@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'ComputerCraft';
+    src: url('fonts/ComputerCraft.woff2') format('woff2'),
+        url('fonts/ComputerCraft.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('fonts/Rubik.woff2') format('woff2'),
+        url('fonts/Rubik.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --md-primary-fg-color:        #2F55FF;
+    --md-primary-fg-color--light: #A8B8FF;
+    --md-primary-fg-color--dark:  #071860;
+
+    --md-accent-fg-color:           #A8B8FF;
+    --md-default-bg-color:          #0F0F1E;
+
+
+    --md-code-font: "ComputerCraft", monospace;
+    --md-text-font: "Rubik", sans-serif;
+}
+
+body {
+    background-color: #0F0F1E;
+}
+
+p * {
+    color: #DDDDDD;
+}
+
+.md-typeset ul * {
+    color: #DDDDDD;
+}
+
+p {
+    color: #DDDDDD;
+}
+
+p strong {
+    color: #FFFFFF;
+}
+
+.headerlink {
+    font-family: var(--md-code-font);
+}
+
+.md-typeset .admonition, .md-typeset details {
+    background-color: #0F0F1E;
+}
+
+.md-typeset h1, .md-typeset h2 {
+    color: #A8B8FF;
+}
+
+.md-nav__link {
+    font-size: .8rem;
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+    height: 2.0rem;
+    width: auto;
+}
+
+.md-typeset code {
+    background-color: #0b0b14;
+}
+
+.md-nav--secondary .md-nav__title {
+    background-color: #0F0F1E;
+    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    color: #A8B8FF;
+}
+
+.md-nav--primary .md-nav__title {
+    background-color: #0F0F1E;
+    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    color: #A8B8FF;
+}
+
+.md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    background-color: #0F0F1E;
+    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    color: #A8B8FF;
+}
+
+.md-footer-meta {
+    background-color: #080811;
+}
+
+.md-search__form {
+    border-radius: 20px;
+}
+
+.md-typeset .md-button--primary, .md-typeset .md-button {
+    border-radius: 20px;
+    padding: .625em 6.5em;
+}
+
+.md-button-right {
+    float: right;
+}
+
+.md-typeset hr {
+    border: none;
+    height: 3px;
+    background-color: #4287ff26;
+    border-radius: 20px;
+}
+
+.md-social__link svg {
+    max-height: 1.25rem;
+    vertical-align: -40%;
+}
+
+.md-typeset table:not([class]) {
+    background-color: #4287ff26;
+    border-radius: 20px;
+}
+
+.md-typeset table:not([class]) thead {
+    background-color: #5692f826;
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+    border-radius: 20px 20px 0 0;
+    background-color: #4287ff26;
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__output {
+    border-radius: 0 0 20px 20px;
+}
+
+.md-search-result__meta {
+    background-color: #5692f826;
+}
