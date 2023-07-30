@@ -11,10 +11,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      SITE_URL: https://cccbridge.tweaked-programs.cc/
-      SOCIAL_CARDS: true
             
     steps:
       - uses: actions/checkout@v3
