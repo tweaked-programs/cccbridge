@@ -8,4 +8,4 @@ This section contains the API documentation.
 | [**RedRouter Block**](RedRouterBlockPeripheral.md) | Sends and receives redstone signals. |
 | [**Target Block**](TargetBlockPeripheral.md) | Simulates a **Create Display Target** to receive data from **Create Display Sources**. |
 | [**Scroller Pane**](ScrollerBlockPeripheral.md) | Provides an interface to select a number form a given spectrum. |
-| [**Animatronic**](AnimatronicPeripheral.md) | Controlls an Animatronic's body and face expression _(Similar to Armor Stands)_ |
+| [**Animatronic**](AnimatronicPeripheral.md) | Controls an Animatronic's body and face expression _(Similar to Armor Stands)_ |

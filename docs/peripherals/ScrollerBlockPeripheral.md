@@ -3,7 +3,7 @@
 ![Image title](../assets/images/peripherals/scroller_block.png){ align=left width="65" }
 This peripheral is provided by the **Scroller Pane**. It allows players to provide an input as an number inside the world. The interface can be manipulated.
 
-The peripheral uses Create's NumberBehaviour selection screen. _(The same one you see when you for example adjust the speed on an **RotationalSpeedController**)_
+The peripheral uses Create's `NumberBehaviour` selection screen. _(The same one you see when you for example adjust the speed on an **RotationalSpeedController**)_
 
 ## Metadata
 
@@ -18,7 +18,7 @@ The RedRouter can send the following event:
 
 | Name | Description | Parameter 1 | Parameter 2 |
 |------|-------------|-------------|-------------|
-| `"scroller_changed"` | Whenever the value got changed by a player. | `string`: **attatched_name** | `number`: **new_value** |
+| `"scroller_changed"` | Whenever the value got changed by a player. | `string`: **attached_name** | `number`: **new_value** |
 
 !!! warning
     The event `"scroller_changed"` also fires when the value gets changed by an Computer. This is a bug that will be fixed!

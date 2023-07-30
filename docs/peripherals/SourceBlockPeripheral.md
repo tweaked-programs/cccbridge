@@ -18,7 +18,7 @@ The RedRouter can send the following event:
 
 | Name | Description | Parameter 1 |
 |------|-------------|-------------|
-| `"monitor_resize"` | Whenever the display targets size changes. | `string`: **attatched_name** |
+| `"monitor_resize"` | Whenever the display targets size changes. | `string`: **attached_name** |
 
 ---
 

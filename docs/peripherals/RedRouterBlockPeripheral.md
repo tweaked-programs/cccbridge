@@ -19,7 +19,7 @@ The RedRouter can send the following event:
 
 | Name | Description | Parameter 1 |
 |------|-------------|-------------|
-| `"redstone"` | Whenever a redstone signal has changed. | `string`: **attatched_name** |
+| `"redstone"` | Whenever a redstone signal has changed. | `string`: **attached_name** |
 
 ---
 
