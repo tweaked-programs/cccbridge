@@ -1,0 +1,88 @@
+site_name: CC:C Bridge
+site_description: The documentation for the CC:C Bridge mod.
+site_author: Tweaked Programs
+
+copyright: Copyright © 2023 Sammy L. Koch
+
+nav:
+  - Home:
+    - Home: "index.md"
+  - Peripherals:
+    - peripherals/index.md
+    - Source Block: peripherals/SourceBlockPeripheral.md
+    - RedRouter Block: peripherals/RedRouterBlockPeripheral.md
+    - Target Block: peripherals/TargetBlockPeripheral.md
+    - Scroller Pane: peripherals/ScrollerBlockPeripheral.md
+    - Animatronic: peripherals/AnimatronicPeripheral.md
+  - Guides:
+    - guides/index.md
+    - Wrenches and You: guides/wrenches.md
+    - "Using Animatronics: The Analog Way": guides/positioningAnimatronicAnalog.md
+
+site_url: https://cccbridge.tweaked-programs.cc/
+repo_name: tweaked-programs/cccbridge
+repo_url: https://github.com/tweaked-programs/cccbridge
+edit_uri: https://github.com/tweaked-programs/cccbridge/tree/current/docs
+
+extra:
+  social:
+    - icon: simple/modrinth
+      link: https://modrinth.com/mod/cccbridge
+      name: Modrinth
+    - icon: simple/curseforge
+      link: https://www.curseforge.com/minecraft/mc-mods/cccbridge
+      name: CurseForge
+
+markdown_extensions:
+  - attr_list
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+  - admonition
+  - pymdownx.details
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+  - toc:
+      permalink: true
+
+theme:
+  name: material
+
+  features:
+    - content.code.copy
+    - navigation.tracking
+    - navigation.instant
+    - navigation.tabs
+    - navigation.indexes
+
+  plugins:
+    - privacy:
+        enabled: true
+    - social:
+      cards_layout: default
+      cards_layout_options:
+        font_family: ComputerCraft
+    - glightbox
+
+  font: false
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+
+  icon:
+    repo: fontawesome/brands/git
+  logo: assets/images/cccbridge-icon.png
+  favicon: assets/images/tweaked-programs-icon.png
+
+extra_css:
+  - assets/stylesheets/extra.css
