@@ -12,6 +12,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      SITE_URL: https://cccbridge.tweaked-programs.cc/
+      SOCIAL_CARDS: true
+            
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -26,8 +30,5 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - run: pip install mkdocs-material
-      - run: pip install mkdocs-minify-plugin
-      - run: pip install mkdocs-glightbox
-      - run: pip install pillow cairosvg
+      - run: pip install mkdocs-material mkdocs-minify-plugin mkdocs-glightbox pillow cairosvg
       - run: mkdocs gh-deploy --force
