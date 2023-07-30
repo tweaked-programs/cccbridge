@@ -50,7 +50,7 @@ Set a redstone signal strength for a specific side.
 ---
 
 ### `getOutput(side)`
-Get the current redstone output of a specific side. *(see ``setOutput``)*  
+Get the current redstone output of a specific side. *(see `setOutput`)*  
 
 **Parameters**
 
@@ -76,7 +76,7 @@ Get the current redstone input of a specific side.
 ---
 
 ### `getAnalogOutput(side)`
-Get the redstone output signal strength for a specific side.  *(see ``setAnalogOutput``)*  
+Get the redstone output signal strength for a specific side.  *(see `setAnalogOutput`)*  
 
 **Parameters**
 

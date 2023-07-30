@@ -37,52 +37,52 @@ After pushing them, every rotation gets reset to `0`.
 
 ### `setHeadRot(x, y, z)`
 Sets the head rotation.  
-Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
+Can only be set within the bounds -180° to 180° for `x`, `y` and `z`.
 
 **Parameters**
 
- 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The X rotation.
- 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y rotation.
- 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Z rotation.
+ 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `x` rotation.
+ 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` rotation.
+ 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `z` rotation.
 
 ---
 
 ### `setBodyRot(x, y, z)`
 Sets the body rotation.  
-Can only be set within the bounds -180° to 180° for `Y` and `Z`.
+Can only be set within the bounds -180° to 180° for `y` and `z`.
 
 !!! info
-    `X` can be set to any number within 360°.
+    `x` can be set to any number within 360°.
 
 **Parameters**
 
- 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The X rotation.
- 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y rotation.
- 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Z rotation.
+ 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `x` rotation.
+ 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` rotation.
+ 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `z` rotation.
 
 ---
 
 ### `setLeftArmRot(x, y, z)`
 Sets the left arm rotation.  
-Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
+Can only be set within the bounds -180° to 180° for `x`, `y` and `z`.
 
 **Parameters**
 
- 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The X rotation.
- 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y rotation.
- 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Z rotation.
+ 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `x` rotation.
+ 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` rotation.
+ 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `z` rotation.
 
 ---
 
 ### `setRightArmRot(x, y, z)`
 Sets the right arm rotation.  
-Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
+Can only be set within the bounds -180° to 180° for `x`, `y` and `z`.
 
 **Parameters**
 
- 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The X rotation.
- 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y rotation.
- 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Z rotation.
+ 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `x` rotation.
+ 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` rotation.
+ 3. `z`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `z` rotation.
 
 ---
 
@@ -90,9 +90,9 @@ Can only be set within the bounds -180° to 180° for `X`, `Y` and `Z`.
 Returns the current stored head rotation.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -100,9 +100,9 @@ Returns the current stored head rotation.
 Returns the current stored body rotation.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -110,9 +110,9 @@ Returns the current stored body rotation.
 Returns the current stored left arm rotation.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -120,9 +120,9 @@ Returns the current stored left arm rotation.
 Returns the current stored right arm rotation.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -130,9 +130,9 @@ Returns the current stored right arm rotation.
 Returns the rotation of the head.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -140,9 +140,9 @@ Returns the rotation of the head.
 Returns the rotation of the body.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -150,9 +150,9 @@ Returns the rotation of the body.
 Returns the rotation of the left arm.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation
 
 ---
 
@@ -160,6 +160,6 @@ Returns the rotation of the left arm.
 Returns the rotation of the right arm.
 
 **Returns**
- 1. `number` The X rotation
- 2. `number` The Y rotation
- 3. `number` The Z rotation
+ 1. `number` The `x` rotation
+ 2. `number` The `y` rotation
+ 3. `number` The `z` rotation

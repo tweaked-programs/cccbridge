@@ -29,8 +29,8 @@ Sets the position of the cursor. `write` will begin at this position.
 
 **Parameters**
 
- 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The new x position of the cursor.  
- 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The new y position of the cursor.  
+ 1. `x`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The new `x` position of the cursor.  
+ 2. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The new `y` position of the cursor.  
 
 ---
 
@@ -66,7 +66,7 @@ Returns the line at the wanted display position.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The y position on the display.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` position on the display.  
 
 **Returns**
 
@@ -83,8 +83,8 @@ Returns the current cursor position.
 
 **Returns**
 
- 1. `number` The **x** position of the cursor.  
- 2. `number` The **y** position of the cursor. 
+ 1. `number` The `x` position of the cursor.  
+ 2. `number` The `y` position of the cursor. 
 
 ---
 

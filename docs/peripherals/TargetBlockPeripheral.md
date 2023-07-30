@@ -39,7 +39,7 @@ Clears the line at the cursor position.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The Y position of the to be cleared line.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` position of the to be cleared line.  
 
 ---
 
@@ -48,11 +48,11 @@ Returns the line at the wanted display position.
 
 **Parameters**
 
- 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The y position on the display.  
+ 1. `y`: [number](https://www.lua.org/manual/5.1/manual.html#2.2) The `y` position on the display.  
 
 **Returns**
 
- 1. `string` The string from the given Y position.  
+ 1. `string` The string from the given `y` position.  
 
 **Throws**
 
