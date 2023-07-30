@@ -19,4 +19,4 @@ If you are new to CC: Tweaked or Lua programming in general, consider to take a 
 [ :material-calculator-variant-outline: Guides :material-calculator-variant-outline: ](guides/index.md){ .md-button .md-button--primary .md-button-right }
 
 [ :octicons-x-circle-24: Issue Tracker :octicons-x-circle-24: ](https://github.com/tweaked-programs/cccbridge/issues){ .md-button }
-[ :fontawesome-brands-github-alt: GitHub :fontawesome-brands-github-alt: ](#https://github.com/tweaked-programs/cccbridge){ .md-button .md-button-right }
+[ :fontawesome-brands-github-alt: GitHub :fontawesome-brands-github-alt: ](https://github.com/tweaked-programs/cccbridge){ .md-button .md-button-right }
