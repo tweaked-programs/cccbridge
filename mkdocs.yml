@@ -55,8 +55,6 @@ markdown_extensions:
       permalink: true
 
 plugins:
-    - privacy:
-        enabled: true
     - social:
       cards_layout: default
       cards_layout_options:
