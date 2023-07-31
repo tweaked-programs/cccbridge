@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="128px" alt="icon" src="./docs/icon.png">  
+  <img width="128px" alt="icon" src="./docs/assets/images/cccbridge-icon.png">  
     
   <h1 align="center">CC:C Bridge</h1>  
   <h3 align="center">CC:C Bridge is a Minecraft Mod that adds compatibility between the ComputerCraft and Create mod!</h3>  
@@ -27,4 +27,4 @@ With these blocks, many things you always wanted to handle precicely and easily 
 
 Documentation
 -------------------------------------
-~~To find out more, check out the [wiki section](https://github.com/tweaked-programs/cccbridge/wiki)!~~
+To find out more, check out our [wiki](https://cccbridge.tweaked-programs.cc/)!
