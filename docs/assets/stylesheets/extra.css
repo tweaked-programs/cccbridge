@@ -37,7 +37,7 @@ p * {
     color: #DDDDDD;
 }
 
-.md-typeset ul * {
+.md-typeset ul p, .md-typeset ul li {
     color: #DDDDDD;
 }
 
@@ -75,20 +75,29 @@ p strong {
 }
 
 .md-nav--secondary .md-nav__title {
-    background-color: #0F0F1E;
-    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    background-color: #080811;
+    box-shadow: none;
     color: #A8B8FF;
 }
 
 .md-nav--primary .md-nav__title {
-    background-color: #0F0F1E;
-    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    background-color: #080811;
+    box-shadow: none;
     color: #A8B8FF;
+}
+
+.md-nav--primary .md-nav__item {
+    border-top: none;
+}
+
+.md-nav--primary .md-nav__title ~ .md-nav__list {
+    background-color: #0F0F1E;
+    box-shadow: none;
 }
 
 .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
     background-color: #0F0F1E;
-    box-shadow: 0 0 .4rem .4rem #0F0F1E;
+    box-shadow: none;
     color: #A8B8FF;
 }
 
@@ -103,10 +112,19 @@ p strong {
 .md-typeset .md-button--primary, .md-typeset .md-button {
     border-radius: 20px;
     padding: .625em 6.5em;
+    overflow-inline: hidden;
+    font-size: .85rem;
+    width: 40%;
+    margin-right: 9%;
+    text-align: center;
 }
 
-.md-button-right {
-    float: right;
+@media (max-width: calc(500px + (80px + 200px) * 2)) {
+    .md-typeset .md-button--primary, .md-typeset .md-button {
+        padding: .625em 2em;
+        width: 100%;
+        font-size: .8rem;
+    }
 }
 
 .md-typeset hr {

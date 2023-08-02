@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+  - toc
+---
 # Welcome!
 
 You found the wiki section. Great! And welcome.  

@@ -74,6 +74,9 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.indexes
+    - navigation.expand
+    - toc.integrate
+    
 
   font: false
   palette:
