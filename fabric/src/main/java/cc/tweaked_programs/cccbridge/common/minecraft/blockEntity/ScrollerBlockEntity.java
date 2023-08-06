@@ -27,8 +27,8 @@ import java.util.List;
 public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralBlockEntity {
     private ScrollerBlockPeripheral peripheral;
     private boolean locked = false;
+    private boolean quietly = false;
     private boolean updateLock = false;
-    private boolean playTickSound = false;
     private LuaScrollValueBehaviour scroller;
 
     public ScrollerBlockEntity(BlockPos pos, BlockState state) {
@@ -54,8 +54,16 @@ public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralB
         scroller.setValue(value);
     }
 
+    public void nextChangeQuietly() {
+        quietly = true;
+    }
+
     public void fireUpdateValueEvent() {
-        if (peripheral != null)
+        if (quietly) {
+            quietly = false;
+            return;
+        }
+        if (peripheral != null )
             peripheral.sendEvent("scroller_changed", scroller.getValue());
     }
 
@@ -73,16 +81,6 @@ public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralB
                     1.5f);
             world.setBlock(blockPos, state.setValue(BlockStateProperties.LOCKED, scroller.locked), 19); // 19 = BLOCK_UPDATE_FLAGS
             scroller.updateLock = false;
-        }
-        if (scroller.playTickSound) {
-            world.playSound(
-                    null,
-                    blockPos,
-                    AllSoundEvents.SCROLL_VALUE.getMainEvent(),
-                    SoundSource.BLOCKS,
-                    0.25f,
-                    1.5f);
-            scroller.playTickSound = false;
         }
     }
 

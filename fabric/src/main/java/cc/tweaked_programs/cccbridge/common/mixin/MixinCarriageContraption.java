@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(CarriageContraption.class)
-public abstract class CarriageContraptionMixin extends Contraption {
+public abstract class MixinCarriageContraption extends Contraption {
     @Shadow
     private List<BlockPos> assembledBlazeBurners;
 
