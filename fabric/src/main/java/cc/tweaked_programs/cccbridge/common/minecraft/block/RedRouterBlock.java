@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.NotNull;
 
 public class RedRouterBlock extends HorizontalDirectionalBlock implements EntityBlock, IWrenchable {
-    public static final Properties REDROUTER_BLOCK_PROPERTIES = FabricBlockSettings.create().strength(1.3f).sound(SoundType.STONE).noOcclusion();
+    public static final Properties REDROUTER_BLOCK_PROPERTIES = FabricBlockSettings.create().strength(1.3f).sound(SoundType.STONE).noOcclusion().isRedstoneConductor((state, view, pos) -> false);
     public static final int FACE_AMOUNT = 16;
     public static final IntegerProperty FACE = IntegerProperty.create("face", 0, FACE_AMOUNT);
     public RedRouterBlock(Properties properties) {
@@ -71,6 +71,11 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
         if (!(block instanceof RedRouterBlockEntity redrouter))
             return 0;
         return redrouter.getPower(dir);
+    }
+
+    @Override
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return getSignal(state, level, pos, direction);
     }
 
     @Override

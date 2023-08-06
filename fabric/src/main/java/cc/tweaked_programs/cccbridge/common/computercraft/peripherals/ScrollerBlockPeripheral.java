@@ -71,8 +71,10 @@ public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEnti
     @LuaFunction
     public final void setValue(int value) {
         ScrollerBlockEntity be = getTarget();
-        if (be != null)
+        if (be != null) {
+            be.nextChangeQuietly();
             be.setValue(value);
+        }
     }
 
     /**
