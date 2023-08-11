@@ -37,7 +37,7 @@ p * {
     color: #DDDDDD;
 }
 
-.md-typeset ul p, .md-typeset ul li {
+.md-typeset ul p, .md-typeset ul li, .md-typeset ol li {
     color: #DDDDDD;
 }
 

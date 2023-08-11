@@ -18,6 +18,7 @@ nav:
     - guides/index.md
     - Wrenches and You: guides/wrenches.md
     - "Using Animatronics: The Analog Way": guides/positioningAnimatronicAnalog.md
+    - "Animating Animatronics using Blockbench": guides/positioningAnimatronicsBlockbench.md
 
 site_url: https://cccbridge.tweaked-programs.cc/
 repo_name: tweaked-programs/cccbridge
@@ -35,6 +36,9 @@ extra:
 
 markdown_extensions:
   - attr_list
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
 
   - pymdownx.highlight:
       anchor_linenums: true

@@ -1,9 +1,16 @@
+# Forge
 /forge/.idea/
 /forge/package.json
 /forge/package-lock.json
+
+# Fabric
 /fabric/.idea/
 /fabric/package.json
 /fabric/package-lock.json
+/fabric/.gradle
+/fabric/build
+/fabric/run
+/fabric/bin
 
 # MkDocs
 .cache
