@@ -130,7 +130,7 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
             if (getLevel().isClientSide)
                 startAnimation();
             else
-                getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL); // Should I use UPDATE_CLIENTS instead? Couldn't test this yet
         }
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
@@ -26,6 +27,15 @@ public class LuaScrollValueBehaviour extends ScrollValueBehaviour {
         value = 0;
         hasMinus = false;
         between(-15,15);
+    }
+
+    public void setValueQuietly(int value) {
+        value = Mth.clamp(value, -max, max);
+        if (value == this.value)
+            return;
+        this.value = value;
+        blockEntity.setChanged();
+        blockEntity.sendData();
     }
 
     @Override

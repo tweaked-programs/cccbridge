@@ -72,8 +72,7 @@ public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEnti
     public final void setValue(int value) {
         ScrollerBlockEntity be = getTarget();
         if (be != null) {
-            be.nextChangeQuietly();
-            be.setValue(value);
+            be.setValueQuietly(value);
         }
     }
 

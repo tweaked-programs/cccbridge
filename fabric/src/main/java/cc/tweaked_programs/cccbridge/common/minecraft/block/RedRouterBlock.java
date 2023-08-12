@@ -66,11 +66,16 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
-    public int getSignal(@NotNull BlockState state, BlockGetter world, @NotNull BlockPos pos, @NotNull Direction dir) {
+    public int getDirectSignal(@NotNull BlockState state, BlockGetter world, @NotNull BlockPos pos, @NotNull Direction direction) {
         BlockEntity block = world.getBlockEntity(pos);
         if (!(block instanceof RedRouterBlockEntity redrouter))
             return 0;
-        return redrouter.getPower(dir);
+        return redrouter.getPower(direction);
+    }
+
+    @Override
+    public int getSignal(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull Direction direction) {
+        return getDirectSignal(state, level, pos, direction);
     }
 
     @Override
