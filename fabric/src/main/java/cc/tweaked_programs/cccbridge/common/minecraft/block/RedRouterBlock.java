@@ -79,6 +79,11 @@ public class RedRouterBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return getSignal(state, level, pos, direction);
+    }
+
+    @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         BlockEntity tileentity = context.getLevel().getBlockEntity(context.getClickedPos());
         if (!(tileentity instanceof RedRouterBlockEntity redrouter))

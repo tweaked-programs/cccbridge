@@ -26,6 +26,7 @@ import java.util.List;
 public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralBlockEntity {
     private ScrollerBlockPeripheral peripheral;
     private boolean locked = false;
+    private boolean quietly = false;
     private boolean updateLock = false;
     private LuaScrollValueBehaviour scroller;
 
@@ -50,6 +51,10 @@ public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralB
 
     public void setValueQuietly(int value) {
         scroller.setValueQuietly(value);
+    }
+
+    public void nextChangeQuietly() {
+        quietly = true;
     }
 
     public void fireUpdateValueEvent() {
