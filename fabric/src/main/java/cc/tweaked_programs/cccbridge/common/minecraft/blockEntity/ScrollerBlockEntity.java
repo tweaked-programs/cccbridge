@@ -3,7 +3,6 @@ package cc.tweaked_programs.cccbridge.common.minecraft.blockEntity;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
 import cc.tweaked_programs.cccbridge.common.computercraft.peripherals.ScrollerBlockPeripheral;
 import cc.tweaked_programs.cccbridge.common.create.behaviour.LuaScrollValueBehaviour;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
@@ -27,7 +26,6 @@ import java.util.List;
 public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralBlockEntity {
     private ScrollerBlockPeripheral peripheral;
     private boolean locked = false;
-    private boolean quietly = false;
     private boolean updateLock = false;
     private LuaScrollValueBehaviour scroller;
 
@@ -50,19 +48,11 @@ public class ScrollerBlockEntity extends SmartBlockEntity implements PeripheralB
         return scroller.getValue();
     }
 
-    public void setValue(int value) {
-        scroller.setValue(value);
-    }
-
-    public void nextChangeQuietly() {
-        quietly = true;
+    public void setValueQuietly(int value) {
+        scroller.setValueQuietly(value);
     }
 
     public void fireUpdateValueEvent() {
-        if (quietly) {
-            quietly = false;
-            return;
-        }
         if (peripheral != null )
             peripheral.sendEvent("scroller_changed", scroller.getValue());
     }

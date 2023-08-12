@@ -55,10 +55,16 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
         }
 
         if (redrouter.blockupdate) {
-            world.updateNeighborsAt(be.getBlockPos(), world.getBlockState(be.getBlockPos()).getBlock());
+            world.updateNeighborsAt(blockPos, state.getBlock());
+            // Update blocks next to ours as well because redstone is great
+            for (Direction dir : Direction.values()) {
+                BlockPos relative = blockPos.relative(dir);
+                world.updateNeighborsAt(relative, world.getBlockState(relative).getBlock());
+            }
+
             redrouter.blockupdate = false;
         }
-            updateInputs(world, blockPos, redrouter);
+        updateInputs(world, blockPos, redrouter);
 
         if (redrouter.newInputs && redrouter.peripheral != null) {
             redrouter.peripheral.sendEvent(RedRouterBlockPeripheral.REDSTONE_EVENT);
