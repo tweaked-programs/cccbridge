@@ -1,4 +1,4 @@
-package cc.tweaked_programs.cccbridge.common.mixin;
+package cc.tweaked_programs.cccbridge.common.mixin.animatronic;
 
 import cc.tweaked_programs.cccbridge.common.minecraft.block.AnimatronicBlock;
 import com.simibubi.create.content.contraptions.Contraption;
