@@ -4,7 +4,6 @@ import cc.tweaked_programs.cccbridge.common.minecraft.block.ScrollerBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueRenderer;
 import com.simibubi.create.foundation.utility.AdventureUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,8 +21,8 @@ public abstract class MixinScrollValueRenderer {
     @Redirect(method = "addBox", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/foundation/utility/AdventureUtil;isAdventure(Lnet/minecraft/world/entity/player/Player;)Z"), remap = false)
     private static boolean cccbridge$addBox$redirectIsAdventure(Player player, ClientLevel world, BlockPos pos, Direction face, ScrollValueBehaviour behaviour, boolean highlight) {
          if (world.getBlockState(pos).getBlock() instanceof ScrollerBlock)
-             return isPhysicalPlayer(Minecraft.getInstance().player);
+             return isPhysicalPlayer(player);
 
-         return AdventureUtil.isAdventure(Minecraft.getInstance().player);
+         return AdventureUtil.isAdventure(player);
     }
 }
