@@ -1,0 +1,44 @@
+{
+  "block.cccbridge.source_block": "Quellenblock",
+  "block.cccbridge.target_block": "Zielblock",
+  "block.cccbridge.redrouter_block": "RedRouter Block",
+  "block.cccbridge.scroller_block": "Scroller Platte",
+  "block.cccbridge.animatronic_block": "Animatronik",
+
+  "block.cccbridge.source_block.description": "§6Kann Text über einen §eAnzeige-Link§6 auf andere §oZiele§r§6 spiegeln.\n\n§7Wenn Birne aufleuchtet\n §6Übermittelt den aktuell zwischengespeicherten Text an das §oZiel§r§6.\n§7Wenn sich Auflösung ändert\n §6Übergibt ein §oevent§r§6 an alle gebundenen §eComputern§6.",
+  "block.cccbridge.target_block.description": "§6Fungiert als §oZiel§r§6 zu anderen §oQuellen§r§6. §eComputer§6 können auf diese Weise auf alle Arten von Informationen von §eCreate§6 zugreifen.",
+  "block.cccbridge.redrouter_block.description": "§6Kann §eRedstone§6 signale mithilfe der §oRedstone API§r§6 steuern.",
+  "block.cccbridge.scroller_block.description": "§6Stellt eine Schnittstelle für die Auswahl einer Zahl zur Verfügung. Kann mit einem §eComputer§6 gelesen, gesteuert und manipuliert werden.",
+  "block.cccbridge.animatronic_block.description": "§6Sein Gesichtsausdruck sowie sein ganzer Körper können durch einen §eComputer§6 verändert und positioniert werden.\n\n§7Beim \"pushen\"\n §6Die zwischengespeicherten §oRotationen§r§6 werden auf den §eAnimatronik§6 angewendet.",
+
+  "cccbridge.tooltip.holdForDescription": "§8Halte [{0}Shift§8] für weitere Details",
+  "cccbridge.tooltip.peripheral": "Peripheral v{0}",
+  "cccbridge.tooltip.no_peripheral": "&oHat keinen Peripheral",
+
+  "cccbridge.display_source.source_block_display_source": "Gegebene Daten vom Computer",
+
+  "cccbridge.general.unit.scroller": "Lua Nummer",
+  "cccbridge.general.unit.scroller.positive": "Lua Num. +",
+  "cccbridge.general.unit.scroller.negative": "Lua Num. -",
+
+  "subtitles.cccbridge.cage_lock": "Scroller gesperrt",
+  "subtitles.cccbridge.cage_unlock": "Scroller entsperrt",
+
+  "itemGroup.cccbridge.cccbridge_group": "Peripherals (CC:C Bridge)",
+
+  "advancements.cccbridge.placed_animatronic.title": "Five Nights in Minecraft",
+  "advancements.cccbridge.placed_animatronic.description": "Eine handelsübliche Animatronik, was kann da schon schiefgehen!",
+  "advancements.cccbridge.placed_redrouter.title": "EMOTIONAL DAMAGE",
+  "advancements.cccbridge.placed_redrouter.description": "Baue dir einen eigenen Freund mit Stimmungsschwankungen.",
+
+  "painting.cccbridge.funny_redrouters.title": "Stimmige RedRounters",
+  "painting.cccbridge.funny_redrouters.author": "Sammy L. Koch",
+
+  "cccbridge.screen.config_screen": "CC:C Bridge Konfiguration",
+  "cccbridge.options.button.save": "Save config",
+  "cccbridge.options.button.saved": "Saved config",
+  "cccbridge.options.button.close": "Close",
+
+  "cccbridge.options.option.flickering": "Licht flackern",
+  "cccbridge.options.tooltip.flickering": "Bestimmt, ob die Gesichter von RedRouter Blöcken oder Animatroniks an dunklen Orten flackern."
+}
