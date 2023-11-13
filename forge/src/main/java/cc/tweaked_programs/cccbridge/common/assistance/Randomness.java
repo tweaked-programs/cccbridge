@@ -7,6 +7,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import static cc.tweaked_programs.cccbridge.client.CCConfig.CONFIG;
 import static cc.tweaked_programs.cccbridge.common.minecraft.block.RedRouterBlock.FACE_AMOUNT;
 
 public class Randomness {
@@ -14,7 +15,7 @@ public class Randomness {
 
     @OnlyIn(Dist.CLIENT)
     public static int lightFlickering() {
-        if (CCCBridge.CONFIG.FLICKERING)
+        if (CONFIG.FLICKERING)
             return ((int)(LightTexture.FULL_BRIGHT - (Math.random()*35) - (random.nextInt(0,45) == 1 ? 50 : 0)));
         else
             return LightTexture.FULL_BRIGHT;
