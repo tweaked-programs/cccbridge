@@ -5,6 +5,7 @@ import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -12,6 +13,10 @@ import java.util.Properties;
 
 @OnlyIn(Dist.CLIENT)
 public class CCConfig {
+    public static final CCConfig CONFIG = new CCConfig(
+            FMLPaths.CONFIGDIR.get().toString()
+    );
+
     private final Properties properties;
     public String config_dir;
 

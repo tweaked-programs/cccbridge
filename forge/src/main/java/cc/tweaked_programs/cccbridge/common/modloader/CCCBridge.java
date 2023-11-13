@@ -26,11 +26,6 @@ public class CCCBridge {
     public static final String MOD_ID = "cccbridge";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    @OnlyIn(Dist.CLIENT)
-    public static final CCConfig CONFIG = new CCConfig(
-            FMLPaths.CONFIGDIR.get().toString()
-    );
-
     public CCCBridge() {
         // Minecraft stuff
         CCCRegistries.register();
@@ -43,7 +38,7 @@ public class CCCBridge {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<RedRouterBlockEntity>) CCCRegistries.REDROUTER_BLOCK_ENTITY.get(), RedRouterBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<AnimatronicBlockEntity>) CCCRegistries.ANIMATRONIC_BLOCK_ENTITY.get(), AnimatronicBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(CCCRegistries.REDROUTER_BLOCK_ENTITY.get(), RedRouterBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(CCCRegistries.ANIMATRONIC_BLOCK_ENTITY.get(), AnimatronicBlockEntityRenderer::new);
     }
 }
