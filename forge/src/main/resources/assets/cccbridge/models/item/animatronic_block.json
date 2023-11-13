@@ -1,5 +1,5 @@
 {
-	"credit": "Made with Blockbench",
+	"credit": "Made with Blockbench by Sammy L. Koch",
 	"parent": "cccbridge:block/animatronic_block",
 	"texture_size": [64, 64],
 	"textures": {
@@ -55,7 +55,7 @@
 			"to": [13.23223, 24, 10.45406],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 14, 5.5]},
 			"faces": {
-				"east": {"uv": [2.5, 2.5, 5, 5], "texture": "#2"}
+				"east": {"uv": [10, 2.5, 12.5, 5], "texture": "#2"}
 			}
 		},
 		{

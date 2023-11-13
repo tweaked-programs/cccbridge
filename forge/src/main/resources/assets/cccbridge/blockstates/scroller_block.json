@@ -32,10 +32,10 @@
       "apply": { "model": "cccbridge:block/locked_scroller_block", "y": 270, "uvlock": false }
     },
     { "when": { "facing": "up", "locked": "true" },
-      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": -90, "uvlock": false }
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": -90, "y": 180, "uvlock": false }
     },
     { "when": { "facing": "down", "locked": "true" },
-      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": 90, "uvlock": false }
+      "apply": { "model": "cccbridge:block/locked_scroller_block", "x": 90, "y": 180, "uvlock": false }
     }
 ]
 }
