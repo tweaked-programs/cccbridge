@@ -2,7 +2,7 @@ site_name: CC:C Bridge
 site_description: The documentation for the CC:C Bridge mod.
 site_author: Tweaked Programs
 
-copyright: Copyright © 2023 Sammy L. Koch
+copyright: Copyright © 2023-2024 Sammy L. Koch
 
 nav:
   - Home:
@@ -16,9 +16,10 @@ nav:
     - Animatronic: peripherals/AnimatronicPeripheral.md
   - Guides:
     - guides/index.md
-    - Wrenches and You: guides/wrenches.md
+    - "Wrenches and You": guides/wrenches.md
     - "Using Animatronics: The Analog Way": guides/positioningAnimatronicAnalog.md
     - "Animating Animatronics using Blockbench": guides/positioningAnimatronicsBlockbench.md
+    - "Using the charset via Create displays": guides/charset.md
 
 site_url: https://cccbridge.tweaked-programs.cc/
 repo_name: tweaked-programs/cccbridge

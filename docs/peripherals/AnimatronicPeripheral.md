@@ -11,6 +11,7 @@ The transition from one pose to a new one is fully automatic - and rusty.
 |-|-|
 | Peripheral | v1 |
 | Attach name | `"animatronic"` |
+| Attach side | only `"top"` |
 
 ---
 

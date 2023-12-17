@@ -12,6 +12,7 @@ The sides are configured similarly to the turtle, where `"left"` is **relative t
 |-|-|
 | Peripheral | v1 |
 | Attach name | `"redrouter"` |
+| Attach side | all |
 
 ### Events
 

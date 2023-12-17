@@ -11,6 +11,7 @@ The peripheral only has some implementations from the [Window API](https://tweak
 |-|-|
 | Peripheral | v1.1 |
 | Attach name | `"create_target"` |
+| Attach side | all |
 
 ---
 

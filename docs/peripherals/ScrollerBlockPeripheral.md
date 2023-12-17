@@ -11,6 +11,7 @@ The peripheral uses Create's `NumberBehaviour` selection screen. _(The same one 
 |-|-|
 | Peripheral | v2 |
 | Attach name | `"scroller"` |
+| Attach side | only `"back"` |
 
 ### Events
 

@@ -11,6 +11,7 @@ The peripheral acts similar to a normal [Terminal](https://tweaked.cc/module/ter
 |-|-|
 | Peripheral | v1.1 |
 | Attach name | `"create_source"` |
+| Attach side | all |
 
 ### Events
 
