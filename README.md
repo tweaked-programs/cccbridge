@@ -9,7 +9,7 @@
   [![Blog](https://img.shields.io/badge/BLOG-222222?style=for-the-badge&logoColor=white&label=TP&labelColor=030380&link=https%3A%2F%2Ftweaked-programs.cc)](https://tweaked-programs.cc)
 
     
-  Available for **1.18.2** and **1.19.2**.  
+  Available for **1.18.2**, **1.19.2** and **1.20.1**.  
   For Forge, requires [Create](https://github.com/Creators-of-Create/Create) *(0.5.1.b or higher)* and [CC:Tweaked](https://github.com/cc-tweaked/cc-tweaked) *(1.101.2 or higher)*!  
   For Fabric, requires [Create](https://github.com/Fabricators-of-Create/Create) *(0.5.1.b or higher)* and [CC:Restitched](https://github.com/cc-tweaked/cc-restitched) *(1.100.5-ccr or higher)*!  
 </div>

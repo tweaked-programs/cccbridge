@@ -1,0 +1,41 @@
+{
+  "block.cccbridge.source_block": "Blok Źródłowy",
+  "block.cccbridge.target_block": "Blok Docelowy",
+  "block.cccbridge.redrouter_block": "Blok RedRouter",
+  "block.cccbridge.scroller_block": "Panel Przewijania",
+  "block.cccbridge.animatronic_block": "Animatronik",
+
+  "block.cccbridge.source_block.description": "§6Może kopiować tekst do innych §opunktów docelowych§r§6 poprzez §eNadajnik Wyświetlacza§6.\n\n§7Kiedy lampka się świeci\n §6Wysyła zawarty tekst do §opunktu docelowego§r§6.\n§7Kiedy rozdzielczość się zmieni\n §6Kolejkuje §owydarzenie§r§6 do wszystkich podłączonych §eKomputerów§6.",
+  "block.cccbridge.target_block.description": "§6Funkcjonuje jako §opunkt docelowy§r§6 dla innych §oźródeł§r§6. W ten sposób §ekomputer§6y mogą dostać różne informacje od §eCreate§6.",
+  "block.cccbridge.redrouter_block.description":  "§6Może kierować sygnałami §eRedstone§6 poprzez API §oRedstone §r§6.",
+  "block.cccbridge.scroller_block.description": "§6Pozwala wyświetlić interfejs pozwalający wybrać liczbę. Może być odczytany, kontrolowany i zmieniony używając §eKomputera§6.",
+  "block.cccbridge.animatronic_block.description":  "§6Wyraz twarzy oraz ciało Animatronika może zostać zmienione poprzez użycie §eKomputera§6.\n\n§7Kiedy zostanie naciśnięty\n §6Zastosowuje zawarte §oobrotys§r§6 §eAnimatronikac§6.",
+
+  "cccbridge.tooltip.holdForDescription": "§8Przytrzymaj [{0}Shift§8] po więcej detali.",
+  "cccbridge.tooltip.peripheral": "Peryferja v{0}",
+  "cccbridge.tooltip.no_peripheral": "&oNie zawiera Peryferji.",
+
+  "cccbridge.display_source.source_block_display_source": "Odebrano dane z komputera.",
+
+  "cccbridge.general.unit.scroller": "Liczba Lua",
+  "cccbridge.general.unit.scroller.positive": "L. Lua +",
+  "cccbridge.general.unit.scroller.negative": "L. Lua -",
+
+  "subtitles.cccbridge.cage_lock": "Przewijak zablokowany",
+  "subtitles.cccbridge.cage_unlock": "Przewijak odblokowany",
+
+  "itemGroup.cccbridge.cccbridge_group": "Peryferie (CC:C Bridge)",
+
+  "advancements.cccbridge.placed_animatronic.title": "Five Nights in Minecraft",
+  "advancements.cccbridge.placed_animatronic.description": "Zupełnie normalny Animatronik, co może pójść nie tak!",
+  "advancements.cccbridge.placed_redrouter.title": "EMOTIONAL DAMAGE",
+  "advancements.cccbridge.placed_redrouter.description": "Zbuduj własnego przyjaciela z wahaniami nastroju.",
+
+  "cccbridge.screen.config_screen": "Konfiguracja CC:C Bridge",
+  "cccbridge.options.button.save": "Zapisz konfigurację",
+  "cccbridge.options.button.saved": "Zapisano konfigurację",
+  "cccbridge.options.button.close": "Zamknij",
+
+  "cccbridge.options.option.flickering": "Mruganie świateł",
+  "cccbridge.options.tooltip.flickering": "Określa czy twarze bloków RedRoutera lub animatroników migoczą w ciemnych miejscach."
+}
