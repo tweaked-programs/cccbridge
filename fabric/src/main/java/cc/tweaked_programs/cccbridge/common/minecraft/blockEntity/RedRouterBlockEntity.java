@@ -80,6 +80,9 @@ public class RedRouterBlockEntity extends BlockEntity implements PeripheralBlock
             BlockState block = world.getBlockState(offsetPos);
 
             int power = block.getBlock().getSignal(block, world, offsetPos, dir);
+
+            if (redrouter.inputDir.get(side) != power) { redrouter.newInputs = true; }
+
             redrouter.inputDir.put(side, power);
         }
     }
