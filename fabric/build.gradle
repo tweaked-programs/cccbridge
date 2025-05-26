@@ -21,16 +21,18 @@ repositories {
 	maven { url = "https://maven.shedaniel.me/" }						// REI
 
 	// CC:T
-	maven { url = "https://squiddev.cc/maven" }							// Goodbye CC:R...
+	maven { url = "https://maven.squiddev.cc" }							// Goodbye CC:R...
 
 	// Create : Primary
-	maven { url = "https://mvn.devos.one/snapshots/" }					// Create, Porting Lib, Forge Tags, Milk Lib
+	maven { url = "https://mvn.devos.one/snapshots/" }					// Create, Forge Tags, Milk Lib
 
 	// Also Create : Secondary (...why do I have to import this as well?)
-	maven { url = "https://maven.tterrag.com/" }						// Registrate and Flywheel
-	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }	// Reach Entity Attributes
-	maven { url = "https://cursemaven.com" }							// Forge Config API Port
-	maven { url = "https://jitpack.io" }								// Mixin Extras, fabric ASM
+	maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
+	maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
+	maven { url = "https://maven.tterrag.com/" } // Flywheel
+	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
+	maven { url = "https://jitpack.io" }	// Mixin Extras, fabric ASM for Porting Lib
 }
 
 dependencies {
