@@ -52,6 +52,22 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
     }
 
     /**
+     * Sets the Animatronic animation mode.
+     *
+     * @param mode The new mode. Must be either 'raw' or 'rusty'.
+     *
+     * @throws LuaException Whenever the given string is not one of those types.
+     */
+    @LuaFunction
+    public final void setAnimationMode(String mode) throws LuaException {
+        if (mode.equals("raw") || mode.equals("rusty")) {
+            AnimatronicBlockEntity be = super.getTarget();
+            if (be != null)
+                be.setAnimationMode(mode);
+        } else throw new LuaException("Given string must be either 'raw' or 'rusty'");
+    }
+
+    /**
      * Pushes the stored rotation values to the Animatronic.
      * After pushing them, the rotations get reset to 0 everywhere.
      */
