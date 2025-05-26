@@ -4,8 +4,8 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "cccbridge:block/animatronic_block",
-		"1": "cccbridge:entity/animatronic/body",
-		"2": "cccbridge:entity/animatronic/face_happy",
+		"1": "cccbridge:item/animatronic/body",
+		"2": "cccbridge:item/animatronic/face_happy",
 		"particle": "cccbridge:block/animatronic_block"
 	},
 	"elements": [
