@@ -95,18 +95,19 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = "Squiddev maven cct"
-        url = 'https://squiddev.cc/maven/'
+        name = "Squiddev maven (cct)"
+        url = 'https://maven.squiddev.cc/'
     }
     maven {
-        name = "Progwml6 maven jei"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        name = "Jared's maven (jei)"
+        url = "https://maven.blamejared.com/"
     }
     maven {
-        name "tterrag maven"
+        name "tterrag maven (create)"
         url "https://maven.tterrag.com/"
     }
     maven {
+        name = "cursemaven (whatever)"
         url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
