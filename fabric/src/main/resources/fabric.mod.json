@@ -6,9 +6,9 @@
   "name": "CC:C Bridge",
   "description": "This mod adds compatibility between the ComputerCraft and Create mod!\n\nCopyright ${copyright_year} Sammy L. Koch",
   "authors": [
-    "Sammy L. Koch",
-    "Luke A. Hanssen"
+    "Sammy L. Koch"
   ],
+  "contributors": [ "agnor99", "Luke A. Hanssen", "Rikaisan", "Aspenhart", "pernydev", "TheZoidMaster"],
   "contact": {
     "homepage": "https://tweaked-programs.cc/",
     "sources": "https://github.com/tweaked-programs/cccbridge",
