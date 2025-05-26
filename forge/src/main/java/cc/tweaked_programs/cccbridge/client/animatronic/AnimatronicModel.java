@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -71,7 +72,7 @@ public class AnimatronicModel<T extends AnimatronicBlockEntity> extends Model {
         if (entity.isMoving())
             entity.updateCurrentPoses(partialTicks);
 
-        float facing = ((float) entity.getBlockState().getValue(AnimatronicBlock.PRECISE_FACING) + entity.getBodyPose().getY()) * awesomeFactor;
+        float facing = (entity.getBlockState().getValue(HorizontalDirectionalBlock.FACING).toYRot() + entity.getBodyPose().getY()) * awesomeFactor;
 
         this.root.getChild("head").xRot = entity.getHeadPose().getX() * awesomeFactor;
         this.root.getChild("head").yRot = entity.getHeadPose().getY() * awesomeFactor;

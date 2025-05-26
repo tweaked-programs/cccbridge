@@ -5,7 +5,6 @@ import cc.tweaked_programs.cccbridge.common.assistance.Randomness;
 import cc.tweaked_programs.cccbridge.common.minecraft.block.AnimatronicBlock;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
-import com.jozufozu.flywheel.core.virtual.VirtualRenderWorld;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -45,10 +44,7 @@ public class AnimatronicBlockEntityRenderer implements BlockEntityRenderer<Anima
         this.model.setupAnim(blockEntity, 0.0F, 0.0F, partialTick, 0.0F, 0.0F);
 
         // Train hat
-        if (blockEntity.getLevel() instanceof VirtualRenderWorld virtualRenderWorld)
-            this.model.hasJob(true); // Normally, we would check for the block being an actual driver for the contraption. Let's just give him a hat anyway.
-        else
-            this.model.hasJob(blockEntity.getBlockState().getValue(AnimatronicBlock.IS_DRIVER));
+        this.model.hasJob(blockEntity.getBlockState().getValue(AnimatronicBlock.IS_DRIVER));
 
         // Render model
         VertexConsumer vertexConsumer = bufferSource.getBuffer(this.model.renderType(TEXTURE_BODY));
