@@ -1,11 +1,8 @@
 plugins {
-	id 'fabric-loom' version '1.1.+'
-	id "io.github.p03w.machete" version "1.+"
+	id 'fabric-loom' version '1.10.+'
+	id "io.github.p03w.machete" version "2.+"
 	id 'maven-publish'
 }
-
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = "${archives_base_name}-mc${mc_version}-${modloader}"
 version = "v${mod_version}"
@@ -28,7 +25,6 @@ repositories {
 
 	// Also Create : Secondary (...why do I have to import this as well?)
 	maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
-	maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
 	maven { url = "https://maven.tterrag.com/" } // Flywheel
 	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
 	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
@@ -63,10 +59,12 @@ dependencies {
 	modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 
 	// Rendering
-	//if (sodium || iris)
-	//	modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
-	//if (iris)
-	//	modLocalRuntime("maven.modrinth:iris:${iris_version}")
+	if (sodium || (iris || indium))
+		modLocalRuntime("maven.modrinth:sodium:${sodium_version}-fabric")
+	if (sodium && iris)
+		modLocalRuntime("maven.modrinth:iris:${iris_version}")
+	if (indium && sodium)
+		modLocalRuntime("maven.modrinth:indium:${indium_version}")
 
 	// Recipe viewers: Load REI or EMI
 	switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
@@ -83,11 +81,6 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		expand(project.properties)
 	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
-	options.compilerArgs <<"-Xlint:deprecation"
 }
 
 jar {
