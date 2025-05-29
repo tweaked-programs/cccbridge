@@ -2,7 +2,10 @@ package cc.tweaked_programs.cccbridge.common.create.behaviour;
 
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.ScrollerBlockEntity;
 import com.google.common.collect.ImmutableList;
-import com.simibubi.create.foundation.blockEntity.behaviour.*;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBoard;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsFormatter;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.nbt.CompoundTag;
@@ -97,11 +100,11 @@ public class LuaScrollValueBehaviour extends ScrollValueBehaviour {
             );
 
         return new ValueSettingsBoard(label, max, 5, rows,
-                new ValueSettingsFormatter(ValueSettingsBehaviour.ValueSettings::format));
+                new ValueSettingsFormatter(ValueSettings::format));
     }
 
     @Override
-    public void setValueSettings(Player player, ValueSettingsBehaviour.ValueSettings valueSetting, boolean ctrlDown) {
+    public void setValueSettings(Player player, ValueSettings valueSetting, boolean ctrlDown) {
         if (valueSetting.equals(getValueSettings()))
             return;
         setValue(hasMinus && valueSetting.row() == 0 ? -valueSetting.value() : valueSetting.value());

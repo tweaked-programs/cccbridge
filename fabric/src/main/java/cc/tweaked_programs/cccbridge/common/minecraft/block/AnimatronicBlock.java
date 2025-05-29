@@ -4,7 +4,7 @@ import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlo
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -28,13 +27,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class AnimatronicBlock extends HorizontalDirectionalBlock implements EntityBlock, IWrenchable {
     public static final BooleanProperty IS_DRIVER = BooleanProperty.create("is_driver");
-    public static final IntegerProperty PRECISE_FACING = IntegerProperty.create("precise_facing", 0, 360);
 
     public AnimatronicBlock() {
         super(FabricBlockSettings.create().strength(1.3f).sound(SoundType.CHAIN));
         registerDefaultState(this.stateDefinition.any()
                 .setValue(IS_DRIVER,false)
-                .setValue(PRECISE_FACING, 0)
+                .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)
         );
     }
 
@@ -64,7 +62,7 @@ public class AnimatronicBlock extends HorizontalDirectionalBlock implements Enti
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        BlockState newState = state.setValue(PRECISE_FACING, (state.getValue(PRECISE_FACING) + 45) % 360);
+        BlockState newState = state.setValue(HorizontalDirectionalBlock.FACING, (state.getValue(HorizontalDirectionalBlock.FACING).getClockWise()));
         return IWrenchable.super.onWrenched(newState, context);
     }
 
@@ -72,17 +70,13 @@ public class AnimatronicBlock extends HorizontalDirectionalBlock implements Enti
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager
                 .add(IS_DRIVER)
-                .add(PRECISE_FACING);
+                .add(HorizontalDirectionalBlock.FACING);
     }
 
     @Override
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext ctx) {
-        int rot = (Mth.floor((Mth.wrapDegrees(ctx.getRotation()) + 22.5F) / 45.0F) * 45);
-        if (rot < 0)
-            rot = (360 + rot) % 360;
-
         return this.defaultBlockState()
                 .setValue(IS_DRIVER, false)
-                .setValue(PRECISE_FACING, rot);
+                .setValue(HorizontalDirectionalBlock.FACING, ctx.getHorizontalDirection());
     }
 }

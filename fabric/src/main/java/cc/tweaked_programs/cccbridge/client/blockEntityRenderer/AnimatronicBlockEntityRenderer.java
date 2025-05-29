@@ -5,7 +5,6 @@ import cc.tweaked_programs.cccbridge.common.assistance.Randomness;
 import cc.tweaked_programs.cccbridge.common.minecraft.block.AnimatronicBlock;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
-import com.jozufozu.flywheel.core.virtual.VirtualRenderWorld;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
@@ -14,12 +13,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
 
 import static cc.tweaked_programs.cccbridge.client.animatronic.AnimatronicModel.createBodyLayer;
 
@@ -49,17 +44,7 @@ public class AnimatronicBlockEntityRenderer implements BlockEntityRenderer<Anima
         this.model.setupAnim(blockEntity, 0.0F, 0.0F, partialTick, 0.0F, 0.0F);
 
         // Train hat
-        if (blockEntity.getLevel() instanceof VirtualRenderWorld virtualRenderWorld)
-            for (Map.Entry<BlockPos, BlockState> entry : virtualRenderWorld.blocksAdded.entrySet()) {
-                BlockPos pos = entry.getKey();
-                BlockState state = entry.getValue();
-
-                if (state.getBlock() instanceof AnimatronicBlock && virtualRenderWorld.getBlockEntity(pos) == blockEntity)
-                    this.model.hasJob(state.getValue(AnimatronicBlock.IS_DRIVER));
-            }
-        else
-            this.model.hasJob(blockEntity.getBlockState().getValue(AnimatronicBlock.IS_DRIVER));
-
+        this.model.hasJob(blockEntity.getBlockState().getValue(AnimatronicBlock.IS_DRIVER));
 
         // Render model
         VertexConsumer vertexConsumer = bufferSource.getBuffer(this.model.renderType(TEXTURE_BODY));

@@ -10,8 +10,11 @@ displayName="CC:C Bridge"
 updateJSONURL="https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
 displayURL="https://tweaked-programs.cc/"
 logoFile= "iconHD.png"
-credits="Thanks to agnor99, who understands modding much better!"
-authors="Sammy L. Koch & Luke A. Hanssen"
+credits='''I'd like to thank agnor99 for being such a nice person.
+Additionally, these people helped contributing:
+ Luke A. Hanssen, Rikaisan, Aspenhart, pernydev, TheZoidMaster
+'''
+authors="Sammy L. Koch"
 description='''This mod adds compatibility between the ComputerCraft and Create mod!
 
 Copyright ${copyright_year} Sammy L. Koch'''
