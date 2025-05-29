@@ -1,7 +1,6 @@
 package cc.tweaked_programs.cccbridge.client.animatronic;
 
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlockEntityRenderer;
-import cc.tweaked_programs.cccbridge.common.minecraft.block.AnimatronicBlock;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,6 +14,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
@@ -71,7 +71,7 @@ public class AnimatronicModel<T extends AnimatronicBlockEntity> extends Model {
         if (entity.isMoving())
             entity.updateCurrentPoses(partialTicks);
 
-        float facing = ((float) entity.getBlockState().getValue(AnimatronicBlock.PRECISE_FACING) + entity.getBodyPose().getY()) * awesomeFactor;
+        float facing = (entity.getBlockState().getValue(HorizontalDirectionalBlock.FACING).toYRot() + entity.getBodyPose().getY()) * awesomeFactor;
 
         this.root.getChild("head").xRot = entity.getHeadPose().getX() * awesomeFactor;
         this.root.getChild("head").yRot = entity.getHeadPose().getY() * awesomeFactor;
