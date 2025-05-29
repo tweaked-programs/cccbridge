@@ -1,22 +1,12 @@
 package cc.tweaked_programs.cccbridge.common.modloader;
 
-import cc.tweaked_programs.cccbridge.client.CCConfig;
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlockEntityRenderer;
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.RedRouterBlockEntityRenderer;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
-import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
-import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.RedRouterBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

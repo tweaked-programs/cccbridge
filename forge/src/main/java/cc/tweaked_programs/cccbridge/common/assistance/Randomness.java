@@ -1,6 +1,5 @@
 package cc.tweaked_programs.cccbridge.common.assistance;
 
-import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

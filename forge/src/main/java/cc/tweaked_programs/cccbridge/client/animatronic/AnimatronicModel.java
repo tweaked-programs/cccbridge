@@ -1,7 +1,6 @@
 package cc.tweaked_programs.cccbridge.client.animatronic;
 
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlockEntityRenderer;
-import cc.tweaked_programs.cccbridge.common.minecraft.block.AnimatronicBlock;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import com.mojang.blaze3d.vertex.PoseStack;
