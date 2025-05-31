@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="128px" alt="icon" src="./docs/icon.png">  
+  <img width="128px" alt="icon" src="./docs/icon/out/icon.webp">  
 
   <h1>CC:C Bridge</h1>  
   <h3>Adds compatibility between CC: Tweaked and Create through more peripherals!</h3>  

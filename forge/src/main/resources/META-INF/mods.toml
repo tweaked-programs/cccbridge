@@ -8,8 +8,8 @@ modId="${archives_base_name}"
 version="${version}"
 displayName="CC:C Bridge"
 updateJSONURL="https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
-displayURL="https://tweaked-programs.cc/"
-logoFile= "iconHD.png"
+displayURL="https://cccbridge.tweaked-programs.cc/"
+logoFile= "icon.png"
 credits='''I'd like to thank agnor99 for being such a nice person.
 Additionally, these people have been contributing:
  Luke A. Hanssen, Rikaisan, Aspenhart, pernydev, TheZoidMaster

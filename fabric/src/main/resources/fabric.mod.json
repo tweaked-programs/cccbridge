@@ -10,13 +10,13 @@
   ],
   "contributors": [ "agnor99", "Luke A. Hanssen", "Rikaisan", "Aspenhart", "pernydev", "TheZoidMaster"],
   "contact": {
-    "homepage": "https://tweaked-programs.cc/",
+    "homepage": "https://cccbridge.tweaked-programs.cc/",
     "sources": "https://github.com/tweaked-programs/cccbridge",
     "issues": "https://github.com/tweaked-programs/cccbridge/issues"
   },
 
   "license": "${license}",
-  "icon": "iconHD.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
