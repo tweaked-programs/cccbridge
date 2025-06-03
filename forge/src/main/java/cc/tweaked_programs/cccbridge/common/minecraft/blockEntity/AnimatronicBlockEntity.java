@@ -1,7 +1,9 @@
 package cc.tweaked_programs.cccbridge.common.minecraft.blockEntity;
 
-import cc.tweaked_programs.cccbridge.client.RustyMovement;
+import cc.tweaked_programs.cccbridge.client.animatronic.RustyMovement;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
+import cc.tweaked_programs.cccbridge.common.assistance.animatronic.Face;
+import cc.tweaked_programs.cccbridge.common.assistance.animatronic.Transition;
 import cc.tweaked_programs.cccbridge.common.computercraft.peripherals.AnimatronicPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.client.Minecraft;
@@ -39,53 +41,59 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
     private Rotations start_leftArmPose = new Rotations(0,0,0);
     private Rotations start_rightArmPose = new Rotations(0,0,0);
 
-    private String animationMode;
+    private Transition transition;
     private boolean isMoving;
     private double step;
     private long start_animation;
 
-    private String face;
+    private Face face;
 
     private AnimatronicPeripheral peripheral;
 
     public AnimatronicBlockEntity(BlockPos pos, BlockState blockState) {
         super((BlockEntityType<AnimatronicBlockEntity>) CCCRegistries.ANIMATRONIC_BLOCK_ENTITY.get(), pos, blockState);
 
-        animationMode = "rusty";
+        transition = Transition.RUSTY;
         isMoving = true;
         step = 0.0;
-        face = "normal";
+        face = Face.NORMAL;
         start_animation = 0;
     }
 
     @OnlyIn(Dist.CLIENT)
     public void updateCurrentPoses(float partialTicks) {
-        switch (animationMode) {
-            case "rusty" -> {
-                step = (getLevel().getGameTime() - start_animation + partialTicks) * (0.0175 * 6);
+        step = (getLevel().getGameTime() - start_animation + partialTicks) * (0.0175 * 6);
 
-                current_headPose = updatePose(start_headPose, getDestinationHeadPose(), false);
-                current_bodyPose = updatePose(start_bodyPose, getDestinationBodyPose(), true);
-                current_leftArmPose = updatePose(start_leftArmPose, getDestinationLeftArmPose(), false);
-                current_rightArmPose = updatePose(start_rightArmPose, getDestinationRightArmPose(), false);
-
-                if (step >= 1) {
-                    isMoving = false;
+        if (step >= 1) {
+            isMoving = false;
+            current_headPose = getDestinationHeadPose();
+            current_bodyPose = getDestinationBodyPose();
+            current_leftArmPose = getDestinationLeftArmPose();
+            current_rightArmPose = getDestinationRightArmPose();
+        } else {
+            switch (transition) {
+                case RUSTY -> {
+                    current_headPose = updateRustyPose(start_headPose, getDestinationHeadPose(), false);
+                    current_bodyPose = updateRustyPose(start_bodyPose, getDestinationBodyPose(), true);
+                    current_leftArmPose = updateRustyPose(start_leftArmPose, getDestinationLeftArmPose(), false);
+                    current_rightArmPose = updateRustyPose(start_rightArmPose, getDestinationRightArmPose(), false);
+                }
+                case NONE -> {
                     current_headPose = getDestinationHeadPose();
                     current_bodyPose = getDestinationBodyPose();
                     current_leftArmPose = getDestinationLeftArmPose();
                     current_rightArmPose = getDestinationRightArmPose();
                 }
-            }
-            case "raw" -> {
-                // Could have used the old switch case syntax and done a fall through, but it's better to be explicit.
-                current_headPose = getDestinationHeadPose();
-                current_bodyPose = getDestinationBodyPose();
-                current_leftArmPose = getDestinationLeftArmPose();
-                current_rightArmPose = getDestinationRightArmPose();
-            }
-            default -> {
-                setAnimationMode("rusty"); // For old Animatronics
+                case LINEAR -> {
+                    current_headPose = updateLinearPose(start_headPose, getDestinationHeadPose(), false);
+                    current_bodyPose = updateLinearPose(start_bodyPose, getDestinationBodyPose(), true);
+                    current_leftArmPose = updateLinearPose(start_leftArmPose, getDestinationLeftArmPose(), false);
+                    current_rightArmPose = updateLinearPose(start_rightArmPose, getDestinationRightArmPose(), false);
+                }
+                default -> {
+                    setTransition(Transition.RUSTY); // For old Animatronics
+                    // Will simply update next frame instead
+                }
             }
         }
     }
@@ -119,9 +127,11 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
         Rotations rightArmRot = ltRightArmPose.isEmpty() ? new Rotations(0,0,0) : new Rotations(ltRightArmPose);
         this.setRightArmPose(rightArmRot.getX(), rightArmRot.getY(), rightArmRot.getZ());
 
-        setFace(nbt.getString("face"));
+        @Nullable Face face = Face.contains(nbt.getString("face"));
+        setFace((face != null) ? face : Face.NORMAL);
 
-        setAnimationMode(nbt.getString("animationMode"));
+        @Nullable Transition transition = Transition.contains(nbt.getString("transition"));
+        setTransition((transition != null) ? transition : Transition.RUSTY);
 
         super.load(nbt);
 
@@ -136,9 +146,9 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
         nbt.put("leftArmPose", getDestinationLeftArmPose().save());
         nbt.put("rightArmPose", getDestinationRightArmPose().save());
         if (face != null)
-            nbt.putString("face", face);
-        if (animationMode != null)
-            nbt.putString("animationMode", animationMode);
+            nbt.putString("face", face.getId());
+        if (transition != null)
+            nbt.putString("transition", transition.getId());
 
         super.saveAdditional(nbt);
     }
@@ -165,10 +175,17 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
         return saveWithoutMetadata();
     }
 
-    private Rotations updatePose(Rotations start, Rotations destination, boolean lazyWay) {
+    private Rotations updateRustyPose(Rotations start, Rotations destination, boolean lazyWay) {
         float x = RustyMovement.updateMovement(start.getX(), destination.getX(), step, false);
         float y = RustyMovement.updateMovement(start.getY(), destination.getY(), step, lazyWay);
         float z = RustyMovement.updateMovement(start.getZ(), destination.getZ(), step, false);
+        return new Rotations(x, y, z);
+    }
+
+    private Rotations updateLinearPose(Rotations start, Rotations destination, boolean lazyWay) {
+        float x = (float) (start.getX() + (destination.getX()-start.getX()) * step);
+        float y = (float) (start.getY() + (destination.getY()-start.getY()) * step);
+        float z = (float) (start.getZ() + (destination.getZ()-start.getZ()) * step);
         return new Rotations(x, y, z);
     }
 
@@ -205,12 +222,12 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
         step = 0.0;
     }
 
-    public void setFace(String face) {
+    public void setFace(Face face) {
         this.face = face;
     }
 
-    public void setAnimationMode(String animationMode) {
-        this.animationMode = animationMode;
+    public void setTransition(Transition animationMode) {
+        this.transition = animationMode;
     }
 
     public void setRightArmPose(float x, float y, float z) {
@@ -229,7 +246,7 @@ public class AnimatronicBlockEntity extends BlockEntity implements PeripheralBlo
         this.headPose = new Rotations(x, y, z);
     }
 
-    public String getFace() {
+    public Face getFace() {
         return face;
     }
 

@@ -1,5 +1,7 @@
 package cc.tweaked_programs.cccbridge.common.computercraft.peripherals;
 
+import cc.tweaked_programs.cccbridge.common.assistance.animatronic.Face;
+import cc.tweaked_programs.cccbridge.common.assistance.animatronic.Transition;
 import cc.tweaked_programs.cccbridge.common.computercraft.TweakedPeripheral;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
@@ -7,6 +9,8 @@ import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.lua.MethodResult;
 import net.minecraft.core.Rotations;
 import net.minecraft.util.Mth;
+
+import javax.annotation.Nullable;
 
 /**
  * This peripheral is used by the Animatronic. It is an electronic puppet that can be positioned however needed.
@@ -42,29 +46,31 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final void setFace(String face) throws LuaException {
-        if (face.equals("normal") || face.equals("happy") || face.equals("question") || face.equals("sad")) {
+        @Nullable Face value = Face.contains(face);
+        if (value != null) {
             AnimatronicBlockEntity be = super.getTarget();
             if (be != null) {
-                be.setFace(face);
+                be.setFace(value);
                 be.setChanged();
             }
-        } else throw new LuaException("Given string must be either 'normal', 'happy', 'question' or 'sad'");
+        } else throw new LuaException("Given string must be one of the following options: "+ Face.availableOptions());
     }
 
     /**
-     * Sets the Animatronic animation mode.
+     * Sets the Animatronic's animation transition mode.
      *
-     * @param mode The new mode. Must be either 'raw' or 'rusty'.
+     * @param kind The new transition mode. Must be either 'raw' or 'rusty'.
      *
      * @throws LuaException Whenever the given string is not one of those types.
      */
     @LuaFunction
-    public final void setAnimationMode(String mode) throws LuaException {
-        if (mode.equals("raw") || mode.equals("rusty")) {
+    public final void setTransition(String kind) throws LuaException {
+        @Nullable Transition value = Transition.contains(kind);
+        if (value != null) {
             AnimatronicBlockEntity be = super.getTarget();
             if (be != null)
-                be.setAnimationMode(mode);
-        } else throw new LuaException("Given string must be either 'raw' or 'rusty'");
+                be.setTransition(value);
+        } else throw new LuaException("Given string must be one of the following options: "+Transition.availableOptions());
     }
 
     /**
