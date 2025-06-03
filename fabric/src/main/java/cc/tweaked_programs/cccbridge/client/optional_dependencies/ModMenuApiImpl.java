@@ -1,5 +1,6 @@
 package cc.tweaked_programs.cccbridge.client.optional_dependencies;
 
+import cc.tweaked_programs.cccbridge.client.CCConfig;
 import cc.tweaked_programs.cccbridge.client.minecraft.screen.ConfigScreen;
 import cc.tweaked_programs.cccbridge.client.modloader.CCCBridgeClient;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -11,6 +12,6 @@ import net.fabricmc.api.Environment;
 public class ModMenuApiImpl implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return (ConfigScreenFactory<ConfigScreen>) CCCBridgeClient.ONFIG::newScreen;
+        return (ConfigScreenFactory<ConfigScreen>) CCConfig.CONFIG::newScreen;
     }
 }

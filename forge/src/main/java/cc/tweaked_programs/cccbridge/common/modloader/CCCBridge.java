@@ -1,10 +1,18 @@
 package cc.tweaked_programs.cccbridge.common.modloader;
 
+import cc.tweaked_programs.cccbridge.client.CCConfig;
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlockEntityRenderer;
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.RedRouterBlockEntityRenderer;
+import cc.tweaked_programs.cccbridge.client.minecraft.screen.ConfigScreen;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
+import com.simibubi.create.foundation.config.ui.BaseConfigScreen;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.slf4j.Logger;

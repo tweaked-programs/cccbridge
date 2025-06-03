@@ -14,7 +14,7 @@ public class Randomness {
 
     @OnlyIn(Dist.CLIENT)
     public static int lightFlickering() {
-        if (CONFIG.FLICKERING)
+        if (CONFIG.flickering.value())
             return ((int)(LightTexture.FULL_BRIGHT - (Math.random()*35) - (random.nextInt(0,45) == 1 ? 50 : 0)));
         else
             return LightTexture.FULL_BRIGHT;
