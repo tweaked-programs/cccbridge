@@ -1,4 +1,5 @@
-package cc.tweaked_programs.cccbridge.client;
+package cc.tweaked_programs.cccbridge.client.animatronic;
+
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

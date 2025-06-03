@@ -5,13 +5,13 @@ issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
 modId="${archives_base_name}"
-version="${version}-${modloader}"
+version="${version}"
 displayName="CC:C Bridge"
 updateJSONURL="https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
-displayURL="https://tweaked-programs.cc/"
-logoFile= "iconHD.png"
+displayURL="https://cccbridge.tweaked-programs.cc/"
+logoFile= "icon.png"
 credits='''I'd like to thank agnor99 for being such a nice person.
-Additionally, these people helped contributing:
+Additionally, these people have been contributing:
  Luke A. Hanssen, Rikaisan, Aspenhart, pernydev, TheZoidMaster
 '''
 authors="Sammy L. Koch"
@@ -34,7 +34,7 @@ Copyright ${copyright_year} Sammy L. Koch'''
 [[dependencies.${archives_base_name}]]
     modId="create"
     mandatory=true
-    versionRange="[${create_version_production},)"
+    versionRange="[${create_version_production},${create_version_production_next})"
     ordering="NONE"
     side="BOTH"
 [[dependencies.${archives_base_name}]]

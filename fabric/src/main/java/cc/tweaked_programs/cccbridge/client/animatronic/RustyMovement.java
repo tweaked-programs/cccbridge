@@ -1,4 +1,4 @@
-package cc.tweaked_programs.cccbridge.client;
+package cc.tweaked_programs.cccbridge.client.animatronic;
 
 
 import net.fabricmc.api.EnvType;

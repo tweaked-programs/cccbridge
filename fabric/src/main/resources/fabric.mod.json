@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "${archives_base_name}",
-  "version": "${mod_version}-${modloader}",
+  "version": "${mod_version}",
 
   "name": "CC:C Bridge",
   "description": "This mod adds compatibility between the ComputerCraft and Create mod!\n\nCopyright ${copyright_year} Sammy L. Koch",
@@ -10,13 +10,13 @@
   ],
   "contributors": [ "agnor99", "Luke A. Hanssen", "Rikaisan", "Aspenhart", "pernydev", "TheZoidMaster"],
   "contact": {
-    "homepage": "https://tweaked-programs.cc/",
+    "homepage": "https://cccbridge.tweaked-programs.cc/",
     "sources": "https://github.com/tweaked-programs/cccbridge",
     "issues": "https://github.com/tweaked-programs/cccbridge/issues"
   },
 
   "license": "${license}",
-  "icon": "iconHD.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -33,14 +33,14 @@
   ],
 
   "depends": {
-    "create": ">=${create_version_production}",
+    "create": "^${create_version_production}",
     "computercraft": ">=${cc_version}",
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": "*",
     "fabric-api": "*",
     "minecraft": "~${mc_version}",
     "java": ">=17"
   },
   "recommends": {
-    "modmenu": ">=${modmenu_version}"
+    "modmenu": "*"
   }
 }

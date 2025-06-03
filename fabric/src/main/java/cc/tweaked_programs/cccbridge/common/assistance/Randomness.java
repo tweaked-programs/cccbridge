@@ -1,5 +1,6 @@
 package cc.tweaked_programs.cccbridge.common.assistance;
 
+import cc.tweaked_programs.cccbridge.client.CCConfig;
 import cc.tweaked_programs.cccbridge.client.modloader.CCCBridgeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,7 +15,7 @@ public class Randomness {
 
     @Environment(EnvType.CLIENT)
     public static int lightFlickering() {
-        if (CCCBridgeClient.ONFIG.FLICKERING)
+        if (CCConfig.CONFIG.flickering.value())
             return ((int)(LightTexture.FULL_BRIGHT - (Math.random()*35) - (random.nextInt(0,45) == 1 ? 50 : 0)));
         else
             return LightTexture.FULL_BRIGHT;

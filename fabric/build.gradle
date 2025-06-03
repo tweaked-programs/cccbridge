@@ -12,6 +12,8 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 
+	maven { url 'https://repo.sleeping.town/' }
+
 	maven { url = 'https://maven.parchmentmc.org' }						// You guessed it.
 	maven { url = "https://api.modrinth.com/maven" }					// LazyDFU, Suggestion Tweaker, Sodium, Iris
 	maven { url = "https://maven.terraformersmc.com/releases/" }		// Mod Menu, EMI
@@ -40,6 +42,9 @@ dependencies {
 	}
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	implementation "folk.sisby:kaleido-config:${kaleido}"
+	include "folk.sisby:kaleido-config:${kaleido}"
 
 	// APIs
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${mc_version}")

@@ -1,6 +1,7 @@
 package cc.tweaked_programs.cccbridge.client.animatronic;
 
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlockEntityRenderer;
+import cc.tweaked_programs.cccbridge.common.assistance.animatronic.Face;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.AnimatronicBlockEntity;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -101,18 +102,16 @@ public class AnimatronicModel<T extends AnimatronicBlockEntity> extends Model {
     }
 
     public static ResourceLocation getFace(AnimatronicBlockEntity be) {
-        String face = be.getFace();
+        Face face = be.getFace();
 
         if (face == null)
             return AnimatronicBlockEntityRenderer.TEXTURE_FACE_NORMAL;
 
         return switch (face) {
-            case "normal" -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_NORMAL;
-            case "happy" -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_HAPPY;
-            case "question" -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_QUESTION;
-            case "sad" -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_SAD;
-
-            default -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_NORMAL;
+            case NORMAL -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_NORMAL;
+            case HAPPY -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_HAPPY;
+            case QUESTION -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_QUESTION;
+            case SAD -> AnimatronicBlockEntityRenderer.TEXTURE_FACE_SAD;
         };
     }
 }

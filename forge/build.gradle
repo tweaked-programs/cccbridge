@@ -94,6 +94,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven { url 'https://repo.sleeping.town/' }
+
     maven {
         name = "Squiddev maven (cct)"
         url = 'https://maven.squiddev.cc/'
@@ -124,6 +126,9 @@ dependencies {
     implementation("cc.tweaked:cc-tweaked-${mc_version}-core:${cc_version}")
     implementation fg.deobf("cc.tweaked:cc-tweaked-${mc_version}-forge:${cc_version}")
     implementation("cc.tweaked:cc-tweaked-${mc_version}-forge-api:${cc_version}")
+
+    implementation "folk.sisby:kaleido-config:${kaleido}"
+    minecraftLibrary "folk.sisby:kaleido-config:${kaleido}"
 
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
