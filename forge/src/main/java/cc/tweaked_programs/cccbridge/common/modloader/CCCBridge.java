@@ -5,16 +5,15 @@ import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.AnimatronicBlock
 import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.RedRouterBlockEntityRenderer;
 import cc.tweaked_programs.cccbridge.client.minecraft.screen.ConfigScreen;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
-import com.simibubi.create.foundation.config.ui.BaseConfigScreen;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +26,12 @@ public class CCCBridge {
     public CCCBridge() {
         // Minecraft stuff
         CCCRegistries.register();
-    }
 
+        if (FMLLoader.getDist().isClient())
+            ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                    () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new ConfigScreen(CCConfig.CONFIG, parent))
+            );
+    }
     @SubscribeEvent
     public static void complete(FMLLoadCompleteEvent event) {
         event.enqueueWork(CCCRegistries::registerCompat);
