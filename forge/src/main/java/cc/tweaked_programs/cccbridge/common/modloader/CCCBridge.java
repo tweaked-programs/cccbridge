@@ -6,14 +6,14 @@ import cc.tweaked_programs.cccbridge.client.blockEntityRenderer.RedRouterBlockEn
 import cc.tweaked_programs.cccbridge.client.minecraft.screen.ConfigScreen;
 import cc.tweaked_programs.cccbridge.common.CCCRegistries;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.loading.FMLLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,12 +26,16 @@ public class CCCBridge {
     public CCCBridge() {
         // Minecraft stuff
         CCCRegistries.register();
-
-        if (FMLLoader.getDist().isClient())
-            ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
-                    () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new ConfigScreen(CCConfig.CONFIG, parent))
-            );
     }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public static void clientInit(FMLClientSetupEvent event) {
+        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+                () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new ConfigScreen(CCConfig.CONFIG, parent))
+        );
+    }
+
     @SubscribeEvent
     public static void complete(FMLLoadCompleteEvent event) {
         event.enqueueWork(CCCRegistries::registerCompat);
