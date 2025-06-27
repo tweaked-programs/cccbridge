@@ -1,7 +1,7 @@
 package cc.tweaked_programs.cccbridge.client;
 
-import folk.sisby.kaleido.api.ReflectiveConfig;
 import cc.tweaked_programs.cccbridge.client.minecraft.screen.ConfigScreen;
+import folk.sisby.kaleido.api.ReflectiveConfig;
 import folk.sisby.kaleido.lib.quiltconfig.api.annotations.Comment;
 import folk.sisby.kaleido.lib.quiltconfig.api.values.TrackedValue;
 import net.minecraft.client.gui.screens.Screen;

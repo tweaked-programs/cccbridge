@@ -4,28 +4,27 @@ import cc.tweaked_programs.cccbridge.common.computercraft.TweakedPeripheral;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.RedRouterBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.core.computer.ComputerSide;
 import net.minecraft.core.Direction;
-
-import java.util.LinkedList;
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This peripheral is used by the RedRouter. It works very similar to the Redstone API.
  *
  * @version 1.0
  */
-public class RedRouterBlockPeripheral extends TweakedPeripheral<RedRouterBlockEntity> {
+public class RedRouterBlockPeripheral implements TweakedPeripheral<RedRouterBlockEntity> {
+    private final RedRouterBlockEntity be;
+
     public static double getVersion() {
         return 1.0D;
     }
 
     public static final String REDSTONE_EVENT = "redstone";
-    private final List<IComputerAccess> pcs = new LinkedList<>();
 
     public RedRouterBlockPeripheral(RedRouterBlockEntity blockentity) {
-        super("redrouter", blockentity);
+        be = blockentity;
     }
 
     public Direction getActualSide(ComputerSide side) {
@@ -136,5 +135,15 @@ public class RedRouterBlockPeripheral extends TweakedPeripheral<RedRouterBlockEn
             return be.getRedstoneInput(getActualSide(side));
 
         return 0;
+    }
+
+    @Override
+    public @NotNull String getType() {
+        return "redrouter";
+    }
+
+    @Override
+    public @Nullable RedRouterBlockEntity getTarget() {
+        return be;
     }
 }
