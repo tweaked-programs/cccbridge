@@ -17,13 +17,13 @@ import javax.annotation.Nullable;
  * This peripheral is used by the Animatronic. It is an electronic puppet that can be positioned however needed.
  * Neat for decoration purposes! A bit rusty, however.
  *
- * @version 1.0
+ * @version 1.1
  */
 public class AnimatronicPeripheral implements TweakedPeripheral<AnimatronicBlockEntity> {
     private final AnimatronicBlockEntity be;
 
     public static double getVersion() {
-        return 1.0D;
+        return 1.1D;
     }
 
     private float[] headRot;

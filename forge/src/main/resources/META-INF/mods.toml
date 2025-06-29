@@ -1,21 +1,21 @@
-modLoader="javafml"
-loaderVersion="[40,)"
-license="${license}"
-issueTrackerURL="https://github.com/tweaked-programs/cccbridge/issues/"
+modLoader = "javafml"
+loaderVersion = "[40,)"
+license = "${license}"
+issueTrackerURL = "https://github.com/tweaked-programs/cccbridge/issues/"
 
 [[mods]]
-modId="${archives_base_name}"
-version="${version}"
-displayName="CC:C Bridge"
-updateJSONURL="https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
-displayURL="https://cccbridge.tweaked-programs.cc/"
-logoFile= "icon.png"
-credits='''I'd like to thank agnor99 for being such a nice person.
+modId = "${archives_base_name}"
+version = "${version}"
+displayName = "CC:C Bridge"
+updateJSONURL = "https://api.modrinth.com/updates/${archives_base_name}/forge_updates.json"
+displayURL = "https://cccbridge.kleinbox.dev/"
+logoFile = "icon.png"
+credits = '''I'd like to thank agnor99 for being such a nice person.
 Additionally, these people have been contributing:
  Luke A. Hanssen, Rikaisan, Aspenhart, pernydev, TheZoidMaster
 '''
-authors="Sammy L. Koch"
-description='''This mod adds compatibility between the ComputerCraft and Create mod!
+authors = "Sammy L. Koch"
+description = '''This mod adds compatibility between the ComputerCraft and Create mod!
 
 Copyright ${copyright_year} Sammy L. Koch'''
 

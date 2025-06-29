@@ -1,8 +1,17 @@
 /forge/.idea/
 /forge/package.json
 /forge/package-lock.json
+/forge/.gradle
+/forge/build
+/forge/run
 /fabric/.idea/
 /fabric/package.json
 /fabric/package-lock.json
+/fabric/.gradle
+/fabric/build
+/fabric/run
 /docs/icon/icon.blend1
 /docs/icon/animation_temp.webp
+/venv/
+.cache
+.idea
