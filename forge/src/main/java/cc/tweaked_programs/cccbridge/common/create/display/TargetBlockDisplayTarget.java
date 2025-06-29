@@ -6,7 +6,7 @@ import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayBoardTarget;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;
 import dan200.computercraft.core.terminal.Terminal;
-import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.ArrayList;

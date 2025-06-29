@@ -9,6 +9,7 @@ import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.lua.MethodResult;
 import net.minecraft.core.Rotations;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -18,7 +19,9 @@ import javax.annotation.Nullable;
  *
  * @version 1.0
  */
-public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEntity> {
+public class AnimatronicPeripheral implements TweakedPeripheral<AnimatronicBlockEntity> {
+    private final AnimatronicBlockEntity be;
+
     public static double getVersion() {
         return 1.0D;
     }
@@ -29,7 +32,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
     private float[] rightArmRot;
 
     public AnimatronicPeripheral(AnimatronicBlockEntity blockEntity) {
-        super("animatronic",blockEntity);
+        be = blockEntity;
 
         headRot = new float[]{0,0,0};
         bodyRot = new float[]{0,0,0};
@@ -48,7 +51,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
     public final void setFace(String face) throws LuaException {
         @Nullable Face value = Face.contains(face);
         if (value != null) {
-            AnimatronicBlockEntity be = super.getTarget();
+            AnimatronicBlockEntity be = getTarget();
             if (be != null) {
                 be.setFace(value);
                 be.setChanged();
@@ -67,7 +70,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
     public final void setTransition(String kind) throws LuaException {
         @Nullable Transition value = Transition.contains(kind);
         if (value != null) {
-            AnimatronicBlockEntity be = super.getTarget();
+            AnimatronicBlockEntity be = getTarget();
             if (be != null)
                 be.setTransition(value);
         } else throw new LuaException("Given string must be one of the following options: "+Transition.availableOptions());
@@ -79,7 +82,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final void push() {
-        AnimatronicBlockEntity be = super.getTarget();
+        AnimatronicBlockEntity be = getTarget();
         if (be != null) {
             be.setHeadPose(headRot[0], headRot[1], headRot[2]);
             be.setBodyPose(bodyRot[0], bodyRot[1], bodyRot[2]);
@@ -206,7 +209,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final MethodResult getAppliedHeadRot() {
-        AnimatronicBlockEntity be = super.getTarget();
+        AnimatronicBlockEntity be = getTarget();
         if (be != null) {
             Rotations rot = be.getHeadPose();
             return MethodResult.of((double)rot.getX(), (double)rot.getY(), (double)rot.getZ());
@@ -221,7 +224,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final MethodResult getAppliedBodyRot() {
-        AnimatronicBlockEntity be = super.getTarget();
+        AnimatronicBlockEntity be = getTarget();
         if (be != null) {
             Rotations rot = be.getBodyPose();
             return MethodResult.of((double)rot.getX(), (double)rot.getY(), (double)rot.getZ());
@@ -236,7 +239,7 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final MethodResult getAppliedLeftArmRot() {
-        AnimatronicBlockEntity be = super.getTarget();
+        AnimatronicBlockEntity be = getTarget();
         if (be != null) {
             Rotations rot = be.getLeftArmPose();
             return MethodResult.of((double)rot.getX(), (double)rot.getY(), (double)rot.getZ());
@@ -251,11 +254,21 @@ public class AnimatronicPeripheral extends TweakedPeripheral<AnimatronicBlockEnt
      */
     @LuaFunction
     public final MethodResult getAppliedRightArmRot() {
-        AnimatronicBlockEntity be = super.getTarget();
+        AnimatronicBlockEntity be = getTarget();
         if (be != null) {
             Rotations rot = be.getRightArmPose();
             return MethodResult.of((double)rot.getX(), (double)rot.getY(), (double)rot.getZ());
         }
         return MethodResult.of(0F, 0F, 0F);
+    }
+
+    @Override
+    public @NotNull String getType() {
+        return "animatronic";
+    }
+
+    @Override
+    public @Nullable AnimatronicBlockEntity getTarget() {
+        return be;
     }
 }

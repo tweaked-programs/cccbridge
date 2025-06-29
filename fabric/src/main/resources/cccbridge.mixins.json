@@ -4,9 +4,6 @@
   "package": "cc.tweaked_programs.cccbridge.common.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "animatronic.MixinCarriageContraption",
-    "scroller.MixinScrollValueRenderer",
-    "scroller.MixinValueSettingsInputHandler"
   ],
   "client": [
   ],

@@ -4,7 +4,6 @@ import cc.tweaked_programs.cccbridge.common.computercraft.TweakedPeripheral;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.TargetBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.core.terminal.Terminal;
 import dan200.computercraft.core.terminal.TextBuffer;
 import org.jetbrains.annotations.NotNull;
