@@ -5,12 +5,17 @@
 
   "name": "CC:C Bridge",
   "description": "This mod adds compatibility between the ComputerCraft and Create mod!\n\nCopyright ${copyright_year} Sammy L. Koch",
-  "authors": [
-    "Sammy L. Koch"
+  "authors": ["Sammy L. Koch"],
+  "contributors": [
+    "agnor99",
+    "Luke A. Hanssen",
+    "Rikaisan",
+    "Aspenhart",
+    "pernydev",
+    "TheZoidMaster"
   ],
-  "contributors": [ "agnor99", "Luke A. Hanssen", "Rikaisan", "Aspenhart", "pernydev", "TheZoidMaster"],
   "contact": {
-    "homepage": "https://cccbridge.tweaked-programs.cc/",
+    "homepage": "https://cccbridge.kleinbox.dev/",
     "sources": "https://github.com/tweaked-programs/cccbridge",
     "issues": "https://github.com/tweaked-programs/cccbridge/issues"
   },
@@ -20,17 +25,15 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "cc.tweaked_programs.cccbridge.common.modloader.CCCBridge"
-    ],
+    "main": ["cc.tweaked_programs.cccbridge.common.modloader.CCCBridge"],
     "client": [
       "cc.tweaked_programs.cccbridge.client.modloader.CCCBridgeClient"
     ],
-    "modmenu": [ "cc.tweaked_programs.cccbridge.client.optional_dependencies.ModMenuApiImpl" ]
+    "modmenu": [
+      "cc.tweaked_programs.cccbridge.client.optional_dependencies.ModMenuApiImpl"
+    ]
   },
-  "mixins": [
-    "cccbridge.mixins.json"
-  ],
+  "mixins": ["cccbridge.mixins.json"],
 
   "depends": {
     "create": "^${create_version_production}",

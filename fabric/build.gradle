@@ -4,8 +4,8 @@ plugins {
 	id 'maven-publish'
 }
 
-archivesBaseName = "${archives_base_name}-mc${mc_version}-${modloader}"
-version = "v${mod_version}"
+archivesBaseName = "cccbridge"
+version = "${mod_version}"
 group = project.maven_group
 
 repositories {

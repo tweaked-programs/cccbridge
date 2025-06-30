@@ -4,8 +4,11 @@ import cc.tweaked_programs.cccbridge.common.computercraft.TweakedPeripheral;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.SourceBlockEntity;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.core.apis.TermMethods;
 import dan200.computercraft.core.terminal.Terminal;
 import dan200.computercraft.core.terminal.TextBuffer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +19,9 @@ import java.util.List;
  *
  * @version 1.1
  */
-public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> {
+public class SourceBlockPeripheral extends TermMethods implements TweakedPeripheral<SourceBlockEntity> {
+    private final SourceBlockEntity be;
+
     public static double getVersion() {
         return 1.1D;
     }
@@ -24,15 +29,18 @@ public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> 
     private final Terminal term = new Terminal(4, 2, false);
 
     public SourceBlockPeripheral(SourceBlockEntity blockentity) {
-        super("create_source", blockentity);
+        be = blockentity;
     }
 
     public void setSize(int width, int height) {
         int oldW = term.getWidth();
         int oldH = term.getHeight();
-        if (!(oldW != width || oldH != height)) return;
+
+        if (oldW == width && oldH == height)
+            return;
+
         term.resize(width, height);
-        super.sendEvent("monitor_resize");
+        sendEvent("monitor_resize");
     }
 
     public List<String> getContent() {
@@ -42,18 +50,6 @@ public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> 
             content.add( term.getLine(i).toString());
 
         return content;
-    }
-
-
-    /**
-     * Sets the position of the cursor. term.write will begin from this position.
-     *
-     * @param x The new x position of the cursor.
-     * @param y The new y position of the cursor.
-     */
-    @LuaFunction
-    public final void setCursorPos(int x, int y) {
-        term.setCursorPos(x - 1, y - 1);
     }
 
     /**
@@ -67,30 +63,9 @@ public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> 
         term.setCursorPos(term.getCursorX() + text.length(), term.getCursorY());
     }
 
-    /**
-     * Scrolls the displays content vertically for [yDiff] lines.
-     *
-     * @param yDiff How many lines will the display scroll.
-     */
-    @LuaFunction
-    public final void scroll(int yDiff) {
-        term.scroll(yDiff);
-    }
-
-    /**
-     * Clears the whole screen.
-     */
-    @LuaFunction
-    public final void clear() {
-        term.clear();
-    }
-
-    /**
-     * Clears the line at the cursor position.
-     */
-    @LuaFunction
-    public final void clearLine() {
-        term.clearLine();
+    @Override
+    public Terminal getTerminal() throws LuaException {
+        return term;
     }
 
     /**
@@ -108,23 +83,13 @@ public class SourceBlockPeripheral extends TweakedPeripheral<SourceBlockEntity> 
         return line.toString();
     }
 
-    /**
-     * Returns the current cursor position.
-     *
-     * @return Object[] {posX, posY}
-     */
-    @LuaFunction
-    public final Object[] getCursorPos() {
-        return new Object[]{term.getCursorX() + 1, term.getCursorY() + 1};
+    @Override
+    public @NotNull String getType() {
+        return "create_source";
     }
 
-    /**
-     * Returns the current display size.
-     *
-     * @return Object[] {width, height}
-     */
-    @LuaFunction
-    public final Object[] getSize() {
-        return new Object[]{term.getWidth(), term.getHeight()};
+    @Override
+    public @Nullable SourceBlockEntity getTarget() {
+        return be;
     }
 }

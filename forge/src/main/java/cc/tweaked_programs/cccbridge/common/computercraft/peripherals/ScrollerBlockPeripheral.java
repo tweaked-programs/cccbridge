@@ -6,6 +6,8 @@ import dan200.computercraft.api.lua.LuaFunction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This peripheral is used by the Scroller Pane. It allows to interact with its valued that the player can manipulate
@@ -13,13 +15,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
  *
  * @version 2.0
  */
-public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEntity> {
+public class ScrollerBlockPeripheral implements TweakedPeripheral<ScrollerBlockEntity> {
+    private final ScrollerBlockEntity be;
+
     public static double getVersion() {
         return 2.0D;
     }
 
     public ScrollerBlockPeripheral(ScrollerBlockEntity blockentity) {
-        super("scroller", blockentity);
+        be = blockentity;
     }
 
     /**
@@ -129,5 +133,15 @@ public class ScrollerBlockPeripheral extends TweakedPeripheral<ScrollerBlockEnti
         ScrollerBlockEntity be = getTarget();
         if (be != null)
             be.setLimit(limit);
+    }
+
+    @Override
+    public @NotNull String getType() {
+        return "scroller";
+    }
+
+    @Override
+    public @Nullable ScrollerBlockEntity getTarget() {
+        return be;
     }
 }

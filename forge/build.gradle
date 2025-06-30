@@ -18,6 +18,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
+jarJar.enable()
+
 version = mod_version
 group = 'cc.tweaked_programs.cccbridge'
 archivesBaseName = 'cccbridge'
@@ -129,10 +131,16 @@ dependencies {
 
     implementation "folk.sisby:kaleido-config:${kaleido}"
     minecraftLibrary "folk.sisby:kaleido-config:${kaleido}"
+    jarJar(group: 'folk.sisby', name: 'kaleido-config', version: '[${kaleido},)')
 
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+}
+
+mixin {
+    add sourceSets.main, 'cccbridge.mixins.refmap.json'
+    config 'cccbridge.mixins.json'
 }
 
 processResources {

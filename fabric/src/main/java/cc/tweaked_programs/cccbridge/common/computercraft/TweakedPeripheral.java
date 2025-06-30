@@ -14,49 +14,38 @@ import java.util.List;
  * I did not steal the name from Create. I swear!
  * No seriously!
  */
-public abstract class TweakedPeripheral<BE extends BlockEntity> implements IPeripheral {
-    private final String type;
-    private final BE blockEntity;
-    private final List<IComputerAccess> computers = new LinkedList<>();
+public interface TweakedPeripheral<BE extends BlockEntity> extends IPeripheral {
+    List<IComputerAccess> computers = new LinkedList<>();
 
-    public TweakedPeripheral(String type, @Nullable BE blockEntity) {
-        this.type = type;
-        this.blockEntity = blockEntity;
-    }
-
-    public void sendEvent(@Nonnull String event, @Nullable Object... arguments) {
+    default void sendEvent(@Nonnull String event, @Nullable Object... arguments) {
         for (IComputerAccess pc : computers)
             pc.queueEvent(event, pc.getAttachmentName(), arguments);
     }
 
     @Override
-    public void attach(@Nonnull IComputerAccess computer) {
+    default void attach(@Nonnull IComputerAccess computer) {
         computers.add(computer);
     }
 
     @Override
-    public void detach(@Nonnull IComputerAccess computer) {
+    default void detach(@Nonnull IComputerAccess computer) {
         computers.removeIf(p -> (p.getID() == computer.getID()));
     }
 
     @NotNull
     @Override
-    public String getType() {
-        return type;
-    }
+    String getType();
 
     @Nullable
     @Override
-    public BE getTarget() {
-        return blockEntity;
-    }
+    BE getTarget();
 
-    public static double getVersion() {
+    static double getVersion() {
         return 0.0D;
     }
 
     @Override
-    public boolean equals(@Nullable IPeripheral other) {
-        return other == this && other.getType().equals(type) && other.getTarget() == this.getTarget();
+    default boolean equals(@Nullable IPeripheral other) {
+        return other == this && other.getType().equals(getType()) && other.getTarget() == this.getTarget();
     }
 }
