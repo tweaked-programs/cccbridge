@@ -11,7 +11,11 @@ import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.*;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import cc.tweaked_programs.cccbridge.common.modloader.PropertiesBuilder;
 import com.simibubi.create.AllInteractionBehaviours;
-import com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours;
+import com.simibubi.create.api.behaviour.display.DisplaySource;
+import com.simibubi.create.api.behaviour.display.DisplayTarget;
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
+import com.simibubi.create.api.registry.CreateRegistries;
+import com.simibubi.create.api.registry.SimpleRegistry;
 import dan200.computercraft.api.ForgeComputerCraftAPI;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,8 +46,13 @@ public class CCCRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CCCBridge.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CCCBridge.MOD_ID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CCCBridge.MOD_ID);
+    public static final DeferredRegister<DisplaySource> CREATE_SOURCES = DeferredRegister.create(CreateRegistries.DISPLAY_SOURCE, CCCBridge.MOD_ID);
+    public static final DeferredRegister<DisplayTarget> CREATE_TARGETS = DeferredRegister.create(CreateRegistries.DISPLAY_TARGET, CCCBridge.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("cccbridge_group", PropertiesBuilder.CCCGROUP::build);
+
+    public static final RegistryObject<SourceBlockDisplaySource> SOURCE_BLOCK_SOURCE = CREATE_SOURCES.register("source_block_display_source", SourceBlockDisplaySource::new);
+    public static final RegistryObject<TargetBlockDisplayTarget> TARGET_BLOCK_TARGET = CREATE_TARGETS.register("target_block_display_target", TargetBlockDisplayTarget::new);
 
     public static final RegistryObject<Block> SOURCE_BLOCK = BLOCKS.register("source_block", () -> new SourceBlock(SOURCE_BLOCK_PROPERTIES));
     public static final RegistryObject<Block> TARGET_BLOCK = BLOCKS.register("target_block", () -> new TargetBlock(TARGET_BLOCK_PROPERTIES));
@@ -74,6 +83,9 @@ public class CCCRegistries {
         ENTITIES.register(modEventBus);
         SOUNDS.register(modEventBus);
 
+        CREATE_SOURCES.register(modEventBus);
+        CREATE_TARGETS.register(modEventBus);
+
         ITEMS.register(modEventBus);
 
         PAINTINGS.register("funny_redrouters", () -> new PaintingVariant(32,16));
@@ -83,10 +95,9 @@ public class CCCRegistries {
 
     public static void registerCompat() {
         // Create stuff
-        AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(CCCBridge.MOD_ID, "source_block_display_source"), new SourceBlockDisplaySource()), CCCRegistries.SOURCE_BLOCK_ENTITY.get());
-        AllDisplayBehaviours.assignBlockEntity(AllDisplayBehaviours.register(new ResourceLocation(CCCBridge.MOD_ID, "target_block_display_target"), new TargetBlockDisplayTarget()), CCCRegistries.TARGET_BLOCK_ENTITY.get());
-
-        AllInteractionBehaviours.registerBehaviour(CCCRegistries.ANIMATRONIC_BLOCK.getId(), new AnimatronicInteractionBehaviour());
+        MovingInteractionBehaviour.REGISTRY.register(CCCRegistries.ANIMATRONIC_BLOCK.get(), new AnimatronicInteractionBehaviour());
+        DisplaySource.BY_BLOCK_ENTITY.add(SOURCE_BLOCK_ENTITY.get(), SOURCE_BLOCK_SOURCE.get());
+        DisplayTarget.BY_BLOCK_ENTITY.register(TARGET_BLOCK_ENTITY.get(), TARGET_BLOCK_TARGET.get());
 
         // ComputerCraft stuff
         ForgeComputerCraftAPI.registerPeripheralProvider(new TweakedPeripheralProvider());

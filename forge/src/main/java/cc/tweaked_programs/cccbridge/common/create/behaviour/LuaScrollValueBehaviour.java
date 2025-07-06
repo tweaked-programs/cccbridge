@@ -7,7 +7,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBoard;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsFormatter;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -91,12 +90,12 @@ public class LuaScrollValueBehaviour extends ScrollValueBehaviour {
         List<Component> rows;
         if (hasMinus)
             rows = ImmutableList.of(
-                Components.translatable("cccbridge.general.unit.scroller.negative"),
-                Components.translatable("cccbridge.general.unit.scroller.positive")
+                Component.translatable("cccbridge.general.unit.scroller.negative"),
+                Component.translatable("cccbridge.general.unit.scroller.positive")
             );
         else
             rows = ImmutableList.of(
-                    Components.translatable("cccbridge.general.unit.scroller")
+                    Component.translatable("cccbridge.general.unit.scroller")
             );
 
         return new ValueSettingsBoard(label, max, 5, rows,

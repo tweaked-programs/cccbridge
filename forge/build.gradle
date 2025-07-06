@@ -107,8 +107,16 @@ repositories {
         url = "https://maven.blamejared.com/"
     }
     maven {
-        name "tterrag maven (create)"
-        url "https://maven.tterrag.com/"
+        name = "Create, Ponder, Flywheel"
+        url = "https://maven.createmod.net"
+    }
+    maven {
+        name = "Registrate"
+        url = "https://maven.tterrag.com/"
+    }
+    maven {
+        name = "ForgeConfigAPIPort"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
     maven {
         name = "cursemaven (whatever)"
@@ -122,20 +130,23 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-
-    implementation("cc.tweaked:cc-tweaked-${mc_version}-core:${cc_version}")
-    implementation fg.deobf("cc.tweaked:cc-tweaked-${mc_version}-forge:${cc_version}")
-    implementation("cc.tweaked:cc-tweaked-${mc_version}-forge-api:${cc_version}")
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 
     implementation "folk.sisby:kaleido-config:${kaleido}"
     minecraftLibrary "folk.sisby:kaleido-config:${kaleido}"
     jarJar(group: 'folk.sisby', name: 'kaleido-config', version: '[${kaleido},)')
 
-    implementation fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation("cc.tweaked:cc-tweaked-${mc_version}-core:${cc_version}")
+    implementation fg.deobf("cc.tweaked:cc-tweaked-${mc_version}-forge:${cc_version}")
+    implementation("cc.tweaked:cc-tweaked-${mc_version}-forge-api:${cc_version}")
+
+    implementation(fg.deobf("com.simibubi.create:create-${mc_version}:${create_version}:slim") { transitive = false })
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${mc_version}:${ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${mc_version}:${flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 }
 
 mixin {
