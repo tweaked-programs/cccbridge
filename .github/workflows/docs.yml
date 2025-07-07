@@ -2,7 +2,7 @@ name: docs
 on:
   push:
     branches:
-      - mc1.20.1
+      - mc1.21.1
 
 permissions:
   contents: write
