@@ -1,9 +1,9 @@
-/forge/.idea/
-/forge/package.json
-/forge/package-lock.json
-/forge/.gradle
-/forge/build
-/forge/run
+/neoforge/.idea/
+/neoforge/package.json
+/neoforge/package-lock.json
+/neoforge/.gradle
+/neoforge/build
+/neoforge/run
 /fabric/.idea/
 /fabric/package.json
 /fabric/package-lock.json
