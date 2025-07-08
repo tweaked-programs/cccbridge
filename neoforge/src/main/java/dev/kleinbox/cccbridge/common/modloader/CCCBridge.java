@@ -30,6 +30,7 @@ public class CCCBridge {
     //public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public CCCBridge(IEventBus eventBus) {
+        var ignored = CCConfig.CONFIG; // Just needs to be touched soon-ish for mcqoy to work
         CCCRegistries.register(eventBus);
     }
 

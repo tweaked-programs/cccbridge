@@ -16,8 +16,4 @@ public class CCConfig extends ReflectiveConfig {
 
     @Comment("Whether the face of the Animatronics should flicker in dark")
     public final TrackedValue<Boolean> flickering = value(true);
-
-    public ConfigScreen newScreen(@Nullable Screen parent) {
-        return new ConfigScreen(this, parent);
-    }
 }
