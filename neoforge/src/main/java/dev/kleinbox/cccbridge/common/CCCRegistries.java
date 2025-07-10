@@ -39,7 +39,7 @@ import static dev.kleinbox.cccbridge.common.minecraft.block.TargetBlock.TARGET_B
 public class CCCRegistries {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, CCCBridge.MOD_ID);
     private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CCCBridge.MOD_ID);
-    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, CCCBridge.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, CCCBridge.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, CCCBridge.MOD_ID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CCCBridge.MOD_ID);
     public static final DeferredRegister<DisplaySource> CREATE_SOURCES = DeferredRegister.create(CreateRegistries.DISPLAY_SOURCE, CCCBridge.MOD_ID);
@@ -89,19 +89,5 @@ public class CCCRegistries {
         MovingInteractionBehaviour.REGISTRY.register(CCCRegistries.ANIMATRONIC_BLOCK.get(), new AnimatronicInteractionBehaviour());
         DisplaySource.BY_BLOCK_ENTITY.add(SOURCE_BLOCK_ENTITY.get(), SOURCE_BLOCK_SOURCE.get());
         DisplayTarget.BY_BLOCK_ENTITY.register(TARGET_BLOCK_ENTITY.get(), TARGET_BLOCK_TARGET.get());
-    }
-
-    public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        BLOCK_ENTITIES.getEntries().forEach((entry) -> {
-            event.registerBlockEntity(
-                    PeripheralCapability.get(),
-                    entry.get(),
-                    (be, side) -> {
-                        if (be instanceof PeripheralBlockEntity provider)
-                            return provider.getPeripheral(side);
-                        return null;
-                    }
-            );
-        });
     }
 }
