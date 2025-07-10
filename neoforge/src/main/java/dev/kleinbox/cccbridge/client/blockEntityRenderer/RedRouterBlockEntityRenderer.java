@@ -55,35 +55,33 @@ public class RedRouterBlockEntityRenderer implements BlockEntityRenderer<RedRout
             id = block.getValue(RedRouterBlock.FACE);
 
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(getFace(id));
-        int sprite_size = sprite.contents().width();
 
         poseStack.translate(0D, 0D, 2D/16D-0.01);
 
-
         buffer.addVertex(poseStack.last().pose(), 0 ,0 ,0)
                 .setColor(0.7F, 0.7F, 0.7F, 1.0F)
-                .setUv(sprite.getU(sprite_size), sprite.getV(sprite_size))
+                .setUv(sprite.getU1(), sprite.getV1())
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(flickering)
                 .setNormal(poseStack.last(), 0, 0, 0);
 
         buffer.addVertex(poseStack.last().pose(), 0 ,1 ,0)
                 .setColor(0.7F, 0.7F, 0.7F, 1.0F)
-                .setUv(sprite.getU(sprite_size), sprite.getV(0))
+                .setUv(sprite.getU1(), sprite.getV0())
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(flickering)
                 .setNormal(poseStack.last(), 0, 0, 0);
 
         buffer.addVertex(poseStack.last().pose(), 1 ,1 ,0)
                 .setColor(0.7F, 0.7F, 0.7F, 1.0F)
-                .setUv(sprite.getU(0), sprite.getV(0))
+                .setUv(sprite.getU0(), sprite.getV0())
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(flickering)
                 .setNormal(poseStack.last(), 0, 0, 0);
 
         buffer.addVertex(poseStack.last().pose(), 1 ,0 ,0)
                 .setColor(0.7F, 0.7F, 0.7F, 1.0F)
-                .setUv(sprite.getU(0), sprite.getV(sprite_size))
+                .setUv(sprite.getU0(), sprite.getV1())
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(flickering)
                 .setNormal(poseStack.last(), 0, 0, 0);

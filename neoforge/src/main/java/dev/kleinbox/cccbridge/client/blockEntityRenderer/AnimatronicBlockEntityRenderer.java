@@ -48,11 +48,11 @@ public class AnimatronicBlockEntityRenderer implements BlockEntityRenderer<Anima
 
         // Render model
         VertexConsumer vertexConsumer = bufferSource.getBuffer(this.model.renderType(TEXTURE_BODY));
-        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1);
+        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
 
         // Eyes
         vertexConsumer = bufferSource.getBuffer(this.model.renderType(Randomness.rareCreepiness() ? TEXTURE_FACE_CURSED : AnimatronicModel.getFace(blockEntity)));
-        this.model.renderToBuffer(poseStack, vertexConsumer, Randomness.lightFlickering(), OverlayTexture.NO_OVERLAY, 1);
+        this.model.renderToBuffer(poseStack, vertexConsumer, Randomness.lightFlickering(), OverlayTexture.NO_OVERLAY);
 
         // Checkout
         poseStack.popPose();
