@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " M ",
-    "HTH",
-    " R "
-  ],
+  "pattern": [" M ", "HTH", " R "],
   "key": {
     "M": {
       "item": "computercraft:monitor_normal"
@@ -20,7 +16,7 @@
     }
   },
   "result": {
-    "item": "cccbridge:animatronic_block",
+    "id": "cccbridge:animatronic_block",
     "count": 1
   }
 }
