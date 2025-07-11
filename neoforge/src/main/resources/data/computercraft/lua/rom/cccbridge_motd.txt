@@ -1,8 +1,5 @@
-Hello from CC:C Bridge!
-You can connect a Display Link with a Source Block to have your own text on Display Boards. :o
 Create.
-EMOTIONAL DAMAGE!
-Visit tweaked-programs.cc for detailed changelogs about CC:C Bridge!
+Visit cccbridge.kleinbox.dev for the CC:C Bridge wiki!
 CC:C Bridge stands for ComputerCraft:Create Bridge.
 Scroller Panes are neat to configure values while being easy to integrate in your buildings.
 RedRouter Blocks use a similar function set of the Redstone API, try it out!
