@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "cccbridge:target_block"
+    "id": "cccbridge:target_block",
+    "count": 1
   }
 }

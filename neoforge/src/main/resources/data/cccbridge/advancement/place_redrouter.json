@@ -3,7 +3,8 @@
         "title": "EMOTIONAL DAMAGE",
         "description": "Build your own friend with mood swings.",
         "icon": {
-            "item": "cccbridge:redrouter_block"
+            "item": "cccbridge:redrouter_block",
+            "id": "cccbridge:redrouter_block"
         },
         "frame": "task",
         "show_toast": false,

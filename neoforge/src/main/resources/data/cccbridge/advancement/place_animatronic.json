@@ -3,7 +3,8 @@
         "title": "Five Nights in Minecraft",
         "description": "A very normal Animatronic, what could go wrong!",
         "icon": {
-            "item": "cccbridge:animatronic_block"
+            "item": "cccbridge:animatronic_block",
+            "id": "cccbridge:animatronic_block"
         },
         "frame": "task",
         "show_toast": false,

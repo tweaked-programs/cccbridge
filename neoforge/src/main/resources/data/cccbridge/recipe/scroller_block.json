@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" C ", "APA", " R "],
+  "key": {
+    "C": {
+      "item": "create:cogwheel"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "A": {
+      "item": "create:cut_asurine"
+    }
+  },
+  "result": {
+    "id": "cccbridge:scroller_block",
+    "count": 1
+  }
+}
