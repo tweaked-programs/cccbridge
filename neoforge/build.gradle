@@ -38,6 +38,11 @@ repositories {
         url = "https://maven.ithundxr.dev/snapshots"
     }
 
+    maven {
+        name = "Jared's maven (jei)"
+        url = "https://maven.blamejared.com/"
+    }
+
     exclusiveContent {
         forRepository {
             maven {
@@ -160,6 +165,8 @@ dependencies {
     implementation("folk.sisby:kaleido-config:${kaleido_version}")
     jarJar(group: 'folk.sisby', name: 'kaleido-config', version: '[${kaleido_version},)')
     additionalRuntimeClasspath("folk.sisby:kaleido-config:${kaleido_version}")
+
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
