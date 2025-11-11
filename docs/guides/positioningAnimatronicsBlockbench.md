@@ -44,7 +44,7 @@ A popup then will open up. Select which animations you want to include in the fi
 ![*Step 4 - Reference Image](../../assets/images/guides/animatronic-blockbench/step-4.png){ loading=lazy }
 
 Finally, click on confirm and select where the `json` file should be saved.
-For further instructions on how to integrate this in Lua code, head over to [the corresponding section](#lua-lnimation-parser).
+For further instructions on how to integrate this in Lua code, head over to [the corresponding section](#lua-animation-parser).
 
 ## Lua Animation Parser
 
