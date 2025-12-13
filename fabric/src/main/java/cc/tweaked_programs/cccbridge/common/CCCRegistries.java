@@ -8,7 +8,7 @@ import cc.tweaked_programs.cccbridge.common.minecraft.block.*;
 import cc.tweaked_programs.cccbridge.common.minecraft.blockEntity.*;
 import cc.tweaked_programs.cccbridge.common.modloader.CCCBridge;
 import cc.tweaked_programs.cccbridge.common.modloader.PropertiesBuilder;
-import com.simibubi.create.AllInteractionBehaviours;
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -77,7 +77,11 @@ public enum CCCRegistries {
             }
         }
 
-        AllInteractionBehaviours.registerBehaviour(ANIMATRONIC_BLOCK.resourceLocation(), new AnimatronicInteractionBehaviour());
+        // TODO: Verify
+        MovingInteractionBehaviour.REGISTRY.register(
+                (Block) ANIMATRONIC_BLOCK.get(),
+                new AnimatronicInteractionBehaviour()
+        );
     }
 
     public static final List<CCCRegistries> ENTRIES = Arrays.asList(CCCRegistries.values());
