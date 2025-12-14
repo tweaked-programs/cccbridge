@@ -77,7 +77,6 @@ public enum CCCRegistries {
             }
         }
 
-        // TODO: Verify
         MovingInteractionBehaviour.REGISTRY.register(
                 (Block) ANIMATRONIC_BLOCK.get(),
                 new AnimatronicInteractionBehaviour()
@@ -110,6 +109,10 @@ public enum CCCRegistries {
 
     public Object get() {
         return entry.entry();
+    }
+
+    public Block getBlock() {
+        return (Block) entry.entry();
     }
 
     public RegisterEntry.TYPE type() {

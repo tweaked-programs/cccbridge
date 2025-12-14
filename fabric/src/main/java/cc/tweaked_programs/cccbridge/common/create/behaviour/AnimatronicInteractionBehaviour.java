@@ -17,7 +17,6 @@ import net.createmod.catnip.lang.Lang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -50,31 +49,38 @@ public class AnimatronicInteractionBehaviour extends MovingInteractionBehaviour 
 
                 setHasJobState(localPos, contraptionEntity, false);
 
-                // TODO: Verify if Component.translateable() is even correct, I assume not.
-                // AS a note it used to be Lang.translateDirect
-
-                // I also am testing
-                // Lang.builder("create")
-                //         .translate("schedule.non_controlling_seat")
-                //         .component();
-
                 if (train.runtime.getSchedule() != null) {
                     if (train.runtime.paused && !train.runtime.completed) {
                         train.runtime.paused = false;
                         AllSoundEvents.CONFIRM.playOnServer(player.level(), player.blockPosition(), 1, 1);
-                        player.displayClientMessage(Component.translatable("schedule.continued"), true);
+                        player.displayClientMessage(
+                                Lang.builder("create")
+                                        .translate("schedule.continued")
+                                        .component(),
+                                true
+                        );
                         return true;
                     }
 
                     if (!itemInHand.isEmpty()) {
                         AllSoundEvents.DENY.playOnServer(player.level(), player.blockPosition(), 1, 1);
-                        player.displayClientMessage(Component.translatable("schedule.remove_with_empty_hand"), true);
+                        player.displayClientMessage(
+                                Lang.builder("create")
+                                        .translate("schedule.remove_with_empty_hand")
+                                        .component(),
+                                true
+                        );
                         return true;
                     }
                     AllSoundEvents.playItemPickup(player);
-                    player.displayClientMessage(Component.translatable(
-                                    train.runtime.isAutoSchedule ? "schedule.auto_removed_from_train" : "schedule.removed_from_train"),
-                            true);
+                    player.displayClientMessage(
+                            Lang.builder("create")
+                                    .translate(train.runtime.isAutoSchedule
+                                            ? "schedule.auto_removed_from_train"
+                                            : "schedule.removed_from_train")
+                                    .component(),
+                            true
+                    );
                     player.setItemInHand(activeHand, train.runtime.returnSchedule());
                     return true;
                 }
@@ -88,7 +94,9 @@ public class AnimatronicInteractionBehaviour extends MovingInteractionBehaviour 
 
                 if (schedule.entries.isEmpty()) {
                     AllSoundEvents.DENY.playOnServer(player.level(), player.blockPosition(), 1, 1);
-                    player.displayClientMessage(Component.translatable("schedule.no_stops"), true);
+                    player.displayClientMessage(Lang.builder("create")
+                            .translate("schedule.no_stops")
+                            .component(), true);
                     return true;
                 }
 
@@ -97,7 +105,9 @@ public class AnimatronicInteractionBehaviour extends MovingInteractionBehaviour 
                 train.runtime.setSchedule(schedule, false);
                 AllAdvancements.CONDUCTOR.awardTo(player);
                 AllSoundEvents.CONFIRM.playOnServer(player.level(), player.blockPosition(), 1, 1);
-                player.displayClientMessage(Component.translatable("schedule.applied_to_train")
+                player.displayClientMessage(Lang.builder("create")
+                        .translate("schedule.applied_to_train")
+                        .component()
                         .withStyle(ChatFormatting.GREEN), true);
                 itemInHand.shrink(1);
                 player.setItemInHand(activeHand, itemInHand.isEmpty() ? ItemStack.EMPTY : itemInHand);
