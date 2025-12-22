@@ -26,7 +26,7 @@ With these blocks, many things you always wanted to handle _precisely_ and _easi
 
 ### Documentation and Feedback
 
-Guides for beginners as well as the API documentation can be found on [our wiki](https://cccbridge.tweaked-programs.cc).
+Guides for beginners as well as the API documentation can be found on [our wiki](https://cccbridge.kleinbox.dev/).
 
 If you found any bug or have an idea for a new feature, feel free to open a new issue on our [Issue Tracker on GitHub](https://github.com/tweaked-programs/cccbridge/issues)!
 
