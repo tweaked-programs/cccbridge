@@ -1,7 +1,7 @@
 package cc.tweaked_programs.cccbridge.common.minecraft;
 
 import cc.tweaked_programs.cccbridge.common.assistance.CharsetManipulator;
-import com.simibubi.create.foundation.utility.LangNumberFormat;
+import net.createmod.catnip.lang.LangNumberFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
