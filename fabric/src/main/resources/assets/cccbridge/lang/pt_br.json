@@ -1,0 +1,44 @@
+{
+  "block.cccbridge.source_block": "Bloco Emissor",
+  "block.cccbridge.target_block": "Bloco Receptor",
+  "block.cccbridge.redrouter_block": "Bloco Roteador de Redstone",
+  "block.cccbridge.scroller_block": "Painel de Rolagem",
+  "block.cccbridge.animatronic_block": "Animatrônico",
+
+  "block.cccbridge.source_block.description": "§6Pode espelhar textos para outros §oreceptores§r§6 usando um §eConector da Placa de Exibição§6.\n\n§7Quando a lâmpada pisca\n §6Transmite o buffer de texto atual para o §oreceptor§r§6.\n§7Quando a resolução muda\n §6Envia um §oevento§r§6 para todos os §eComputadores§6 conectados.",
+  "block.cccbridge.target_block.description": "§6Age como um §oreceptor§r§6 para outros §oemissores§r§6. §eComputadores§6 podem acessar todo o tipo de informação do §eCreate§6 desta forma.",
+  "block.cccbridge.redrouter_block.description":  "§6Pode controlar sinais de §eRedstone§6 através da §oAPI Redstone§r§6.",
+  "block.cccbridge.scroller_block.description": "§6Provê uma interface para selecionar um número. Pode ser lido, controlado e manipulado com um §eComputador§6.",
+  "block.cccbridge.animatronic_block.description":  "§6Sua expressão facial, assim como o corpo todo, pode ser alterado e posicionado usando um §eComputador§6.\n\n§7Ao enviar\n §6Aplica a §orotação§r§6 do buffer ao §eAnimatrônico§6.",
+
+  "cccbridge.tooltip.holdForDescription": "§8Segure [{0}Shift§8] para mais detalhes",
+  "cccbridge.tooltip.peripheral": "Periférico v{0}",
+  "cccbridge.tooltip.no_peripheral": "&oNão tem um Periférico",
+
+  "cccbridge.display_source.source_block_display_source": "Dados fornecidos pelo computador",
+
+  "cccbridge.general.unit.scroller": "Número no Lua",
+  "cccbridge.general.unit.scroller.positive": "Num. Lua +",
+  "cccbridge.general.unit.scroller.negative": "Num. Lua -",
+
+  "subtitles.cccbridge.cage_lock": "Rolagem travada",
+  "subtitles.cccbridge.cage_unlock": "Rolagem destravada",
+
+  "itemGroup.cccbridge.cccbridge_group": "Periféricos (CC:C Bridge)",
+
+  "advancements.cccbridge.placed_animatronic.title": "Five Nights in Minecraft",
+  "advancements.cccbridge.placed_animatronic.description": "Um animatrônico muito normal, o que poderia dar errado!",
+  "advancements.cccbridge.placed_redrouter.title": "EMOTIONAL DAMAGE",
+  "advancements.cccbridge.placed_redrouter.description": "Construa seu próprio amigo com mudanças de humor.",
+
+  "painting.cccbridge.funny_redrouters.title": "Roteador de Redstone Divertido",
+  "painting.cccbridge.funny_redrouters.author": "Sammy L. Koch",
+
+  "cccbridge.screen.config_screen": "Configurações do CC:C Bridge",
+  "cccbridge.options.button.save": "Salvar config",
+  "cccbridge.options.button.saved": "Saved config",
+  "cccbridge.options.button.close": "Fechar",
+
+  "cccbridge.options.option.flickering": "Luzes Piscantes",
+  "cccbridge.options.tooltip.flickering": "Determina se as faces do bloco Roteador de Redstone ou animatrônicos piscam em lugares escuros."
+}
