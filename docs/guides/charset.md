@@ -40,8 +40,8 @@ The 'blit' characters _(from \\128 to \\159)_ have been untouched, although they
 
 Those are the main differences that have been made to the chars:
 
-- **\\016** (`§`) in CC changes to **\\u2591** (`░`) in Create
-- **\\160** (` `) in CC changes to **\\u2591** (`▓`) in Create
+- **\\021** (`§`) in CC changes to **\\u2591** (`░`) in Create
+- **\\127** (` `) in CC changes to **\\u2591** (`▓`) in Create
 - **\\167** (`§`) in CC changes to **\\u2591** (`█`) in Create
 
 As the pattern here gives it away, this mainly affects the symbols used for legacy formatting and the dithered blocks used by Create.
@@ -49,5 +49,5 @@ This makes it possible to make the same progressbars as Create uses them.
 
 ## Example
 
-The line `Power: ███▓░░░` in Create would convert to `Power: §§§ §§§` in CC. Keep in mind, that the second row of `§` is **\\016** and not **\\167** like the first row.  
+The line `Power: ███▓░░░` in Create would convert to `Power: §§§ §§§` in CC. Keep in mind, that the second row of `§` is **\\021** and not **\\167** like the first row.  
 Same goes the other way around as well.
