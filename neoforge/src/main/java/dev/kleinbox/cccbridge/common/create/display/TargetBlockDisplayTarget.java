@@ -31,7 +31,11 @@ public class TargetBlockDisplayTarget extends DisplayBoardTarget {
         }
 
         synchronized (term) {
-            term.clear();
+            // herobrine added
+            for (int i = 0; i < source.size(); i++) {
+                term.setCursorPos(0, offset + i);
+                term.clearLine();
+            }
 
             int y = offset;
             for (String line : source) {
