@@ -12,19 +12,20 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This peripheral is used by the Target Block. It is used to get data from Create Display Sources. The data has to be synced by the BlockEntity.
  *
- * @version 1.2
+ * @version 1.3
  */
 public class TargetBlockPeripheral implements TweakedPeripheral<TargetBlockEntity> {
     private final TargetBlockEntity be;
 
     public static double getVersion() {
-        return 1.2D;
+        return 1.3D;
     }
 
-    public final Terminal term = new Terminal(32, 8, true);
+    public final Terminal term;
 
-    public TargetBlockPeripheral(TargetBlockEntity be) {
+    public TargetBlockPeripheral(TargetBlockEntity be, int width, int height) {
         this.be = be;
+        this.term = new Terminal(width, height, true);
     }
 
     /**
@@ -34,12 +35,13 @@ public class TargetBlockPeripheral implements TweakedPeripheral<TargetBlockEntit
      * @param height The new height of the terminal.
      * @throws LuaException Whenever the given numbers are smaller than 1.
      */
-    @LuaFunction
+    @LuaFunction(mainThread = true)
     public final void resize(int width, int height) throws LuaException {
         if (width < 1 || height < 1)
             throw new LuaException("The width and height of the terminal must be bigger than zero.");
 
         term.resize(width, height);
+        be.afterResize(width, height);
     }
 
     /**

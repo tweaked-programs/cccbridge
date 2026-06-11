@@ -53,8 +53,6 @@ public class TargetBlockDisplayTarget extends DisplayBoardTarget {
         if (!(block instanceof TargetBlockEntity targetBlock))
             return new DisplayTargetStats(1, 1, this);
 
-        Terminal term = targetBlock.getPeripheral(null).term;
-
-        return new DisplayTargetStats(term.getHeight(), term.getWidth(), this);
+        return new DisplayTargetStats(targetBlock.getHeight(), targetBlock.getWidth(), this);
     }
 }

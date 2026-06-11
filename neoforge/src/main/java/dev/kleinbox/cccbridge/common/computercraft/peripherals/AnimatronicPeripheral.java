@@ -80,7 +80,7 @@ public class AnimatronicPeripheral implements TweakedPeripheral<AnimatronicBlock
      * Pushes the stored rotation values to the Animatronic.
      * After pushing them, the rotations get reset to 0 everywhere.
      */
-    @LuaFunction
+    @LuaFunction(mainThread = true)
     public final void push() {
         AnimatronicBlockEntity be = getTarget();
         if (be != null) {
